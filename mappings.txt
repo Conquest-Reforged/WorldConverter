@@ -1,0 +1,18 @@
+ # Example 1 - single block
+ # Explicitly replaces a 1.12 block variant with the 1.14 flattened block
+minecraft:planks[variant=oak] -> minecraft:oak_planks
+
+
+ # Example 2 - multiple blocks
+ # Replaces all 1.12 block variants with their 1.14 flattened counterparts
+ # The 'axis' property is copied across like-for-like unless we specify otherwise
+minecraft:log[variant=$0] -> minecraft:$0_log
+minecraft:log2[variant=$0] -> minecraft:$0_log
+
+
+ # Example 3 - multiple blocks & property name-change
+ # Replaces all 1.12 block variants with their 1.14 flattened counterparts ($0 copies the variant name across)
+ # Replaces the 1.12 'half' property with the 1.14 'type' property ($1 copies the value [top/bottom] across)
+ # Properties that exist on 1.14 but not 1.12, and that have not been specified in the rule (ie 'waterlogged')
+   will be copied over from the 1.14 Block's default BlockState
+minecraft:wooden_slab[variant=$0,half=$1] -> minecraft:$0_slab[type=$1]

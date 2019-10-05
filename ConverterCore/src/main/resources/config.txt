@@ -1,0 +1,19 @@
+# A world folder, a folder containing schematic/structure files,
+# or an individual schematic/structure file
+file=
+
+# The format and version of the world/schematic(s)/structure(s) [optional]
+input_format=world
+input_version=1.12
+
+# The format and version to convert to [optional, defaults to 1.14]
+output_format=world
+output_version=1.14
+
+# The paths to your custom GameData json files [optional]
+data_in=
+data_out=
+
+# The paths to your custom mapping files, or directories containing mapping files [optional]
+block_mappings=
+biome_mappings=

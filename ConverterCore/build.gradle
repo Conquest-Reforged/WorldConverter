@@ -1,0 +1,33 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "4.0.2"
+    id "java"
+}
+
+sourceCompatibility = targetCompatibility = "1.8"
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    shade "com.github.dags-:JNBT:2.0.4"
+    shade "com.google.code.gson:gson:2.8.2"
+}
+
+shadowJar {
+    configurations = [project.configurations.shade]
+    relocate("com.google.gson.", "me.dags.converter.libs.gson.")
+    relocate("org.jnbt.", "me.dags.converter.libs.jnbt.")
+    exclude("me/dags/scraper/**")
+    exclude("META-INF/**")
+    exclude("pack.mcmeta")
+    exclude("mcmod.info")
+    classifier = null
+
+    manifest {
+        attributes("Main-Class": "me.dags.converter.Main")
+    }
+}
+
+build.dependsOn(shadowJar)

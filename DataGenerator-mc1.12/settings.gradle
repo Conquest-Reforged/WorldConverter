@@ -1,0 +1,2 @@
+include ":ConverterCore"
+project(':ConverterCore').projectDir = new File('../ConverterCore')

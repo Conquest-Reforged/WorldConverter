@@ -1,0 +1,73 @@
+apply plugin: "java"
+
+group = "me.dags"
+version = "1.0.0"
+
+configurations {
+    shade
+    compile.extendsFrom(shade)
+}
+
+allprojects {
+    apply plugin: "java"
+
+    configurations {
+        shade
+        compile.extendsFrom(shade)
+    }
+
+    task copyClasses(type: Copy) {
+        includeEmptyDirs = false
+        from { configurations.shade.collect { zipTree(it) } }
+        include("**/*.class")
+        destinationDir("$buildDir/classes/java/main" as File)
+    }
+
+    task deobfJar(type: Jar) {
+        dependsOn(copyClasses)
+        from sourceSets.main.output
+        classifier = "deobf"
+    }
+
+    group = rootProject.group
+    version = rootProject.version
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+task coreClasses(type: Copy, dependsOn: subprojects.tasks["build"]) {
+    includeEmptyDirs = false
+    from { zipTree(project(":ConverterCore").tasks.withType(Jar).last().archivePath) }
+    include("**/*.class")
+    into { file("$buildDir/classes/java/main") }
+}
+
+task coreResources(type: Copy, dependsOn: subprojects.tasks["build"]) {
+    includeEmptyDirs = false
+    from { zipTree(project(":ConverterCore").tasks.withType(Jar).last().archivePath) }
+    exclude("**/*.class")
+    into { file("$buildDir/resources/main") }
+}
+
+task modJars(type: Copy, dependsOn: subprojects.tasks["build"]) {
+    from {
+        subprojects.collect {
+            if (it.name == "ConverterCore") {
+                return [].asList()
+            } else {
+                return it.tasks.withType(Jar).collect { it.archivePath }
+            }
+        }
+    }
+    into { file("$buildDir/resources/main/mods") }
+}
+
+jar {
+    dependsOn(coreClasses, coreResources, modJars)
+
+    manifest {
+        attributes("Main-Class": "me.dags.converter.Main")
+    }
+}
+
