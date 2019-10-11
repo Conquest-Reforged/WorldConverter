@@ -1,4 +1,4 @@
-package me.dags.converter.extent.converter;
+package me.dags.converter.converter;
 
 import me.dags.converter.data.GameData;
 import me.dags.converter.extent.Extent;
@@ -9,16 +9,16 @@ import java.util.List;
 
 public class ExtentConverter implements Converter {
 
-    private final ReaderFunc readerFunc;
-    private final WriterFunc writerFunc;
-    private final GameData gameData;
+    private final ReaderFactory readerFactory;
+    private final WriterFactory writerFactory;
     private final List<DataConverter> converters;
+    private final GameData gameData;
 
-    public ExtentConverter(ReaderFunc readerFunc, WriterFunc writerFunc, GameData gameData, List<DataConverter> converters) {
-        this.readerFunc = readerFunc;
-        this.writerFunc = writerFunc;
-        this.gameData = gameData;
+    public ExtentConverter(ReaderFactory readerFactory, WriterFactory writerFactory, GameData gameData, List<DataConverter> converters) {
+        this.readerFactory = readerFactory;
+        this.writerFactory = writerFactory;
         this.converters = converters;
+        this.gameData = gameData;
     }
 
     @Override
@@ -29,8 +29,8 @@ public class ExtentConverter implements Converter {
         config.put("Width", in.getInt("Width"));
         config.put("Height", in.getInt("Height"));
         config.put("Length", in.getInt("Length"));
-        Extent.Reader reader = readerFunc.get(gameData.blocks, in);
-        ConverterWriter writer = new ConverterWriter(writerFunc.get(config), gameData);
+        Extent.Reader reader = readerFactory.create(gameData.blocks, in);
+        ConverterWriter writer = new ConverterWriter(writerFactory.create(config), gameData);
         reader.iterate(writer);
         writer.setData("Entities", reader.getData("Entities"));
         writer.setData("TileEntities", reader.getData("TileEntities"));

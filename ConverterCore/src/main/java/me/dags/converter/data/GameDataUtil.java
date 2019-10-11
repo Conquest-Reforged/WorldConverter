@@ -1,4 +1,4 @@
-package me.dags.converter.util;
+package me.dags.converter.data;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

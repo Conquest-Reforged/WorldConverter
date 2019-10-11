@@ -1,6 +1,6 @@
 package me.dags.converter.extent.volume;
 
-import me.dags.converter.extent.converter.Converter;
+import me.dags.converter.converter.Converter;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.log.Logger;
 import org.jnbt.CompoundTag;

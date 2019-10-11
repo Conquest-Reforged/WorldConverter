@@ -1,7 +1,7 @@
 package me.dags.converter.extent;
 
-import me.dags.converter.extent.converter.ReaderFunc;
-import me.dags.converter.extent.converter.WriterFunc;
+import me.dags.converter.converter.ReaderFactory;
+import me.dags.converter.converter.WriterFactory;
 import me.dags.converter.version.Version;
 
 public enum Format {
@@ -21,7 +21,7 @@ public enum Format {
         return identifier;
     }
 
-    public ReaderFunc reader(Version version) {
+    public ReaderFactory reader(Version version) {
         switch (this) {
             case SCHEMATIC:
                 return version::schematicReader;
@@ -33,7 +33,7 @@ public enum Format {
         return null;
     }
 
-    public WriterFunc writer(Version version) {
+    public WriterFactory writer(Version version) {
         switch (this) {
             case SCHEMATIC:
                 return version::schematicWriter;

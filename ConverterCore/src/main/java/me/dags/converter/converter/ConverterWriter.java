@@ -1,4 +1,4 @@
-package me.dags.converter.extent.converter;
+package me.dags.converter.converter;
 
 import me.dags.converter.block.BlockState;
 import me.dags.converter.data.GameData;

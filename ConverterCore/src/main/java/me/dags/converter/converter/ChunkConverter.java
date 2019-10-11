@@ -1,4 +1,4 @@
-package me.dags.converter.extent.converter;
+package me.dags.converter.converter;
 
 import me.dags.converter.block.BlockState;
 import me.dags.converter.data.GameData;
@@ -15,18 +15,18 @@ public class ChunkConverter implements Converter {
 
     private final List<DataConverter> section;
     private final List<DataConverter> level;
+    private final WriterConfig config;
     private final GameData gameData;
     private final Version from;
     private final Version to;
-    private final WriterConfig config;
 
     public ChunkConverter(Version from, Version to, GameData gameData) {
         this.level = determineLevelConversion(from, to, gameData);
         this.section = ChunkData.sectionData();
+        this.config = new WriterConfig();
         this.gameData = gameData;
         this.from = from;
         this.to = to;
-        this.config = new WriterConfig();
         config.put("registry", gameData.blocks);
     }
 

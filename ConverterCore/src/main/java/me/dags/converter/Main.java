@@ -5,13 +5,13 @@ import me.dags.converter.config.CustomData;
 import me.dags.converter.data.GameData;
 import me.dags.converter.data.Mappings;
 import me.dags.converter.extent.Format;
-import me.dags.converter.extent.converter.Converter;
-import me.dags.converter.extent.converter.ExtentConverter;
-import me.dags.converter.extent.converter.ReaderFunc;
-import me.dags.converter.extent.converter.WriterFunc;
-import me.dags.converter.extent.volume.VolumeConverter;
+import me.dags.converter.converter.Converter;
+import me.dags.converter.converter.ExtentConverter;
+import me.dags.converter.converter.ReaderFactory;
+import me.dags.converter.converter.WriterFactory;
+import me.dags.converter.converter.DirectoryConverter;
 import me.dags.converter.extent.world.World;
-import me.dags.converter.util.GameDataUtil;
+import me.dags.converter.data.GameDataUtil;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.Threading;
 import me.dags.converter.util.log.Logger;
@@ -105,12 +105,12 @@ public class Main {
     }
 
     private static File convertExtent(File source, File dest, Format in, Format out, Version from, Version to, CustomData customData, Consumer<Float> progress) throws Exception {
-        ReaderFunc reader = in.reader(from);
-        WriterFunc writer = out.writer(to);
+        ReaderFactory reader = in.reader(from);
+        WriterFactory writer = out.writer(to);
         Mappings mappings = Mappings.build(from, to).builtIn();
         GameData gameData = GameDataUtil.applyMappings(customData, mappings);
         Converter converter = new ExtentConverter(reader, writer, gameData, Collections.emptyList());
-        List<Future<Void>> tasks = new VolumeConverter(converter).convert(source, in, dest, out);
+        List<Future<Void>> tasks = new DirectoryConverter(converter).convert(source, in, dest, out);
         await(tasks, progress);
         return dest;
     }

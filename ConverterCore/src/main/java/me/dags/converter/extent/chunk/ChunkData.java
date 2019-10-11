@@ -2,7 +2,7 @@ package me.dags.converter.extent.chunk;
 
 import me.dags.converter.biome.Biome;
 import me.dags.converter.data.GameData;
-import me.dags.converter.extent.converter.DataConverter;
+import me.dags.converter.converter.DataConverter;
 import me.dags.converter.registry.Registry;
 import org.jnbt.CompoundTag;
 import org.jnbt.ListTag;

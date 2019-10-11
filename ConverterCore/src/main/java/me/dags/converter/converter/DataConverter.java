@@ -1,4 +1,4 @@
-package me.dags.converter.extent.converter;
+package me.dags.converter.converter;
 
 import me.dags.converter.extent.io.DataReader;
 import me.dags.converter.extent.io.DataWriter;

@@ -1,8 +1,8 @@
-package me.dags.converter.extent.volume;
+package me.dags.converter.converter;
 
 import me.dags.converter.config.ExtentFile;
 import me.dags.converter.extent.Format;
-import me.dags.converter.extent.converter.Converter;
+import me.dags.converter.extent.volume.ConversionTask;
 import me.dags.converter.util.Threading;
 import me.dags.converter.util.log.Logger;
 
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-public class VolumeConverter {
+public class DirectoryConverter {
 
     private final Converter converter;
 
-    public VolumeConverter(Converter converter) {
+    public DirectoryConverter(Converter converter) {
         this.converter = converter;
     }
 
@@ -27,7 +27,7 @@ public class VolumeConverter {
     }
 
     private void convert(File source, Format sourceFormat, File dest, Format destFormat, List<Future<Void>> results, int depth) {
-        if (++depth > 5){
+        if (++depth > 10){
             return;
         }
         if (source.isDirectory()) {
