@@ -2,11 +2,9 @@ package me.dags.converter.resource.jar;
 
 import me.dags.converter.resource.Container;
 import me.dags.converter.resource.Resource;
-import me.dags.converter.util.log.Logger;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;

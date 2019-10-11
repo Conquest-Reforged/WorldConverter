@@ -21,7 +21,7 @@ public class ChunkData {
             byte[] in = tag.asByteArray().getValue();
             byte[] out = new byte[in.length];
             for (int i = 0; i < in.length; i++) {
-                Biome biome = registry.getVal(in[i]);
+                Biome biome = registry.getValue(in[i]);
                 out[i] = (byte) registry.getId(biome);
             }
             return Nbt.tag(out);

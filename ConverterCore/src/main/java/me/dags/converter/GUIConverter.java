@@ -4,7 +4,6 @@ import me.dags.converter.config.Config;
 import me.dags.converter.config.CustomData;
 import me.dags.converter.extent.ExtentType;
 import me.dags.converter.extent.Format;
-import me.dags.converter.extent.world.region.RegionTask;
 import me.dags.converter.resource.Container;
 import me.dags.converter.resource.Resource;
 import me.dags.converter.util.IO;

@@ -6,6 +6,7 @@ public class BlockData {
 
     private final int id;
     private final String name;
+    private final boolean upgrade;
     private final StateData defaultState;
     private final List<StateData> states;
 
@@ -14,8 +15,13 @@ public class BlockData {
     }
 
     public BlockData(Object name, int id, StateData defaultState, List<StateData> states) {
+        this(name, id, false, defaultState, states);
+    }
+
+    public BlockData(Object name, int id, boolean upgrade, StateData defaultState, List<StateData> states) {
         this.id = id;
         this.name = "" + name;
+        this.upgrade = upgrade;
         this.states = states;
         this.defaultState = defaultState;
     }
@@ -26,6 +32,10 @@ public class BlockData {
 
     public int getId() {
         return id;
+    }
+
+    public boolean upgrade() {
+        return upgrade;
     }
 
     public StateData getDefaultState() {

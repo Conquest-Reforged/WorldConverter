@@ -30,8 +30,8 @@ public class ExtentConverter implements Converter {
         config.put("Height", in.getInt("Height"));
         config.put("Length", in.getInt("Length"));
         Extent.Reader reader = readerFunc.get(gameData.blocks, in);
-        Extent.Writer writer = writerFunc.get(config);
-        reader.iterate(writer::setState);
+        ConverterWriter writer = new ConverterWriter(writerFunc.get(config), gameData);
+        reader.iterate(writer);
         writer.setData("Entities", reader.getData("Entities"));
         writer.setData("TileEntities", reader.getData("TileEntities"));
         DataConverter.writeData(reader, writer, converters);

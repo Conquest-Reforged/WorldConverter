@@ -15,7 +15,7 @@ public class PaletteReader<T extends RegistryItem> implements Registry.Reader<T>
     }
 
     @Override
-    public T getVal(int id) {
+    public T getValue(int id) {
         return idToVal.getOrDefault(id, fallback);
     }
 }

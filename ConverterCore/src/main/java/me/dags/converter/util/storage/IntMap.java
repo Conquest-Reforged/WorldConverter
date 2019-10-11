@@ -1,5 +1,6 @@
 package me.dags.converter.util.storage;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Function;
 
@@ -10,6 +11,15 @@ public class IntMap<T> implements Iterable<T> {
 
     public IntMap(int size) {
         this.values = new Object[size];
+    }
+
+    private IntMap(int size, Object[] values) {
+        this.values = values;
+        this.size = size;
+    }
+
+    public IntMap<T> copy() {
+        return new IntMap<>(size, Arrays.copyOf(values, values.length));
     }
 
     public int size() {

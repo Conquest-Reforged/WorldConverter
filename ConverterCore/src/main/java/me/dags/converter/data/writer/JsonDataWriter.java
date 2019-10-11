@@ -26,6 +26,12 @@ public class JsonDataWriter implements DataWriter {
     }
 
     @Override
+    public DataWriter value(boolean value) throws IOException {
+        writer.value(value);
+        return this;
+    }
+
+    @Override
     public DataWriter value(String value) throws IOException {
         writer.value(value);
         return this;

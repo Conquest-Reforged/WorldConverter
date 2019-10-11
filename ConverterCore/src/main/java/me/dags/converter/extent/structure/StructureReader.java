@@ -36,7 +36,7 @@ public class StructureReader implements Structure.Reader {
             int y = pos.get(1).getValue();
             int z = pos.get(2).getValue();
             int index = block.asCompound().getInt("state");
-            BlockState state = palette.getVal(index);
+            BlockState state = palette.getValue(index);
             visitor.visit(x, y, z, state);
         }
     }

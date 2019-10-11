@@ -3,7 +3,6 @@ package me.dags.converter.extent.schematic.legacy;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.extent.volume.legacy.AbstractLegacyVolumeReader;
 import me.dags.converter.registry.Registry;
-import me.dags.converter.util.storage.nibble.ChunkNibbleArray;
 import me.dags.converter.util.storage.nibble.NibbleArray;
 import me.dags.converter.util.storage.nibble.VolumeNibbleArray;
 import org.jnbt.CompoundTag;

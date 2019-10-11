@@ -39,7 +39,7 @@ public class ChunkConverter implements Converter {
         for (int i = 0; i < sections; i++) {
             Volume.Reader sectionReader = reader.getSection(i);
             Volume.Writer sectionWriter = writer.getSection(i);
-            writeSection(sectionReader, sectionWriter);
+            convertSection(i, reader, writer);
             DataConverter.writeData(sectionReader, sectionWriter, section);
         }
 
@@ -47,16 +47,24 @@ public class ChunkConverter implements Converter {
         return writer.flush();
     }
 
-    private void writeSection(Volume.Reader reader, Volume.Writer writer) {
+    private void convertSection(int index, Chunk.Reader chunkReader, Chunk.Writer chunkWriter) throws Exception {
+        Volume.Reader reader = chunkReader.getSection(index);
         if (reader.size() == 0) {
             return;
         }
+
+        Volume.Writer writer = chunkWriter.getSection(index);
+
         // blocks
         for (int y = 0; y < reader.getHeight(); y++) {
             for (int z = 0; z < reader.getLength(); z++) {
                 for (int x = 0; x < reader.getWidth(); x++) {
-                    BlockState state = reader.getState(x, y, z);
-                    writer.setState(x, y, z, state);
+                    BlockState stateIn = reader.getState(x, y, z);
+                    BlockState stateOut = gameData.blocks.getOutput(stateIn);
+                    writer.setState(x, y, z, stateOut);
+                    if (stateIn.requiresUpgrade()) {
+                        chunkWriter.markUpgrade(index, x, y, z);
+                    }
                 }
             }
         }

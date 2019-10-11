@@ -89,8 +89,9 @@ public class Main {
         try {
             if (formatIn == Format.WORLD) {
                 return convertWorld(source, dest, from, to, config.custom, progress);
+            } else {
+                return convertExtent(source, dest, formatIn, formatOut, from, to, config.custom, progress);
             }
-            return convertExtent(source, dest, formatIn, formatOut, from, to, config.custom, progress);
         } finally {
             Logger.flush();
         }

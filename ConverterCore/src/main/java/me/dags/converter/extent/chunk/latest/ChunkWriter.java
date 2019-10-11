@@ -1,6 +1,5 @@
 package me.dags.converter.extent.chunk.latest;
 
-import me.dags.converter.block.BlockState;
 import me.dags.converter.extent.chunk.AbstractChunkWriter;
 import me.dags.converter.extent.volume.Volume;
 import me.dags.converter.version.Version;

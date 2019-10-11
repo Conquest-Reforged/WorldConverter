@@ -68,13 +68,14 @@ public class V1_12 implements Version {
             }
 
             JsonObject block = entry.getValue().getAsJsonObject();
+            boolean upgrade = block.get("upgrade").getAsBoolean();
             JsonObject states = block.getAsJsonObject("states");
 
             if (states == null || states.size() == 0) {
                 int blockId = block.get("id").getAsInt();
                 int stateId = BlockState.getStateId(blockId, 0);
                 CompoundTag state = Nbt.compound(1).put("Name", entry.getKey());
-                blocks.addUnchecked(stateId, new BlockState(stateId, state));
+                blocks.addUnchecked(stateId, new BlockState(stateId, upgrade, state));
             } else {
                 int blockId = block.get("id").getAsInt();
                 String defaults = block.get("default").getAsString();
@@ -112,7 +113,7 @@ public class V1_12 implements Version {
                             .put("Name", entry.getKey())
                             .put("Properties", props);
 
-                    blocks.addUnchecked(stateId, new BlockState(stateId, state));
+                    blocks.addUnchecked(stateId, new BlockState(stateId, upgrade, state));
                 }
             }
         }

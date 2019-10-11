@@ -26,6 +26,8 @@ public interface Chunk {
 
     interface Writer extends Extent.Writer, DataWriter {
 
+        void markUpgrade(int section, int dx, int dy, int dz);
+
         Volume.Writer getSection(int index);
 
         default void setState(int x, int y, int z, BlockState state) {

@@ -8,6 +8,8 @@ public interface DataWriter extends AutoCloseable {
 
     DataWriter value(int value) throws IOException;
 
+    DataWriter value(boolean value) throws IOException;
+
     DataWriter value(String value) throws IOException;
 
     DataWriter beginObject() throws IOException;

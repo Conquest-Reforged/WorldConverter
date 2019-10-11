@@ -11,6 +11,7 @@ public class BlockWriterLegacy implements ValueWriter<BlockData> {
         writer.name(block.getName()).beginObject();
         {
             writer.name("id").value(block.getId());
+            writer.name("upgrade").value(block.upgrade());
             if (BlockWriter.hasState(block)) {
                 writer.name("default").value(block.getDefaultState().getName());
                 writer.name("states").beginObject();

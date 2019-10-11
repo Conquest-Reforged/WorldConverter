@@ -2,7 +2,6 @@ package me.dags.converter.version;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import me.dags.converter.biome.Biome;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.data.GameData;
 import me.dags.converter.extent.Extent;

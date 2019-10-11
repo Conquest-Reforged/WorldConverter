@@ -33,12 +33,13 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
         return version;
     }
 
+    @Override
     public boolean isDefault(T t) {
         return t == fallback;
     }
 
     @Override
-    public T getVal(int id) {
+    public T getValue(int id) {
         return idToVal.getOrDefault(id, fallback);
     }
 
@@ -57,7 +58,7 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
         if (id == null) {
             throw new ParseException("Unknown item: " + in, -1);
         }
-        return getVal(id);
+        return getValue(id);
     }
 
     public static class Builder<T extends RegistryItem> {

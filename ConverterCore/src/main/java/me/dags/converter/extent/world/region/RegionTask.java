@@ -7,8 +7,6 @@ import org.jnbt.CompoundTag;
 
 import java.io.File;
 import java.util.concurrent.Callable;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
 
 public class RegionTask implements Callable<Void> {
 

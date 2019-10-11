@@ -13,12 +13,25 @@ import java.util.List;
 public abstract class AbstractChunkWriter implements Chunk.Writer {
 
     private int top = -1;
+    private boolean hasUpgrade;
     private final Version version;
     private final CompoundTag level = Nbt.compound();
+    private final UpgradeData[] upgradeData = new UpgradeData[16];
     private final Volume.Writer[] sections = new Volume.Writer[16];
 
     protected AbstractChunkWriter(Version version) {
         this.version = version;
+    }
+
+    @Override
+    public void markUpgrade(int section, int dx, int dy, int dz) {
+        UpgradeData sectionData = upgradeData[section];
+        if (sectionData == null) {
+            hasUpgrade = true;
+            sectionData = new UpgradeData();
+            upgradeData[section] = sectionData;
+        }
+        sectionData.mark(dx, dy, dz);
     }
 
     @Override
@@ -40,6 +53,9 @@ public abstract class AbstractChunkWriter implements Chunk.Writer {
     @Override
     public CompoundTag flush() {
         level.put("Sections", Nbt.list(TagType.COMPOUND, flushSections()));
+        if (hasUpgrade) {
+            level.put("UpgradeData", flushUpgradeData());
+        }
         CompoundTag root = createRoot();
         root.put("Level", level);
         root.put("DataVersion", version.getId());
@@ -50,6 +66,20 @@ public abstract class AbstractChunkWriter implements Chunk.Writer {
         List<CompoundTag> list = new LinkedList<>();
         addSections(list);
         return list;
+    }
+
+    private CompoundTag flushUpgradeData() {
+        CompoundTag root = Nbt.compound(1);
+        CompoundTag indices = Nbt.compound(16);
+        for (int i = 0; i < upgradeData.length; i++) {
+            UpgradeData sectionData = upgradeData[i];
+            if (sectionData == null) {
+                continue;
+            }
+            indices.put(String.valueOf(i), sectionData.toArray());
+        }
+        root.put("Indices", indices);
+        return root;
     }
 
     protected void addSections(List<CompoundTag> list) {

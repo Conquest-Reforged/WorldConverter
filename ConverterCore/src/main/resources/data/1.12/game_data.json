@@ -2,10 +2,12 @@
   "version": "1.12",
   "blocks": {
     "minecraft:air": {
-      "id": 0
+      "id": 0,
+      "upgrade": false
     },
     "minecraft:stone": {
       "id": 1,
+      "upgrade": false,
       "default": "variant=stone",
       "states": {
         "variant=stone": 0,
@@ -19,6 +21,7 @@
     },
     "minecraft:grass": {
       "id": 2,
+      "upgrade": false,
       "default": "snowy=false",
       "states": {
         "snowy=true": 0,
@@ -27,6 +30,7 @@
     },
     "minecraft:dirt": {
       "id": 3,
+      "upgrade": false,
       "default": "snowy=false,variant=dirt",
       "states": {
         "snowy=true,variant=dirt": 0,
@@ -38,10 +42,12 @@
       }
     },
     "minecraft:cobblestone": {
-      "id": 4
+      "id": 4,
+      "upgrade": false
     },
     "minecraft:planks": {
       "id": 5,
+      "upgrade": false,
       "default": "variant=oak",
       "states": {
         "variant=oak": 0,
@@ -54,6 +60,7 @@
     },
     "minecraft:sapling": {
       "id": 6,
+      "upgrade": false,
       "default": "stage=0,type=oak",
       "states": {
         "stage=0,type=oak": 0,
@@ -71,10 +78,12 @@
       }
     },
     "minecraft:bedrock": {
-      "id": 7
+      "id": 7,
+      "upgrade": false
     },
     "minecraft:flowing_water": {
       "id": 8,
+      "upgrade": false,
       "default": "level=0",
       "states": {
         "level=0": 0,
@@ -97,6 +106,7 @@
     },
     "minecraft:water": {
       "id": 9,
+      "upgrade": false,
       "default": "level=0",
       "states": {
         "level=0": 0,
@@ -119,6 +129,7 @@
     },
     "minecraft:flowing_lava": {
       "id": 10,
+      "upgrade": false,
       "default": "level=0",
       "states": {
         "level=0": 0,
@@ -141,6 +152,7 @@
     },
     "minecraft:lava": {
       "id": 11,
+      "upgrade": false,
       "default": "level=0",
       "states": {
         "level=0": 0,
@@ -163,6 +175,7 @@
     },
     "minecraft:sand": {
       "id": 12,
+      "upgrade": false,
       "default": "variant=sand",
       "states": {
         "variant=sand": 0,
@@ -170,19 +183,24 @@
       }
     },
     "minecraft:gravel": {
-      "id": 13
+      "id": 13,
+      "upgrade": false
     },
     "minecraft:gold_ore": {
-      "id": 14
+      "id": 14,
+      "upgrade": false
     },
     "minecraft:iron_ore": {
-      "id": 15
+      "id": 15,
+      "upgrade": false
     },
     "minecraft:coal_ore": {
-      "id": 16
+      "id": 16,
+      "upgrade": false
     },
     "minecraft:log": {
       "id": 17,
+      "upgrade": false,
       "default": "axis=y,variant=oak",
       "states": {
         "axis=x,variant=oak": 4,
@@ -205,6 +223,7 @@
     },
     "minecraft:leaves": {
       "id": 18,
+      "upgrade": false,
       "default": "check_decay=true,decayable=true,variant=oak",
       "states": {
         "check_decay=true,decayable=true,variant=oak": 8,
@@ -227,6 +246,7 @@
     },
     "minecraft:sponge": {
       "id": 19,
+      "upgrade": false,
       "default": "wet=false",
       "states": {
         "wet=true": 1,
@@ -234,16 +254,20 @@
       }
     },
     "minecraft:glass": {
-      "id": 20
+      "id": 20,
+      "upgrade": false
     },
     "minecraft:lapis_ore": {
-      "id": 21
+      "id": 21,
+      "upgrade": false
     },
     "minecraft:lapis_block": {
-      "id": 22
+      "id": 22,
+      "upgrade": false
     },
     "minecraft:dispenser": {
       "id": 23,
+      "upgrade": false,
       "default": "facing=north,triggered=false",
       "states": {
         "facing=down,triggered=true": 8,
@@ -262,6 +286,7 @@
     },
     "minecraft:sandstone": {
       "id": 24,
+      "upgrade": false,
       "default": "type=sandstone",
       "states": {
         "type=sandstone": 0,
@@ -270,10 +295,12 @@
       }
     },
     "minecraft:noteblock": {
-      "id": 25
+      "id": 25,
+      "upgrade": false
     },
     "minecraft:bed": {
       "id": 26,
+      "upgrade": true,
       "default": "facing=north,occupied=false,part=foot",
       "states": {
         "facing=north,occupied=true,part=head": 14,
@@ -296,6 +323,7 @@
     },
     "minecraft:golden_rail": {
       "id": 27,
+      "upgrade": false,
       "default": "powered=false,shape=north_south",
       "states": {
         "powered=true,shape=north_south": 8,
@@ -314,6 +342,7 @@
     },
     "minecraft:detector_rail": {
       "id": 28,
+      "upgrade": false,
       "default": "powered=false,shape=north_south",
       "states": {
         "powered=true,shape=north_south": 8,
@@ -332,6 +361,7 @@
     },
     "minecraft:sticky_piston": {
       "id": 29,
+      "upgrade": false,
       "default": "extended=false,facing=north",
       "states": {
         "extended=true,facing=down": 8,
@@ -349,10 +379,12 @@
       }
     },
     "minecraft:web": {
-      "id": 30
+      "id": 30,
+      "upgrade": false
     },
     "minecraft:tallgrass": {
       "id": 31,
+      "upgrade": false,
       "default": "type=dead_bush",
       "states": {
         "type=dead_bush": 0,
@@ -361,10 +393,12 @@
       }
     },
     "minecraft:deadbush": {
-      "id": 32
+      "id": 32,
+      "upgrade": false
     },
     "minecraft:piston": {
       "id": 33,
+      "upgrade": false,
       "default": "extended=false,facing=north",
       "states": {
         "extended=true,facing=down": 8,
@@ -383,6 +417,7 @@
     },
     "minecraft:piston_head": {
       "id": 34,
+      "upgrade": true,
       "default": "facing=north,short=false,type=normal",
       "states": {
         "facing=down,short=true,type=normal": 0,
@@ -413,6 +448,7 @@
     },
     "minecraft:wool": {
       "id": 35,
+      "upgrade": false,
       "default": "color=white",
       "states": {
         "color=white": 0,
@@ -435,6 +471,7 @@
     },
     "minecraft:piston_extension": {
       "id": 36,
+      "upgrade": false,
       "default": "facing=north,type=normal",
       "states": {
         "facing=down,type=normal": 0,
@@ -453,6 +490,7 @@
     },
     "minecraft:yellow_flower": {
       "id": 37,
+      "upgrade": false,
       "default": "type=dandelion",
       "states": {
         "type=dandelion": 0
@@ -460,6 +498,7 @@
     },
     "minecraft:red_flower": {
       "id": 38,
+      "upgrade": false,
       "default": "type=poppy",
       "states": {
         "type=poppy": 0,
@@ -474,19 +513,24 @@
       }
     },
     "minecraft:brown_mushroom": {
-      "id": 39
+      "id": 39,
+      "upgrade": false
     },
     "minecraft:red_mushroom": {
-      "id": 40
+      "id": 40,
+      "upgrade": false
     },
     "minecraft:gold_block": {
-      "id": 41
+      "id": 41,
+      "upgrade": false
     },
     "minecraft:iron_block": {
-      "id": 42
+      "id": 42,
+      "upgrade": false
     },
     "minecraft:double_stone_slab": {
       "id": 43,
+      "upgrade": false,
       "default": "seamless=false,variant=stone",
       "states": {
         "seamless=true,variant=stone": 8,
@@ -509,6 +553,7 @@
     },
     "minecraft:stone_slab": {
       "id": 44,
+      "upgrade": false,
       "default": "half=bottom,variant=stone",
       "states": {
         "half=top,variant=stone": 8,
@@ -530,10 +575,12 @@
       }
     },
     "minecraft:brick_block": {
-      "id": 45
+      "id": 45,
+      "upgrade": false
     },
     "minecraft:tnt": {
       "id": 46,
+      "upgrade": false,
       "default": "explode=false",
       "states": {
         "explode=true": 1,
@@ -541,16 +588,20 @@
       }
     },
     "minecraft:bookshelf": {
-      "id": 47
+      "id": 47,
+      "upgrade": false
     },
     "minecraft:mossy_cobblestone": {
-      "id": 48
+      "id": 48,
+      "upgrade": false
     },
     "minecraft:obsidian": {
-      "id": 49
+      "id": 49,
+      "upgrade": false
     },
     "minecraft:torch": {
       "id": 50,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=up": 5,
@@ -562,6 +613,7 @@
     },
     "minecraft:fire": {
       "id": 51,
+      "upgrade": true,
       "default": "age=0,east=false,north=false,south=false,up=false,west=false",
       "states": {
         "age=0,east=true,north=true,south=true,up=true,west=true": 0,
@@ -1079,10 +1131,12 @@
       }
     },
     "minecraft:mob_spawner": {
-      "id": 52
+      "id": 52,
+      "upgrade": false
     },
     "minecraft:oak_stairs": {
       "id": 53,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -1129,6 +1183,7 @@
     },
     "minecraft:chest": {
       "id": 54,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -1139,6 +1194,7 @@
     },
     "minecraft:redstone_wire": {
       "id": 55,
+      "upgrade": true,
       "default": "east=none,north=none,power=0,south=none,west=none",
       "states": {
         "east=up,north=up,power=0,south=up,west=up": 0,
@@ -2440,16 +2496,20 @@
       }
     },
     "minecraft:diamond_ore": {
-      "id": 56
+      "id": 56,
+      "upgrade": false
     },
     "minecraft:diamond_block": {
-      "id": 57
+      "id": 57,
+      "upgrade": false
     },
     "minecraft:crafting_table": {
-      "id": 58
+      "id": 58,
+      "upgrade": false
     },
     "minecraft:wheat": {
       "id": 59,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -2464,6 +2524,7 @@
     },
     "minecraft:farmland": {
       "id": 60,
+      "upgrade": false,
       "default": "moisture=0",
       "states": {
         "moisture=0": 0,
@@ -2478,6 +2539,7 @@
     },
     "minecraft:furnace": {
       "id": 61,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -2488,6 +2550,7 @@
     },
     "minecraft:lit_furnace": {
       "id": 62,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -2498,6 +2561,7 @@
     },
     "minecraft:standing_sign": {
       "id": 63,
+      "upgrade": false,
       "default": "rotation=0",
       "states": {
         "rotation=0": 0,
@@ -2520,6 +2584,7 @@
     },
     "minecraft:wooden_door": {
       "id": 64,
+      "upgrade": true,
       "default": "facing=north,half=lower,hinge=left,open=false,powered=false",
       "states": {
         "facing=north,half=upper,hinge=left,open=true,powered=true": 10,
@@ -2590,6 +2655,7 @@
     },
     "minecraft:ladder": {
       "id": 65,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -2600,6 +2666,7 @@
     },
     "minecraft:rail": {
       "id": 66,
+      "upgrade": false,
       "default": "shape=north_south",
       "states": {
         "shape=north_south": 0,
@@ -2616,6 +2683,7 @@
     },
     "minecraft:stone_stairs": {
       "id": 67,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -2662,6 +2730,7 @@
     },
     "minecraft:wall_sign": {
       "id": 68,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -2672,6 +2741,7 @@
     },
     "minecraft:lever": {
       "id": 69,
+      "upgrade": false,
       "default": "facing=north,powered=false",
       "states": {
         "facing=down_x,powered=true": 8,
@@ -2694,6 +2764,7 @@
     },
     "minecraft:stone_pressure_plate": {
       "id": 70,
+      "upgrade": false,
       "default": "powered=false",
       "states": {
         "powered=true": 1,
@@ -2702,6 +2773,7 @@
     },
     "minecraft:iron_door": {
       "id": 71,
+      "upgrade": true,
       "default": "facing=north,half=lower,hinge=left,open=false,powered=false",
       "states": {
         "facing=north,half=upper,hinge=left,open=true,powered=true": 10,
@@ -2772,6 +2844,7 @@
     },
     "minecraft:wooden_pressure_plate": {
       "id": 72,
+      "upgrade": false,
       "default": "powered=false",
       "states": {
         "powered=true": 1,
@@ -2779,13 +2852,16 @@
       }
     },
     "minecraft:redstone_ore": {
-      "id": 73
+      "id": 73,
+      "upgrade": false
     },
     "minecraft:lit_redstone_ore": {
-      "id": 74
+      "id": 74,
+      "upgrade": false
     },
     "minecraft:unlit_redstone_torch": {
       "id": 75,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=up": 5,
@@ -2797,6 +2873,7 @@
     },
     "minecraft:redstone_torch": {
       "id": 76,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=up": 5,
@@ -2808,6 +2885,7 @@
     },
     "minecraft:stone_button": {
       "id": 77,
+      "upgrade": false,
       "default": "facing=north,powered=false",
       "states": {
         "facing=down,powered=true": 8,
@@ -2826,6 +2904,7 @@
     },
     "minecraft:snow_layer": {
       "id": 78,
+      "upgrade": false,
       "default": "layers=1",
       "states": {
         "layers=1": 0,
@@ -2839,13 +2918,16 @@
       }
     },
     "minecraft:ice": {
-      "id": 79
+      "id": 79,
+      "upgrade": false
     },
     "minecraft:snow": {
-      "id": 80
+      "id": 80,
+      "upgrade": false
     },
     "minecraft:cactus": {
       "id": 81,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -2867,10 +2949,12 @@
       }
     },
     "minecraft:clay": {
-      "id": 82
+      "id": 82,
+      "upgrade": false
     },
     "minecraft:reeds": {
       "id": 83,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -2893,6 +2977,7 @@
     },
     "minecraft:jukebox": {
       "id": 84,
+      "upgrade": false,
       "default": "has_record=false",
       "states": {
         "has_record=true": 1,
@@ -2901,6 +2986,7 @@
     },
     "minecraft:fence": {
       "id": 85,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -2923,6 +3009,7 @@
     },
     "minecraft:pumpkin": {
       "id": 86,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -2932,16 +3019,20 @@
       }
     },
     "minecraft:netherrack": {
-      "id": 87
+      "id": 87,
+      "upgrade": false
     },
     "minecraft:soul_sand": {
-      "id": 88
+      "id": 88,
+      "upgrade": false
     },
     "minecraft:glowstone": {
-      "id": 89
+      "id": 89,
+      "upgrade": false
     },
     "minecraft:portal": {
       "id": 90,
+      "upgrade": false,
       "default": "axis=x",
       "states": {
         "axis=x": 1,
@@ -2950,6 +3041,7 @@
     },
     "minecraft:lit_pumpkin": {
       "id": 91,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -2960,6 +3052,7 @@
     },
     "minecraft:cake": {
       "id": 92,
+      "upgrade": false,
       "default": "bites=0",
       "states": {
         "bites=0": 0,
@@ -2973,6 +3066,7 @@
     },
     "minecraft:unpowered_repeater": {
       "id": 93,
+      "upgrade": true,
       "default": "delay=1,facing=north,locked=false",
       "states": {
         "delay=1,facing=north,locked=true": 2,
@@ -3011,6 +3105,7 @@
     },
     "minecraft:powered_repeater": {
       "id": 94,
+      "upgrade": true,
       "default": "delay=1,facing=north,locked=false",
       "states": {
         "delay=1,facing=north,locked=true": 2,
@@ -3049,6 +3144,7 @@
     },
     "minecraft:stained_glass": {
       "id": 95,
+      "upgrade": false,
       "default": "color=white",
       "states": {
         "color=white": 0,
@@ -3071,6 +3167,7 @@
     },
     "minecraft:trapdoor": {
       "id": 96,
+      "upgrade": false,
       "default": "facing=north,half=bottom,open=false",
       "states": {
         "facing=north,half=top,open=true": 12,
@@ -3093,6 +3190,7 @@
     },
     "minecraft:monster_egg": {
       "id": 97,
+      "upgrade": false,
       "default": "variant=stone",
       "states": {
         "variant=stone": 0,
@@ -3105,6 +3203,7 @@
     },
     "minecraft:stonebrick": {
       "id": 98,
+      "upgrade": false,
       "default": "variant=stonebrick",
       "states": {
         "variant=stonebrick": 0,
@@ -3115,6 +3214,7 @@
     },
     "minecraft:brown_mushroom_block": {
       "id": 99,
+      "upgrade": false,
       "default": "variant=all_outside",
       "states": {
         "variant=north_west": 1,
@@ -3134,6 +3234,7 @@
     },
     "minecraft:red_mushroom_block": {
       "id": 100,
+      "upgrade": false,
       "default": "variant=all_outside",
       "states": {
         "variant=north_west": 1,
@@ -3153,6 +3254,7 @@
     },
     "minecraft:iron_bars": {
       "id": 101,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -3175,6 +3277,7 @@
     },
     "minecraft:glass_pane": {
       "id": 102,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -3196,10 +3299,12 @@
       }
     },
     "minecraft:melon_block": {
-      "id": 103
+      "id": 103,
+      "upgrade": false
     },
     "minecraft:pumpkin_stem": {
       "id": 104,
+      "upgrade": true,
       "default": "age=0,facing=up",
       "states": {
         "age=0,facing=up": 0,
@@ -3246,6 +3351,7 @@
     },
     "minecraft:melon_stem": {
       "id": 105,
+      "upgrade": true,
       "default": "age=0,facing=up",
       "states": {
         "age=0,facing=up": 0,
@@ -3292,6 +3398,7 @@
     },
     "minecraft:vine": {
       "id": 106,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,up=false,west=false",
       "states": {
         "east=true,north=true,south=true,up=true,west=true": 15,
@@ -3330,6 +3437,7 @@
     },
     "minecraft:fence_gate": {
       "id": 107,
+      "upgrade": true,
       "default": "facing=north,in_wall=false,open=false,powered=false",
       "states": {
         "facing=north,in_wall=true,open=true,powered=true": 14,
@@ -3368,6 +3476,7 @@
     },
     "minecraft:brick_stairs": {
       "id": 108,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -3414,6 +3523,7 @@
     },
     "minecraft:stone_brick_stairs": {
       "id": 109,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -3460,6 +3570,7 @@
     },
     "minecraft:mycelium": {
       "id": 110,
+      "upgrade": false,
       "default": "snowy=false",
       "states": {
         "snowy=true": 0,
@@ -3467,13 +3578,16 @@
       }
     },
     "minecraft:waterlily": {
-      "id": 111
+      "id": 111,
+      "upgrade": false
     },
     "minecraft:nether_brick": {
-      "id": 112
+      "id": 112,
+      "upgrade": false
     },
     "minecraft:nether_brick_fence": {
       "id": 113,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -3496,6 +3610,7 @@
     },
     "minecraft:nether_brick_stairs": {
       "id": 114,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -3542,6 +3657,7 @@
     },
     "minecraft:nether_wart": {
       "id": 115,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -3551,10 +3667,12 @@
       }
     },
     "minecraft:enchanting_table": {
-      "id": 116
+      "id": 116,
+      "upgrade": false
     },
     "minecraft:brewing_stand": {
       "id": 117,
+      "upgrade": false,
       "default": "has_bottle_0=false,has_bottle_1=false,has_bottle_2=false",
       "states": {
         "has_bottle_0=true,has_bottle_1=true,has_bottle_2=true": 7,
@@ -3569,6 +3687,7 @@
     },
     "minecraft:cauldron": {
       "id": 118,
+      "upgrade": false,
       "default": "level=0",
       "states": {
         "level=0": 0,
@@ -3578,10 +3697,12 @@
       }
     },
     "minecraft:end_portal": {
-      "id": 119
+      "id": 119,
+      "upgrade": false
     },
     "minecraft:end_portal_frame": {
       "id": 120,
+      "upgrade": false,
       "default": "eye=false,facing=north",
       "states": {
         "eye=true,facing=north": 6,
@@ -3595,19 +3716,24 @@
       }
     },
     "minecraft:end_stone": {
-      "id": 121
+      "id": 121,
+      "upgrade": false
     },
     "minecraft:dragon_egg": {
-      "id": 122
+      "id": 122,
+      "upgrade": false
     },
     "minecraft:redstone_lamp": {
-      "id": 123
+      "id": 123,
+      "upgrade": false
     },
     "minecraft:lit_redstone_lamp": {
-      "id": 124
+      "id": 124,
+      "upgrade": false
     },
     "minecraft:double_wooden_slab": {
       "id": 125,
+      "upgrade": false,
       "default": "variant=oak",
       "states": {
         "variant=oak": 0,
@@ -3620,6 +3746,7 @@
     },
     "minecraft:wooden_slab": {
       "id": 126,
+      "upgrade": false,
       "default": "half=bottom,variant=oak",
       "states": {
         "half=top,variant=oak": 8,
@@ -3638,6 +3765,7 @@
     },
     "minecraft:cocoa": {
       "id": 127,
+      "upgrade": false,
       "default": "age=0,facing=north",
       "states": {
         "age=0,facing=north": 2,
@@ -3656,6 +3784,7 @@
     },
     "minecraft:sandstone_stairs": {
       "id": 128,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -3701,10 +3830,12 @@
       }
     },
     "minecraft:emerald_ore": {
-      "id": 129
+      "id": 129,
+      "upgrade": false
     },
     "minecraft:ender_chest": {
       "id": 130,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -3715,6 +3846,7 @@
     },
     "minecraft:tripwire_hook": {
       "id": 131,
+      "upgrade": false,
       "default": "attached=false,facing=north,powered=false",
       "states": {
         "attached=true,facing=north,powered=true": 14,
@@ -3737,6 +3869,7 @@
     },
     "minecraft:tripwire": {
       "id": 132,
+      "upgrade": true,
       "default": "attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false",
       "states": {
         "attached=true,disarmed=true,east=true,north=true,powered=true,south=true,west=true": 13,
@@ -3870,10 +4003,12 @@
       }
     },
     "minecraft:emerald_block": {
-      "id": 133
+      "id": 133,
+      "upgrade": false
     },
     "minecraft:spruce_stairs": {
       "id": 134,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -3920,6 +4055,7 @@
     },
     "minecraft:birch_stairs": {
       "id": 135,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -3966,6 +4102,7 @@
     },
     "minecraft:jungle_stairs": {
       "id": 136,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -4012,6 +4149,7 @@
     },
     "minecraft:command_block": {
       "id": 137,
+      "upgrade": false,
       "default": "conditional=false,facing=north",
       "states": {
         "conditional=true,facing=down": 8,
@@ -4029,10 +4167,12 @@
       }
     },
     "minecraft:beacon": {
-      "id": 138
+      "id": 138,
+      "upgrade": false
     },
     "minecraft:cobblestone_wall": {
       "id": 139,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,up=false,variant=cobblestone,west=false",
       "states": {
         "east=true,north=true,south=true,up=true,variant=cobblestone,west=true": 0,
@@ -4103,6 +4243,7 @@
     },
     "minecraft:flower_pot": {
       "id": 140,
+      "upgrade": true,
       "default": "contents=empty,legacy_data=0",
       "states": {
         "contents=empty,legacy_data=0": 0,
@@ -4461,6 +4602,7 @@
     },
     "minecraft:carrots": {
       "id": 141,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -4475,6 +4617,7 @@
     },
     "minecraft:potatoes": {
       "id": 142,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -4489,6 +4632,7 @@
     },
     "minecraft:wooden_button": {
       "id": 143,
+      "upgrade": false,
       "default": "facing=north,powered=false",
       "states": {
         "facing=down,powered=true": 8,
@@ -4507,6 +4651,7 @@
     },
     "minecraft:skull": {
       "id": 144,
+      "upgrade": false,
       "default": "facing=north,nodrop=false",
       "states": {
         "facing=down,nodrop=true": 8,
@@ -4525,6 +4670,7 @@
     },
     "minecraft:anvil": {
       "id": 145,
+      "upgrade": false,
       "default": "damage=0,facing=north",
       "states": {
         "damage=0,facing=north": 2,
@@ -4543,6 +4689,7 @@
     },
     "minecraft:trapped_chest": {
       "id": 146,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -4553,6 +4700,7 @@
     },
     "minecraft:light_weighted_pressure_plate": {
       "id": 147,
+      "upgrade": false,
       "default": "power=0",
       "states": {
         "power=0": 0,
@@ -4575,6 +4723,7 @@
     },
     "minecraft:heavy_weighted_pressure_plate": {
       "id": 148,
+      "upgrade": false,
       "default": "power=0",
       "states": {
         "power=0": 0,
@@ -4597,6 +4746,7 @@
     },
     "minecraft:unpowered_comparator": {
       "id": 149,
+      "upgrade": false,
       "default": "facing=north,mode=compare,powered=false",
       "states": {
         "facing=north,mode=compare,powered=true": 10,
@@ -4619,6 +4769,7 @@
     },
     "minecraft:powered_comparator": {
       "id": 150,
+      "upgrade": false,
       "default": "facing=north,mode=compare,powered=false",
       "states": {
         "facing=north,mode=compare,powered=true": 10,
@@ -4641,6 +4792,7 @@
     },
     "minecraft:daylight_detector": {
       "id": 151,
+      "upgrade": false,
       "default": "power=0",
       "states": {
         "power=0": 0,
@@ -4662,13 +4814,16 @@
       }
     },
     "minecraft:redstone_block": {
-      "id": 152
+      "id": 152,
+      "upgrade": false
     },
     "minecraft:quartz_ore": {
-      "id": 153
+      "id": 153,
+      "upgrade": false
     },
     "minecraft:hopper": {
       "id": 154,
+      "upgrade": false,
       "default": "enabled=true,facing=down",
       "states": {
         "enabled=true,facing=down": 0,
@@ -4685,6 +4840,7 @@
     },
     "minecraft:quartz_block": {
       "id": 155,
+      "upgrade": false,
       "default": "variant=default",
       "states": {
         "variant=default": 0,
@@ -4696,6 +4852,7 @@
     },
     "minecraft:quartz_stairs": {
       "id": 156,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -4742,6 +4899,7 @@
     },
     "minecraft:activator_rail": {
       "id": 157,
+      "upgrade": false,
       "default": "powered=false,shape=north_south",
       "states": {
         "powered=true,shape=north_south": 8,
@@ -4760,6 +4918,7 @@
     },
     "minecraft:dropper": {
       "id": 158,
+      "upgrade": false,
       "default": "facing=north,triggered=false",
       "states": {
         "facing=down,triggered=true": 8,
@@ -4778,6 +4937,7 @@
     },
     "minecraft:stained_hardened_clay": {
       "id": 159,
+      "upgrade": false,
       "default": "color=white",
       "states": {
         "color=white": 0,
@@ -4800,6 +4960,7 @@
     },
     "minecraft:stained_glass_pane": {
       "id": 160,
+      "upgrade": true,
       "default": "color=white,east=false,north=false,south=false,west=false",
       "states": {
         "color=white,east=true,north=true,south=true,west=true": 0,
@@ -5062,6 +5223,7 @@
     },
     "minecraft:leaves2": {
       "id": 161,
+      "upgrade": false,
       "default": "check_decay=true,decayable=true,variant=acacia",
       "states": {
         "check_decay=true,decayable=true,variant=acacia": 8,
@@ -5076,6 +5238,7 @@
     },
     "minecraft:log2": {
       "id": 162,
+      "upgrade": false,
       "default": "axis=y,variant=acacia",
       "states": {
         "axis=x,variant=acacia": 4,
@@ -5090,6 +5253,7 @@
     },
     "minecraft:acacia_stairs": {
       "id": 163,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -5136,6 +5300,7 @@
     },
     "minecraft:dark_oak_stairs": {
       "id": 164,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -5181,13 +5346,16 @@
       }
     },
     "minecraft:slime": {
-      "id": 165
+      "id": 165,
+      "upgrade": false
     },
     "minecraft:barrier": {
-      "id": 166
+      "id": 166,
+      "upgrade": false
     },
     "minecraft:iron_trapdoor": {
       "id": 167,
+      "upgrade": false,
       "default": "facing=north,half=bottom,open=false",
       "states": {
         "facing=north,half=top,open=true": 12,
@@ -5210,6 +5378,7 @@
     },
     "minecraft:prismarine": {
       "id": 168,
+      "upgrade": false,
       "default": "variant=prismarine",
       "states": {
         "variant=prismarine": 0,
@@ -5218,10 +5387,12 @@
       }
     },
     "minecraft:sea_lantern": {
-      "id": 169
+      "id": 169,
+      "upgrade": false
     },
     "minecraft:hay_block": {
       "id": 170,
+      "upgrade": false,
       "default": "axis=y",
       "states": {
         "axis=x": 4,
@@ -5231,6 +5402,7 @@
     },
     "minecraft:carpet": {
       "id": 171,
+      "upgrade": false,
       "default": "color=white",
       "states": {
         "color=white": 0,
@@ -5252,16 +5424,20 @@
       }
     },
     "minecraft:hardened_clay": {
-      "id": 172
+      "id": 172,
+      "upgrade": false
     },
     "minecraft:coal_block": {
-      "id": 173
+      "id": 173,
+      "upgrade": false
     },
     "minecraft:packed_ice": {
-      "id": 174
+      "id": 174,
+      "upgrade": false
     },
     "minecraft:double_plant": {
       "id": 175,
+      "upgrade": true,
       "default": "facing=north,half=lower,variant=sunflower",
       "states": {
         "facing=north,half=upper,variant=sunflower": 10,
@@ -5316,6 +5492,7 @@
     },
     "minecraft:standing_banner": {
       "id": 176,
+      "upgrade": false,
       "default": "rotation=0",
       "states": {
         "rotation=0": 0,
@@ -5338,6 +5515,7 @@
     },
     "minecraft:wall_banner": {
       "id": 177,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -5348,6 +5526,7 @@
     },
     "minecraft:daylight_detector_inverted": {
       "id": 178,
+      "upgrade": false,
       "default": "power=0",
       "states": {
         "power=0": 0,
@@ -5370,6 +5549,7 @@
     },
     "minecraft:red_sandstone": {
       "id": 179,
+      "upgrade": false,
       "default": "type=red_sandstone",
       "states": {
         "type=red_sandstone": 0,
@@ -5379,6 +5559,7 @@
     },
     "minecraft:red_sandstone_stairs": {
       "id": 180,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -5425,6 +5606,7 @@
     },
     "minecraft:double_stone_slab2": {
       "id": 181,
+      "upgrade": false,
       "default": "seamless=false,variant=red_sandstone",
       "states": {
         "seamless=true,variant=red_sandstone": 8,
@@ -5433,6 +5615,7 @@
     },
     "minecraft:stone_slab2": {
       "id": 182,
+      "upgrade": false,
       "default": "half=bottom,variant=red_sandstone",
       "states": {
         "half=top,variant=red_sandstone": 8,
@@ -5441,6 +5624,7 @@
     },
     "minecraft:spruce_fence_gate": {
       "id": 183,
+      "upgrade": true,
       "default": "facing=north,in_wall=false,open=false,powered=false",
       "states": {
         "facing=north,in_wall=true,open=true,powered=true": 14,
@@ -5479,6 +5663,7 @@
     },
     "minecraft:birch_fence_gate": {
       "id": 184,
+      "upgrade": true,
       "default": "facing=north,in_wall=false,open=false,powered=false",
       "states": {
         "facing=north,in_wall=true,open=true,powered=true": 14,
@@ -5517,6 +5702,7 @@
     },
     "minecraft:jungle_fence_gate": {
       "id": 185,
+      "upgrade": true,
       "default": "facing=north,in_wall=false,open=false,powered=false",
       "states": {
         "facing=north,in_wall=true,open=true,powered=true": 14,
@@ -5555,6 +5741,7 @@
     },
     "minecraft:dark_oak_fence_gate": {
       "id": 186,
+      "upgrade": true,
       "default": "facing=north,in_wall=false,open=false,powered=false",
       "states": {
         "facing=north,in_wall=true,open=true,powered=true": 14,
@@ -5593,6 +5780,7 @@
     },
     "minecraft:acacia_fence_gate": {
       "id": 187,
+      "upgrade": true,
       "default": "facing=north,in_wall=false,open=false,powered=false",
       "states": {
         "facing=north,in_wall=true,open=true,powered=true": 14,
@@ -5631,6 +5819,7 @@
     },
     "minecraft:spruce_fence": {
       "id": 188,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -5653,6 +5842,7 @@
     },
     "minecraft:birch_fence": {
       "id": 189,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -5675,6 +5865,7 @@
     },
     "minecraft:jungle_fence": {
       "id": 190,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -5697,6 +5888,7 @@
     },
     "minecraft:dark_oak_fence": {
       "id": 191,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -5719,6 +5911,7 @@
     },
     "minecraft:acacia_fence": {
       "id": 192,
+      "upgrade": true,
       "default": "east=false,north=false,south=false,west=false",
       "states": {
         "east=true,north=true,south=true,west=true": 0,
@@ -5741,6 +5934,7 @@
     },
     "minecraft:spruce_door": {
       "id": 193,
+      "upgrade": true,
       "default": "facing=north,half=lower,hinge=left,open=false,powered=false",
       "states": {
         "facing=north,half=upper,hinge=left,open=true,powered=true": 10,
@@ -5811,6 +6005,7 @@
     },
     "minecraft:birch_door": {
       "id": 194,
+      "upgrade": true,
       "default": "facing=north,half=lower,hinge=left,open=false,powered=false",
       "states": {
         "facing=north,half=upper,hinge=left,open=true,powered=true": 10,
@@ -5881,6 +6076,7 @@
     },
     "minecraft:jungle_door": {
       "id": 195,
+      "upgrade": true,
       "default": "facing=north,half=lower,hinge=left,open=false,powered=false",
       "states": {
         "facing=north,half=upper,hinge=left,open=true,powered=true": 10,
@@ -5951,6 +6147,7 @@
     },
     "minecraft:acacia_door": {
       "id": 196,
+      "upgrade": true,
       "default": "facing=north,half=lower,hinge=left,open=false,powered=false",
       "states": {
         "facing=north,half=upper,hinge=left,open=true,powered=true": 10,
@@ -6021,6 +6218,7 @@
     },
     "minecraft:dark_oak_door": {
       "id": 197,
+      "upgrade": true,
       "default": "facing=north,half=lower,hinge=left,open=false,powered=false",
       "states": {
         "facing=north,half=upper,hinge=left,open=true,powered=true": 10,
@@ -6091,6 +6289,7 @@
     },
     "minecraft:end_rod": {
       "id": 198,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6103,6 +6302,7 @@
     },
     "minecraft:chorus_plant": {
       "id": 199,
+      "upgrade": true,
       "default": "down=false,east=false,north=false,south=false,up=false,west=false",
       "states": {
         "down=true,east=true,north=true,south=true,up=true,west=true": 0,
@@ -6173,6 +6373,7 @@
     },
     "minecraft:chorus_flower": {
       "id": 200,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -6184,10 +6385,12 @@
       }
     },
     "minecraft:purpur_block": {
-      "id": 201
+      "id": 201,
+      "upgrade": false
     },
     "minecraft:purpur_pillar": {
       "id": 202,
+      "upgrade": false,
       "default": "axis=x",
       "states": {
         "axis=x": 4,
@@ -6197,6 +6400,7 @@
     },
     "minecraft:purpur_stairs": {
       "id": 203,
+      "upgrade": true,
       "default": "facing=north,half=bottom,shape=straight",
       "states": {
         "facing=north,half=top,shape=straight": 7,
@@ -6243,6 +6447,7 @@
     },
     "minecraft:purpur_double_slab": {
       "id": 204,
+      "upgrade": false,
       "default": "variant=default",
       "states": {
         "variant=default": 0
@@ -6250,6 +6455,7 @@
     },
     "minecraft:purpur_slab": {
       "id": 205,
+      "upgrade": false,
       "default": "half=bottom,variant=default",
       "states": {
         "half=top,variant=default": 8,
@@ -6257,10 +6463,12 @@
       }
     },
     "minecraft:end_bricks": {
-      "id": 206
+      "id": 206,
+      "upgrade": false
     },
     "minecraft:beetroots": {
       "id": 207,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -6270,13 +6478,16 @@
       }
     },
     "minecraft:grass_path": {
-      "id": 208
+      "id": 208,
+      "upgrade": false
     },
     "minecraft:end_gateway": {
-      "id": 209
+      "id": 209,
+      "upgrade": false
     },
     "minecraft:repeating_command_block": {
       "id": 210,
+      "upgrade": false,
       "default": "conditional=false,facing=north",
       "states": {
         "conditional=true,facing=down": 8,
@@ -6295,6 +6506,7 @@
     },
     "minecraft:chain_command_block": {
       "id": 211,
+      "upgrade": false,
       "default": "conditional=false,facing=north",
       "states": {
         "conditional=true,facing=down": 8,
@@ -6313,6 +6525,7 @@
     },
     "minecraft:frosted_ice": {
       "id": 212,
+      "upgrade": false,
       "default": "age=0",
       "states": {
         "age=0": 0,
@@ -6322,16 +6535,20 @@
       }
     },
     "minecraft:magma": {
-      "id": 213
+      "id": 213,
+      "upgrade": false
     },
     "minecraft:nether_wart_block": {
-      "id": 214
+      "id": 214,
+      "upgrade": false
     },
     "minecraft:red_nether_brick": {
-      "id": 215
+      "id": 215,
+      "upgrade": false
     },
     "minecraft:bone_block": {
       "id": 216,
+      "upgrade": false,
       "default": "axis=x",
       "states": {
         "axis=x": 4,
@@ -6340,10 +6557,12 @@
       }
     },
     "minecraft:structure_void": {
-      "id": 217
+      "id": 217,
+      "upgrade": false
     },
     "minecraft:observer": {
       "id": 218,
+      "upgrade": false,
       "default": "facing=south,powered=false",
       "states": {
         "facing=down,powered=true": 8,
@@ -6362,6 +6581,7 @@
     },
     "minecraft:white_shulker_box": {
       "id": 219,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6374,6 +6594,7 @@
     },
     "minecraft:orange_shulker_box": {
       "id": 220,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6386,6 +6607,7 @@
     },
     "minecraft:magenta_shulker_box": {
       "id": 221,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6398,6 +6620,7 @@
     },
     "minecraft:light_blue_shulker_box": {
       "id": 222,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6410,6 +6633,7 @@
     },
     "minecraft:yellow_shulker_box": {
       "id": 223,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6422,6 +6646,7 @@
     },
     "minecraft:lime_shulker_box": {
       "id": 224,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6434,6 +6659,7 @@
     },
     "minecraft:pink_shulker_box": {
       "id": 225,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6446,6 +6672,7 @@
     },
     "minecraft:gray_shulker_box": {
       "id": 226,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6458,6 +6685,7 @@
     },
     "minecraft:silver_shulker_box": {
       "id": 227,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6470,6 +6698,7 @@
     },
     "minecraft:cyan_shulker_box": {
       "id": 228,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6482,6 +6711,7 @@
     },
     "minecraft:purple_shulker_box": {
       "id": 229,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6494,6 +6724,7 @@
     },
     "minecraft:blue_shulker_box": {
       "id": 230,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6506,6 +6737,7 @@
     },
     "minecraft:brown_shulker_box": {
       "id": 231,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6518,6 +6750,7 @@
     },
     "minecraft:green_shulker_box": {
       "id": 232,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6530,6 +6763,7 @@
     },
     "minecraft:red_shulker_box": {
       "id": 233,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6542,6 +6776,7 @@
     },
     "minecraft:black_shulker_box": {
       "id": 234,
+      "upgrade": false,
       "default": "facing=up",
       "states": {
         "facing=down": 0,
@@ -6554,6 +6789,7 @@
     },
     "minecraft:white_glazed_terracotta": {
       "id": 235,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6564,6 +6800,7 @@
     },
     "minecraft:orange_glazed_terracotta": {
       "id": 236,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6574,6 +6811,7 @@
     },
     "minecraft:magenta_glazed_terracotta": {
       "id": 237,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6584,6 +6822,7 @@
     },
     "minecraft:light_blue_glazed_terracotta": {
       "id": 238,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6594,6 +6833,7 @@
     },
     "minecraft:yellow_glazed_terracotta": {
       "id": 239,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6604,6 +6844,7 @@
     },
     "minecraft:lime_glazed_terracotta": {
       "id": 240,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6614,6 +6855,7 @@
     },
     "minecraft:pink_glazed_terracotta": {
       "id": 241,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6624,6 +6866,7 @@
     },
     "minecraft:gray_glazed_terracotta": {
       "id": 242,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6634,6 +6877,7 @@
     },
     "minecraft:silver_glazed_terracotta": {
       "id": 243,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6644,6 +6888,7 @@
     },
     "minecraft:cyan_glazed_terracotta": {
       "id": 244,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6654,6 +6899,7 @@
     },
     "minecraft:purple_glazed_terracotta": {
       "id": 245,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6664,6 +6910,7 @@
     },
     "minecraft:blue_glazed_terracotta": {
       "id": 246,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6674,6 +6921,7 @@
     },
     "minecraft:brown_glazed_terracotta": {
       "id": 247,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6684,6 +6932,7 @@
     },
     "minecraft:green_glazed_terracotta": {
       "id": 248,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6694,6 +6943,7 @@
     },
     "minecraft:red_glazed_terracotta": {
       "id": 249,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6704,6 +6954,7 @@
     },
     "minecraft:black_glazed_terracotta": {
       "id": 250,
+      "upgrade": false,
       "default": "facing=north",
       "states": {
         "facing=north": 2,
@@ -6714,6 +6965,7 @@
     },
     "minecraft:concrete": {
       "id": 251,
+      "upgrade": false,
       "default": "color=white",
       "states": {
         "color=white": 0,
@@ -6736,6 +6988,7 @@
     },
     "minecraft:concrete_powder": {
       "id": 252,
+      "upgrade": false,
       "default": "color=white",
       "states": {
         "color=white": 0,
@@ -6758,6 +7011,7 @@
     },
     "minecraft:structure_block": {
       "id": 255,
+      "upgrade": false,
       "default": "mode=save",
       "states": {
         "mode=save": 0,

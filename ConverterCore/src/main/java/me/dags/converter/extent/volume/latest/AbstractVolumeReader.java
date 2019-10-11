@@ -35,7 +35,7 @@ public abstract class AbstractVolumeReader implements Volume.Reader {
     public BlockState getState(int x, int y, int z) {
         int index = indexOf(x, y, z);
         int stateId = blocks.getBits(index);
-        return palette.getVal(stateId);
+        return palette.getValue(stateId);
     }
 
     @Override

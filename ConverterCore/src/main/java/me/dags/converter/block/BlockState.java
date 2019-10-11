@@ -9,26 +9,29 @@ import java.text.ParseException;
 public class BlockState implements RegistryItem {
 
     public static final int MAX_ID = getStateId(4096, 15);
-    public static final BlockState AIR = new BlockState(0, Nbt.compound(1).put("Name", "minecraft:air"));
+    public static final BlockState AIR = new BlockState(0, false, Nbt.compound(1).put("Name", "minecraft:air"));
 
     private final int stateId;
+    private final boolean upgrade;
     private final CompoundTag data;
     private final String blockName;
     private final String identifier;
 
     public BlockState(CompoundTag data) {
-        this(0, data);
+        this(0, false, data);
     }
 
     public BlockState(String name, String properties) throws ParseException {
         this.stateId = 0;
-        this.data = Serializer.deserialize(name, properties);
+        this.upgrade = false;
         this.blockName = name;
+        this.data = Serializer.deserialize(name, properties);
         this.identifier = Serializer.serialize(data);
     }
 
-    public BlockState(int stateId, CompoundTag data) {
+    public BlockState(int stateId, boolean upgrade, CompoundTag data) {
         this.data = data;
+        this.upgrade = upgrade;
         this.stateId = stateId;
         this.blockName = data.getString("Name");
         this.identifier = Serializer.serialize(data);
@@ -36,6 +39,10 @@ public class BlockState implements RegistryItem {
 
     public boolean isAir() {
         return this == AIR;
+    }
+
+    public boolean requiresUpgrade() {
+        return upgrade;
     }
 
     public CompoundTag getData() {

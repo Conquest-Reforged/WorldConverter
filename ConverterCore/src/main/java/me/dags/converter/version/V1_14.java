@@ -70,12 +70,12 @@ public class V1_14 implements Version {
             JsonArray states = block.getAsJsonArray("states");
             if (states == null) {
                 CompoundTag data = Serializer.deserialize(entry.getKey());
-                BlockState blockState = new BlockState(++stateId, data);
+                BlockState blockState = new BlockState(++stateId, false, data);
                 blocks.add(blockState);
             } else {
                 for (JsonElement state : states) {
                     CompoundTag data = Serializer.deserialize(entry.getKey(), state.getAsString());
-                    BlockState blockState = new BlockState(++stateId, data);
+                    BlockState blockState = new BlockState(++stateId, false, data);
                     blocks.add(blockState);
                 }
             }
