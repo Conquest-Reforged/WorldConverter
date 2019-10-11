@@ -5,12 +5,15 @@ plugins {
 
 sourceCompatibility = targetCompatibility = "1.8"
 
+configurations {
+    shade
+    compile.extendsFrom(shade)
+}
+
 repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
 }
-
-
 
 dependencies {
     shade "com.github.dags-:JNBT:2.0.4"

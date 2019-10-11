@@ -12,6 +12,10 @@ apply plugin: "java"
 apply plugin: "net.minecraftforge.gradle.forge"
 sourceCompatibility = targetCompatibility = "1.8"
 
+dependencies {
+    shade(project(":ConverterCore")) { transitive(false) }
+}
+
 minecraft {
     version = "1.12.2-14.23.5.2838"
     runDir = "run"

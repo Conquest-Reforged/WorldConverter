@@ -56,7 +56,9 @@ task modJars(type: Copy, dependsOn: subprojects.tasks["build"]) {
             if (it.name == "ConverterCore") {
                 return [].asList()
             } else {
-                return it.tasks.withType(Jar).collect { it.archivePath }
+                return it.tasks.withType(Jar)
+                        .matching { !it.toString().contains("deobf") }
+                        .collect { it.archivePath }
             }
         }
     }
