@@ -108,6 +108,15 @@ public class GUIConverter {
         JLabel format = new JLabel("Output");
         format.setPreferredSize(new Dimension(left, height));
         outputFormat = select(Format.values(), data.format, optionWidth, height, f -> data.format = f);
+        outputFormat.addActionListener(e -> {
+            Format formatOut = outputFormat.getItemAt(outputFormat.getSelectedIndex());
+            if (formatOut == Format.WORLD) {
+                Format formatIn = inputFormat.getItemAt(inputFormat.getSelectedIndex());
+                if (formatIn != Format.WORLD) {
+                    outputFormat.setSelectedItem(formatIn);
+                }
+            }
+        });
 
         JLabel version = new JLabel("Version");
         version.setPreferredSize(new Dimension(left, height));
