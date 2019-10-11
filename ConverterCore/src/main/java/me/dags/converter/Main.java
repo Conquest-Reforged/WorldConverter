@@ -1,7 +1,7 @@
 package me.dags.converter;
 
-import me.dags.converter.config.Config;
-import me.dags.converter.config.CustomData;
+import me.dags.converter.converter.config.Config;
+import me.dags.converter.converter.config.CustomData;
 import me.dags.converter.data.GameData;
 import me.dags.converter.data.Mappings;
 import me.dags.converter.extent.Format;

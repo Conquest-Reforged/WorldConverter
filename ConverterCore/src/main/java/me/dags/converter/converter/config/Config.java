@@ -1,4 +1,4 @@
-package me.dags.converter.config;
+package me.dags.converter.converter.config;
 
 import me.dags.converter.extent.Format;
 import me.dags.converter.version.MinecraftVersion;

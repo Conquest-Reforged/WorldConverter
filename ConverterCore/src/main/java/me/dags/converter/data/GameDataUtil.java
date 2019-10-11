@@ -2,9 +2,7 @@ package me.dags.converter.data;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import me.dags.converter.config.CustomData;
-import me.dags.converter.data.GameData;
-import me.dags.converter.data.Mappings;
+import me.dags.converter.converter.config.CustomData;
 import me.dags.converter.registry.Mapper;
 import me.dags.converter.resource.Container;
 import me.dags.converter.resource.Resource;

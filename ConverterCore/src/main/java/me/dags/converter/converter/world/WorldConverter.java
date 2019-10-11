@@ -1,6 +1,6 @@
 package me.dags.converter.converter.world;
 
-import me.dags.converter.config.CustomData;
+import me.dags.converter.converter.config.CustomData;
 import me.dags.converter.data.GameData;
 import me.dags.converter.data.Mappings;
 import me.dags.converter.converter.Converter;

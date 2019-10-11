@@ -1,4 +1,4 @@
-package me.dags.converter.config;
+package me.dags.converter.converter.config;
 
 import java.io.File;
 

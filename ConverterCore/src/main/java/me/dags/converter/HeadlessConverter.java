@@ -1,6 +1,6 @@
 package me.dags.converter;
 
-import me.dags.converter.config.Config;
+import me.dags.converter.converter.config.Config;
 import me.dags.converter.extent.ExtentType;
 import me.dags.converter.extent.Format;
 import me.dags.converter.util.IO;
