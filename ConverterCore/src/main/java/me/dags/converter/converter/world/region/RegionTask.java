@@ -1,4 +1,4 @@
-package me.dags.converter.extent.world.region;
+package me.dags.converter.converter.world.region;
 
 import me.dags.converter.converter.Converter;
 import me.dags.converter.util.IO;

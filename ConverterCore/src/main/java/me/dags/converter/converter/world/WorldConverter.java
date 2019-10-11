@@ -1,13 +1,12 @@
-package me.dags.converter.extent.world;
+package me.dags.converter.converter.world;
 
 import me.dags.converter.config.CustomData;
 import me.dags.converter.data.GameData;
 import me.dags.converter.data.Mappings;
-import me.dags.converter.converter.ChunkConverter;
 import me.dags.converter.converter.Converter;
-import me.dags.converter.extent.world.level.Level;
-import me.dags.converter.extent.world.level.LevelTask;
-import me.dags.converter.extent.world.region.RegionTask;
+import me.dags.converter.converter.world.level.Level;
+import me.dags.converter.converter.world.level.LevelTask;
+import me.dags.converter.converter.world.region.RegionTask;
 import me.dags.converter.util.CopyTask;
 import me.dags.converter.data.GameDataUtil;
 import me.dags.converter.util.IO;
@@ -22,13 +21,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Future;
 
-public class World {
+public class WorldConverter {
 
     private final File root;
     private final Level level;
     private final CustomData customData;
 
-    public World(File root, CustomData customData) {
+    public WorldConverter(File root, CustomData customData) {
         this.root = root;
         this.level = new Level(new File(root, "level.dat"));
         this.customData = customData;

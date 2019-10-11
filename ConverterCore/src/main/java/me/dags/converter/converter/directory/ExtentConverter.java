@@ -1,5 +1,6 @@
-package me.dags.converter.converter;
+package me.dags.converter.converter.directory;
 
+import me.dags.converter.converter.*;
 import me.dags.converter.data.GameData;
 import me.dags.converter.extent.Extent;
 import me.dags.converter.extent.WriterConfig;

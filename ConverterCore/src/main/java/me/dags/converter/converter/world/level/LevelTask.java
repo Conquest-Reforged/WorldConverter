@@ -1,4 +1,4 @@
-package me.dags.converter.extent.world.level;
+package me.dags.converter.converter.world.level;
 
 import me.dags.converter.biome.Biome;
 import me.dags.converter.block.BlockState;

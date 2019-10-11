@@ -1,6 +1,8 @@
-package me.dags.converter.converter;
+package me.dags.converter.converter.world;
 
 import me.dags.converter.block.BlockState;
+import me.dags.converter.converter.Converter;
+import me.dags.converter.converter.DataConverter;
 import me.dags.converter.data.GameData;
 import me.dags.converter.extent.WriterConfig;
 import me.dags.converter.extent.chunk.Chunk;
