@@ -5,6 +5,7 @@ import org.jnbt.Tag;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Rule {
@@ -19,6 +20,11 @@ public class Rule {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return name + props.toString();
     }
 
     public boolean matches(CompoundTag state) {
@@ -63,6 +69,9 @@ public class Rule {
 
     public void fill(CompoundTag state) {
         CompoundTag properties = state.getCompound("Properties");
+
+        props.keySet().removeIf(s -> properties.get(s).isAbsent());
+
         for (Map.Entry<String, Tag> e : properties) {
             if (!props.containsKey(e.getKey())) {
                 props.put(e.getKey(), e.getValue().asString().getValue());

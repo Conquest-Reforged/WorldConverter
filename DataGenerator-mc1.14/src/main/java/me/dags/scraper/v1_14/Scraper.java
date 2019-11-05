@@ -9,6 +9,7 @@ import me.dags.converter.data.block.StateData;
 import me.dags.converter.extent.chunk.ChunkData;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.state.IProperty;
 import net.minecraft.util.registry.Registry;

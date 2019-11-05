@@ -101,6 +101,10 @@ public class DataFixers {
         return fixed;
     }
 
+    private static CompoundNBT fixDoublePlant(CompoundNBT in) {
+        return in;
+    }
+
     private static CompoundNBT fixPlantPot(CompoundNBT in) {
         CompoundNBT props = in.getCompound("Properties");
         String contents = props.getString("contents");

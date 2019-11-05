@@ -16,7 +16,7 @@ sourceCompatibility = targetCompatibility = "1.8"
 
 dependencies {
     shade(project(":ConverterCore")) { transitive(false) }
-    minecraft "net.minecraftforge:forge:1.14.4-28.0.46"
+    minecraft "net.minecraftforge:forge:1.14.4-28.1.80"
 }
 
 minecraft {

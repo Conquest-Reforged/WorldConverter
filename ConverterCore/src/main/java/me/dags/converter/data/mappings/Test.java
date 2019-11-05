@@ -1,6 +1,9 @@
 package me.dags.converter.data.mappings;
 
+import me.dags.converter.block.BlockState;
+import me.dags.converter.data.GameData;
 import me.dags.converter.version.MinecraftVersion;
+import me.dags.converter.version.Version;
 
 import java.io.*;
 import java.util.Scanner;
@@ -8,6 +11,10 @@ import java.util.Scanner;
 public class Test {
 
     public static void main(String[] args) throws Exception {
+
+        if (true) return;
+
+
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader("mappings.txt")))) {
             try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("mappings-out.txt")))) {
                 StateRegistry from = StateRegistry.createLegacy(MinecraftVersion.V1_12.loadGameDataJson().getAsJsonObject("blocks"));

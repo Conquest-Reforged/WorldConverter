@@ -72,9 +72,13 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
         }
 
         public Builder<T> parse(String in, String out) throws ParseException {
-            T from = this.from.getParser().parse(in);
-            T to = this.to.getParser().parse(out);
-            mappings.put(from, to);
+            try {
+                T from = this.from.getParser().parse(in);
+                T to = this.to.getParser().parse(out);
+                mappings.put(from, to);
+            } catch (ParseException ignored) {
+
+            }
             return this;
         }
 

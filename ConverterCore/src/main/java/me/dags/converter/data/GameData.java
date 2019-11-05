@@ -8,8 +8,8 @@ import me.dags.converter.version.Version;
 public class GameData {
 
     public final Version version;
-    public final Registry<BlockState> blocks;
     public final Registry<Biome> biomes;
+    public final Registry<BlockState> blocks;
 
     public GameData(Version version, Registry<BlockState> blocks, Registry<Biome> biomes) {
         this.version = version;

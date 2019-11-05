@@ -14,6 +14,11 @@ public interface Chunk {
 
         Volume.Reader getSection(int index) throws Exception;
 
+        default BlockState getState(int x, int y, int z) throws Exception {
+            Volume.Reader section = getSection(y >> 4);
+            return section.getState(x & 15, y & 15, z & 15);
+        }
+
         @Override
         default void iterate(Extent.Visitor visitor) throws Exception {
             for (int i = 0; i < getSectionCount(); i++) {

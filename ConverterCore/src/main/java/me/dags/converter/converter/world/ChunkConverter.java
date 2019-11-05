@@ -8,6 +8,7 @@ import me.dags.converter.extent.WriterConfig;
 import me.dags.converter.extent.chunk.Chunk;
 import me.dags.converter.extent.chunk.ChunkData;
 import me.dags.converter.extent.volume.Volume;
+import me.dags.converter.registry.Registry;
 import me.dags.converter.version.Version;
 import org.jnbt.CompoundTag;
 
@@ -57,11 +58,16 @@ public class ChunkConverter implements Converter {
 
         Volume.Writer writer = chunkWriter.getSection(index);
 
+        int blockY = index << 4;
+        Registry.Parser<BlockState> parser = gameData.blocks.getParser();
+
         // blocks
         for (int y = 0; y < reader.getHeight(); y++) {
             for (int z = 0; z < reader.getLength(); z++) {
                 for (int x = 0; x < reader.getWidth(); x++) {
                     BlockState stateIn = reader.getState(x, y, z);
+                    stateIn = stateIn.getActualState(parser, chunkReader, x, blockY + y, z);
+
                     BlockState stateOut = gameData.blocks.getOutput(stateIn);
                     writer.setState(x, y, z, stateOut);
                     if (stateIn.requiresUpgrade()) {

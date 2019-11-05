@@ -7,6 +7,8 @@ import me.dags.converter.biome.registry.BiomeRegistry;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.block.PropertyComparator;
 import me.dags.converter.block.Serializer;
+import me.dags.converter.block.fixer.DoublePlant;
+import me.dags.converter.block.fixer.StateFixer;
 import me.dags.converter.block.registry.BlockRegistry;
 import me.dags.converter.data.GameData;
 import me.dags.converter.extent.WriterConfig;
@@ -17,9 +19,12 @@ import me.dags.converter.extent.schematic.legacy.LegacySchematicReader;
 import me.dags.converter.extent.schematic.legacy.LegacySchematicWriter;
 import me.dags.converter.extent.volume.Volume;
 import me.dags.converter.registry.Registry;
+import me.dags.converter.util.log.Logger;
 import org.jnbt.CompoundTag;
 import org.jnbt.Nbt;
 
+import java.text.ParseException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class V1_12 implements Version {
@@ -68,53 +73,11 @@ public class V1_12 implements Version {
             }
 
             JsonObject block = entry.getValue().getAsJsonObject();
-            boolean upgrade = block.get("upgrade").getAsBoolean();
             JsonObject states = block.getAsJsonObject("states");
-
             if (states == null || states.size() == 0) {
-                int blockId = block.get("id").getAsInt();
-                int stateId = BlockState.getStateId(blockId, 0);
-                CompoundTag state = Nbt.compound(1).put("Name", entry.getKey());
-                blocks.addUnchecked(stateId, new BlockState(stateId, upgrade, state));
+                parseOne(entry.getKey(), block, blocks);
             } else {
-                int blockId = block.get("id").getAsInt();
-                String defaults = block.get("default").getAsString();
-                CompoundTag defProps = Serializer.deserializeProps(defaults);
-                PropertyComparator stateComparator = new PropertyComparator(defProps);
-
-                int minId = 15;
-                CompoundTag[] persistentStates = new CompoundTag[16];
-                for (Map.Entry<String, JsonElement> state : states.entrySet()) {
-                    int meta = state.getValue().getAsInt();
-                    minId = Math.min(minId, meta);
-                    CompoundTag props = Serializer.deserializeProps(state.getKey());
-                    CompoundTag current = persistentStates[meta];
-                    if (current == null) {
-                        persistentStates[meta] = props;
-                        continue;
-                    }
-                    if (stateComparator.compare(current, props) > 0) {
-                        persistentStates[meta] = props;
-                    }
-                }
-
-                for (int meta = 0; meta < persistentStates.length; meta++) {
-                    CompoundTag props = persistentStates[meta];
-                    if (meta < minId) {
-//                        props = defProps;
-                    }
-
-                    if (props == null) {
-                        continue;
-                    }
-
-                    int stateId = BlockState.getStateId(blockId, meta);
-                    CompoundTag state = Nbt.compound(2)
-                            .put("Name", entry.getKey())
-                            .put("Properties", props);
-
-                    blocks.addUnchecked(stateId, new BlockState(stateId, upgrade, state));
-                }
+                parse(entry.getKey(), block, blocks);
             }
         }
 
@@ -126,4 +89,59 @@ public class V1_12 implements Version {
 
         return new GameData(this, blocks.build(), biomes.build());
     }
+
+    private static void parseOne(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {
+        int blockId = block.get("id").getAsInt();
+        int stateId = BlockState.getStateId(blockId, 0);
+        boolean upgrade = block.get("upgrade").getAsBoolean();
+        StateFixer fixer = fixers.getOrDefault(name, StateFixer.NONE);
+        CompoundTag state = Nbt.compound(1).put("Name", name);
+        builder.addUnchecked(stateId, new BlockState(stateId, state, fixer, upgrade));
+    }
+
+    private static void parse(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {
+        int blockId = block.get("id").getAsInt();
+        JsonObject states = block.getAsJsonObject("states");
+        String defaults = block.get("default").getAsString();
+        String fixerId = block.has("fixer") ? block.get("fixer").getAsString() : name;
+        StateFixer fixer = fixers.getOrDefault(fixerId, StateFixer.NONE);
+
+        boolean upgrade = block.get("upgrade").getAsBoolean();
+        CompoundTag defProps = Serializer.deserializeProps(defaults);
+        PropertyComparator stateComparator = new PropertyComparator(defProps);
+
+        int minId = 15;
+        CompoundTag[] persistentStates = new CompoundTag[16];
+        for (Map.Entry<String, JsonElement> state : states.entrySet()) {
+            int meta = state.getValue().getAsInt();
+            minId = Math.min(minId, meta);
+            CompoundTag props = Serializer.deserializeProps(state.getKey());
+            CompoundTag current = persistentStates[meta];
+            if (current == null) {
+                persistentStates[meta] = props;
+                continue;
+            }
+            if (stateComparator.compare(current, props) > 0) {
+                persistentStates[meta] = props;
+            }
+        }
+
+        for (int meta = 0; meta < persistentStates.length; meta++) {
+            CompoundTag props = persistentStates[meta];
+            if (props == null) {
+                continue;
+            }
+
+            int stateId = BlockState.getStateId(blockId, meta);
+            CompoundTag state = Nbt.compound(2)
+                    .put("Name", name)
+                    .put("Properties", props);
+
+            builder.addUnchecked(stateId, new BlockState(stateId, state, fixer, upgrade));
+        }
+    }
+
+    private static Map<String, StateFixer> fixers = new HashMap<String, StateFixer>() {{
+        put("minecraft:double_plant", new DoublePlant());
+    }};
 }
