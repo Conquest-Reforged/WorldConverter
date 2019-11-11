@@ -1,5 +1,6 @@
 package me.dags.converter.extent.structure;
 
+import com.google.gson.JsonObject;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.block.registry.PaletteWriter;
 import me.dags.converter.extent.WriterConfig;
@@ -12,15 +13,15 @@ import java.util.List;
 public class StructureWriter implements Structure.Writer {
 
     private final StructureConfig config;
-    private final Registry.Writer<BlockState> palette;
     private final List<CompoundTag> blocks;
+    private final Registry.Writer<BlockState> palette;
     private final CompoundTag root = Nbt.compound();
 
     private int minX, minY, minZ;
     private int maxX, maxY, maxZ;
 
     public StructureWriter(WriterConfig config) {
-        this.config = new StructureConfig();
+        this.config = StructureConfig.parse(new JsonObject());
         this.palette = new PaletteWriter<>();
         this.blocks = new LinkedList<>();
     }
@@ -28,6 +29,9 @@ public class StructureWriter implements Structure.Writer {
     @Override
     public void setState(int x, int y, int z, BlockState state) {
         if (config.filter.test(state)) {
+            return;
+        }
+        if (state.getBlockName().equals("minecraft:air")) {
             return;
         }
         CompoundTag block = Nbt.compound();

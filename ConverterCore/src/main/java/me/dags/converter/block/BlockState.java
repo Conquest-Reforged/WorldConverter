@@ -53,7 +53,7 @@ public class BlockState implements RegistryItem {
     }
 
     public boolean isAir() {
-        return this == AIR;
+        return getBlockId(getStateId()) == getBlockId(AIR.getId());
     }
 
     public boolean requiresUpgrade() {

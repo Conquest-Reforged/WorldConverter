@@ -2,6 +2,7 @@ package me.dags.converter.registry;
 
 import me.dags.converter.biome.Biome;
 import me.dags.converter.block.BlockState;
+import me.dags.converter.util.log.Logger;
 
 import java.util.Iterator;
 
@@ -36,8 +37,7 @@ public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
         if (registry.isDefault(source)) {
             int block = BlockState.getBlockId(id);
             int meta = BlockState.getMetaData(id);
-            new RuntimeException("Missing value for id: " + id + "(" + block + ":" + meta + ")").printStackTrace();
-            System.exit(1);
+            Logger.log(new RuntimeException("Missing value for id: " + id + "(" + block + ":" + meta + ")")).flush();
         }
         return source;
     }
@@ -46,8 +46,7 @@ public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
     public T getOutput(T input) {
         T result = mapper.apply(input);
         if (!(result instanceof Biome) && result == input) {
-            new RuntimeException("Unable to remap value: " + input).printStackTrace();
-            System.out.println(1);
+            Logger.log(new RuntimeException("Unable to remap value: " + input)).flush();
         }
         return result;
     }
