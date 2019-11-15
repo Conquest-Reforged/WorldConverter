@@ -7,18 +7,38 @@ import me.dags.converter.version.Version;
 public enum Format {
     NONE("none"),
     WORLD("world"),
-    SCHEMATIC("schematic"),
-    STRUCTURE("nbt"),
+    SCHEMATIC("schematic", "schematic", "schem"),
+    STRUCTURE("nbt", "nbt"),
     ;
 
     private final String identifier;
+    private final String[] suffixes;
 
-    Format(String identifier) {
+    Format(String identifier, String... suffixes) {
         this.identifier = identifier;
+        this.suffixes = suffixes;
     }
 
     public String getIdentifier() {
         return identifier;
+    }
+
+    public String getSuffix(String name) {
+        for (String s : suffixes) {
+            if (name.endsWith(s)) {
+                return s;
+            }
+        }
+        return "";
+    }
+
+    public boolean hasSuffix(String in) {
+        for (String s : suffixes) {
+            if (in.endsWith(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public ReaderFactory reader(Version version) {

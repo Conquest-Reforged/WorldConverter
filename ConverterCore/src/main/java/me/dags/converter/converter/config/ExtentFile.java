@@ -3,6 +3,7 @@ package me.dags.converter.converter.config;
 import me.dags.converter.extent.Format;
 
 import java.io.File;
+import java.util.concurrent.ForkJoinPool;
 
 public class ExtentFile {
 
@@ -23,17 +24,17 @@ public class ExtentFile {
     }
 
     public static ExtentFile of(File in) {
-        if (in.getName().endsWith(".schematic")) {
-            return new ExtentFile(in.getAbsoluteFile(), Format.SCHEMATIC);
-        }
-        if (in.getName().endsWith(".nbt")) {
-            return new ExtentFile(in.getAbsoluteFile(), Format.STRUCTURE);
+        for (Format format : Format.values()) {
+            if (format.hasSuffix(in.getName())) {
+                return new ExtentFile(in.getAbsoluteFile(), format);
+            }
         }
         return null;
     }
 
     public static ExtentFile of(File dir, File file, Format in, Format out) {
-        String name = file.getName().replace(in.getIdentifier(), out.getIdentifier());
+        String suffix = in.getSuffix(file.getName());
+        String name = file.getName().replace(suffix, out.getIdentifier());
         name = toSafeName(name, out.getIdentifier());
         File output = new File(dir, name);
         return new ExtentFile(output, out);

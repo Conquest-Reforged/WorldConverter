@@ -43,7 +43,7 @@ public class DirectoryConverter {
                 }
                 convert(f, sourceFormat, destDir, destFormat, results, depth);
             }
-        } else if (source.getName().endsWith(sourceFormat.getIdentifier())) {
+        } else if (sourceFormat.hasSuffix(source.getName())) {
             ExtentFile in = new ExtentFile(source, sourceFormat);
             ExtentFile out = ExtentFile.of(dest, source, sourceFormat, destFormat);
             Callable<Void> task = new ConversionTask(in.getFile(), out.getFile(), converter);

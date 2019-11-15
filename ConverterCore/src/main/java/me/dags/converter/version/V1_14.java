@@ -13,8 +13,9 @@ import me.dags.converter.extent.WriterConfig;
 import me.dags.converter.extent.chunk.Chunk;
 import me.dags.converter.extent.chunk.latest.ChunkReader;
 import me.dags.converter.extent.chunk.latest.ChunkWriter;
-import me.dags.converter.extent.schematic.latest.SchematicReader;
 import me.dags.converter.extent.schematic.latest.SchematicWriter;
+import me.dags.converter.extent.schematic.sponge.SpongeSchematicReader;
+import me.dags.converter.extent.schematic.sponge.SpongeSchematicWriter;
 import me.dags.converter.extent.volume.Volume;
 import me.dags.converter.registry.Registry;
 import org.jnbt.CompoundTag;
@@ -50,12 +51,12 @@ public class V1_14 implements Version {
 
     @Override
     public Volume.Reader schematicReader(Registry<BlockState> registry, CompoundTag root) throws Exception {
-        return new SchematicReader(registry, root);
+        return new SpongeSchematicReader(registry, root);
     }
 
     @Override
     public Volume.Writer schematicWriter(WriterConfig config) {
-        return new SchematicWriter(config);
+        return new SpongeSchematicWriter(config);
     }
 
     @Override
