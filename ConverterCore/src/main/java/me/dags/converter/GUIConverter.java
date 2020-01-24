@@ -129,6 +129,7 @@ public class GUIConverter {
 
         return root;
     }
+
     private static JPanel convert(JFrame frame, JProgressBar progress, Config config) {
         int height = 30;
         int smallWidth = 85;

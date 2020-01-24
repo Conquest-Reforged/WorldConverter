@@ -33,7 +33,7 @@ public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
     public T getInput(int id) {
         T source = registry.getValue(id);
         if (registry.isDefault(source)) {
-            Logger.log(new RuntimeException("Missing value for id: " + registry.getIdentifier(source))).flush();
+            Logger.log(new RuntimeException("Missing value for item: " + registry.getIdentifier(source))).flush();
         }
         return source;
     }
