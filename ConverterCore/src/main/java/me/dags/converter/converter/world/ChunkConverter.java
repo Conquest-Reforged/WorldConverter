@@ -16,15 +16,15 @@ import java.util.List;
 
 public class ChunkConverter implements Converter {
 
-    private final List<DataConverter> section;
-    private final List<DataConverter> level;
-    private final WriterConfig config;
-    private final GameData gameData;
-    private final Version from;
     private final Version to;
+    private final Version from;
+    private final GameData gameData;
+    private final WriterConfig config;
+    private final List<DataConverter> level;
+    private final List<DataConverter> section;
 
     public ChunkConverter(Version from, Version to, GameData gameData) {
-        this.level = determineLevelConversion(from, to, gameData);
+        this.level = ChunkData.getLevelDataConverters(from, to, gameData);
         this.section = ChunkData.sectionData();
         this.config = new WriterConfig();
         this.gameData = gameData;
@@ -75,20 +75,6 @@ public class ChunkConverter implements Converter {
                     }
                 }
             }
-        }
-    }
-
-    private static List<DataConverter> determineLevelConversion(Version from, Version to, GameData data) {
-        if (from.isLegacy()) {
-            if (to.isLegacy()) {
-                return ChunkData.legacyLevel();
-            }
-            return ChunkData.legacyToLatestLevel(from, to, data);
-        } else {
-            if (to.isLegacy()) {
-                return ChunkData.latestLegacyLevel(from, to, data);
-            }
-            return ChunkData.v114Tov115(from, to, data);
         }
     }
 }
