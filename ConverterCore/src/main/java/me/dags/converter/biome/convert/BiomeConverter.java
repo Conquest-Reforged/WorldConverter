@@ -35,10 +35,6 @@ public class BiomeConverter implements DataConverter {
 
     @Override
     public Tag<?> convert(Tag<?> tag) {
-        if (versionIn.getId() == versionOut.getId()) {
-            return tag;
-        }
-
         BiomeContainer.Reader reader = versionIn.getBiomeFormat().newReader(tag);
         BiomeContainer.Writer writer = versionOut.getBiomeFormat().newWriter();
         for (int y = 0; y < writer.sizeY(); y++) {
@@ -51,7 +47,6 @@ public class BiomeConverter implements DataConverter {
                 }
             }
         }
-
         return writer.getTag();
     }
 }

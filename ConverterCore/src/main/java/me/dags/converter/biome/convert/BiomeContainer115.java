@@ -8,7 +8,6 @@ public class BiomeContainer115 implements BiomeContainer {
 
     private static final int ZOOM_HORIZ = (int) Math.round(Math.log(16.0D) / Math.log(2.0D)) - 2;
     private static final int ZOOM_VERT = (int) Math.round(Math.log(256.0D) / Math.log(2.0D)) - 2;
-    public static final int SIZE = 1 << ZOOM_HORIZ + ZOOM_HORIZ + ZOOM_VERT;
     public static final int MASK_HORIZ = (1 << ZOOM_HORIZ) - 1;
     public static final int MASK_VERT = (1 << ZOOM_VERT) - 1;
 

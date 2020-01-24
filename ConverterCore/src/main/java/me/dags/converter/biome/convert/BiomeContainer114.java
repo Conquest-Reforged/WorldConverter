@@ -37,7 +37,7 @@ public class BiomeContainer114 implements BiomeContainer {
     }
 
     private static int indexOf(int x, int z) {
-        return (z >> 4) + x;
+        return (z << 4) + x;
     }
 
     private static class Reader extends BiomeContainer114 implements BiomeContainer.Reader {

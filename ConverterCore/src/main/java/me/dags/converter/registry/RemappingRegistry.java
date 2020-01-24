@@ -1,7 +1,5 @@
 package me.dags.converter.registry;
 
-import me.dags.converter.util.log.Logger;
-
 import java.util.Iterator;
 
 public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
@@ -31,11 +29,7 @@ public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
 
     @Override
     public T getInput(int id) {
-        T source = registry.getValue(id);
-        if (registry.isDefault(source)) {
-            Logger.log(new RuntimeException("Missing value for item: " + registry.getIdentifier(source))).flush();
-        }
-        return source;
+        return registry.getValue(id);
     }
 
     @Override
