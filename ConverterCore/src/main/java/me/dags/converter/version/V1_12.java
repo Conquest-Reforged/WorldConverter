@@ -11,15 +11,9 @@ import me.dags.converter.block.fixer.DoublePlant;
 import me.dags.converter.block.fixer.StateFixer;
 import me.dags.converter.block.registry.BlockRegistry;
 import me.dags.converter.data.GameData;
-import me.dags.converter.extent.WriterConfig;
-import me.dags.converter.extent.chunk.Chunk;
-import me.dags.converter.extent.chunk.legacy.LegacyChunkReader;
-import me.dags.converter.extent.chunk.legacy.LegacyChunkWriter;
-import me.dags.converter.extent.schematic.legacy.LegacySchematicReader;
-import me.dags.converter.extent.schematic.legacy.LegacySchematicWriter;
-import me.dags.converter.extent.volume.Volume;
-import me.dags.converter.registry.Registry;
-import me.dags.converter.util.log.Logger;
+import me.dags.converter.version.format.BiomeFormat;
+import me.dags.converter.version.format.ChunkFormat;
+import me.dags.converter.version.format.SchematicFormat;
 import org.jnbt.CompoundTag;
 import org.jnbt.Nbt;
 
@@ -45,23 +39,18 @@ public class V1_12 implements Version {
     }
 
     @Override
-    public Chunk.Reader chunkReader(Registry<BlockState> registry, CompoundTag root) throws Exception {
-        return new LegacyChunkReader(registry, root);
+    public ChunkFormat getChunkFormat() {
+        return ChunkFormat.LEGACY;
     }
 
     @Override
-    public Chunk.Writer chunkWriter(WriterConfig config) {
-        return new LegacyChunkWriter(this, config);
+    public BiomeFormat getBiomeFormat() {
+        return BiomeFormat.LEGACY;
     }
 
     @Override
-    public Volume.Reader schematicReader(Registry<BlockState> registry, CompoundTag root) throws Exception {
-        return new LegacySchematicReader(registry, root);
-    }
-
-    @Override
-    public Volume.Writer schematicWriter(WriterConfig config) {
-        return new LegacySchematicWriter(config);
+    public SchematicFormat getSchematicFormat() {
+        return SchematicFormat.LEGACY;
     }
 
     @Override

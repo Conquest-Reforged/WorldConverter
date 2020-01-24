@@ -9,15 +9,9 @@ import me.dags.converter.block.BlockState;
 import me.dags.converter.block.Serializer;
 import me.dags.converter.block.registry.BlockRegistry;
 import me.dags.converter.data.GameData;
-import me.dags.converter.extent.WriterConfig;
-import me.dags.converter.extent.chunk.Chunk;
-import me.dags.converter.extent.chunk.latest.ChunkReader;
-import me.dags.converter.extent.chunk.latest.ChunkWriter;
-import me.dags.converter.extent.schematic.latest.SchematicWriter;
-import me.dags.converter.extent.schematic.sponge.SpongeSchematicReader;
-import me.dags.converter.extent.schematic.sponge.SpongeSchematicWriter;
-import me.dags.converter.extent.volume.Volume;
-import me.dags.converter.registry.Registry;
+import me.dags.converter.version.format.BiomeFormat;
+import me.dags.converter.version.format.ChunkFormat;
+import me.dags.converter.version.format.SchematicFormat;
 import org.jnbt.CompoundTag;
 
 import java.util.Map;
@@ -40,23 +34,18 @@ public class V1_14 implements Version {
     }
 
     @Override
-    public Chunk.Reader chunkReader(Registry<BlockState> registry, CompoundTag root) throws Exception {
-        return new ChunkReader(registry, root);
+    public ChunkFormat getChunkFormat() {
+        return ChunkFormat.LATEST;
     }
 
     @Override
-    public Chunk.Writer chunkWriter(WriterConfig config) {
-        return new ChunkWriter(this);
+    public BiomeFormat getBiomeFormat() {
+        return BiomeFormat.LEGACY;
     }
 
     @Override
-    public Volume.Reader schematicReader(Registry<BlockState> registry, CompoundTag root) throws Exception {
-        return new SpongeSchematicReader(registry, root);
-    }
-
-    @Override
-    public Volume.Writer schematicWriter(WriterConfig config) {
-        return new SpongeSchematicWriter(config);
+    public SchematicFormat getSchematicFormat() {
+        return SchematicFormat.SPONGE;
     }
 
     @Override

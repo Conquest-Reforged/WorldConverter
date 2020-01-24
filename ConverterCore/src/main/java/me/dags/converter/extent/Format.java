@@ -44,11 +44,11 @@ public enum Format {
     public ReaderFactory reader(Version version) {
         switch (this) {
             case SCHEMATIC:
-                return version::schematicReader;
+                return version.getSchematicFormat()::newReader;
             case STRUCTURE:
-                return version::structureReader;
+                return version.getStructureFormat()::newReader;
             case WORLD:
-                return version::chunkReader;
+                return version.getChunkFormat()::newReader;
         }
         return null;
     }
@@ -56,11 +56,11 @@ public enum Format {
     public WriterFactory writer(Version version) {
         switch (this) {
             case SCHEMATIC:
-                return version::schematicWriter;
+                return version.getSchematicFormat()::newWriter;
             case STRUCTURE:
-                return version::structureWriter;
+                return version.getStructureFormat()::newWriter;
             case WORLD:
-                return version::chunkWriter;
+                return cfg -> version.getChunkFormat().newWriter(version, cfg);
         }
         return null;
     }

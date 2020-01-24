@@ -1,13 +1,10 @@
 package me.dags.converter.version;
 
 import com.google.gson.JsonObject;
-import me.dags.converter.block.BlockState;
 import me.dags.converter.data.GameData;
-import me.dags.converter.extent.WriterConfig;
-import me.dags.converter.extent.chunk.Chunk;
-import me.dags.converter.extent.volume.Volume;
-import me.dags.converter.registry.Registry;
-import org.jnbt.CompoundTag;
+import me.dags.converter.version.format.BiomeFormat;
+import me.dags.converter.version.format.ChunkFormat;
+import me.dags.converter.version.format.SchematicFormat;
 
 public class Auto implements Version {
 
@@ -27,22 +24,17 @@ public class Auto implements Version {
     }
 
     @Override
-    public Chunk.Reader chunkReader(Registry<BlockState> registry, CompoundTag root) throws Exception {
+    public ChunkFormat getChunkFormat() {
         return null;
     }
 
     @Override
-    public Volume.Reader schematicReader(Registry<BlockState> registry, CompoundTag root) throws Exception {
+    public BiomeFormat getBiomeFormat() {
         return null;
     }
 
     @Override
-    public Chunk.Writer chunkWriter(WriterConfig config) {
-        return null;
-    }
-
-    @Override
-    public Volume.Writer schematicWriter(WriterConfig config) {
+    public SchematicFormat getSchematicFormat() {
         return null;
     }
 

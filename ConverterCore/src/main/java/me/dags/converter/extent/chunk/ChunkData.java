@@ -1,9 +1,11 @@
 package me.dags.converter.extent.chunk;
 
 import me.dags.converter.biome.Biome;
-import me.dags.converter.data.GameData;
+import me.dags.converter.biome.convert.BiomeConverter;
 import me.dags.converter.converter.DataConverter;
+import me.dags.converter.data.GameData;
 import me.dags.converter.registry.Registry;
+import me.dags.converter.version.Version;
 import org.jnbt.CompoundTag;
 import org.jnbt.ListTag;
 import org.jnbt.Nbt;
@@ -61,7 +63,7 @@ public class ChunkData {
         return Collections.unmodifiableList(list);
     }
 
-    public static List<DataConverter> legacyToLatestLevel(GameData gameData) {
+    public static List<DataConverter> legacyToLatestLevel(Version from, Version to, GameData gameData) {
         List<DataConverter> list = new LinkedList<>();
         list.add(DataConverter.create("Entities", "Entities"));
         list.add(DataConverter.create("TileEntities", "TileEntities"));
@@ -71,11 +73,11 @@ public class ChunkData {
         list.add(DataConverter.create("TerrainPopulated", "Status", t -> Nbt.tag("full")));
         list.add(DataConverter.create("xPos", "xPos"));
         list.add(DataConverter.create("zPos", "zPos"));
-        list.add(biomeConverter(gameData.biomes));
+        list.add(new BiomeConverter(from, to, gameData.biomes));
         return Collections.unmodifiableList(list);
     }
 
-    public static List<DataConverter> latestLegacyLevel(GameData gameData) {
+    public static List<DataConverter> latestLegacyLevel(Version from, Version to, GameData gameData) {
         List<DataConverter> list = new LinkedList<>();
         list.add(DataConverter.create("Entities", "Entities"));
         list.add(DataConverter.create("TileEntities", "TileEntities"));
@@ -85,7 +87,27 @@ public class ChunkData {
         list.add(DataConverter.create("Status", "TerrainPopulated", t -> Nbt.tag((byte) 1)));
         list.add(DataConverter.create("xPos", "xPos"));
         list.add(DataConverter.create("zPos", "zPos"));
-        list.add(biomeConverter(gameData.biomes));
+        list.add(new BiomeConverter(from, to, gameData.biomes));
+        return Collections.unmodifiableList(list);
+    }
+
+    public static List<DataConverter> v114Tov115(Version from, Version to, GameData gameData) {
+        List<DataConverter> list = new LinkedList<>();
+        list.add(DataConverter.create("CarvingMasks", "CarvingMasks"));
+        list.add(DataConverter.create("Heightmaps", "Heightmaps"));
+        list.add(DataConverter.create("Structures", "Structures"));
+        list.add(DataConverter.create("Entities", "Entities"));
+        list.add(DataConverter.create("Lights", "Lights"));
+        list.add(DataConverter.create("LiquidsToBeTicked", "LiquidsToBeTicked"));
+        list.add(DataConverter.create("PostProcessing", "PostProcessing"));
+        list.add(DataConverter.create("TileEntities", "TileEntities"));
+        list.add(DataConverter.create("ToBeTicked", "ToBeTicked"));
+        list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
+        list.add(DataConverter.create("LastUpdate", "LastUpdate"));
+        list.add(DataConverter.create("Status", "Status"));
+        list.add(DataConverter.create("xPos", "xPos"));
+        list.add(DataConverter.create("zPos", "zPos"));
+        list.add(new BiomeConverter(from, to, gameData.biomes));
         return Collections.unmodifiableList(list);
     }
 

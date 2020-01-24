@@ -3,19 +3,9 @@ package me.dags.scraper.v1_14;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.dags.converter.resource.Container;
-import me.dags.converter.resource.Resource;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tags.Tag;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoader;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.loading.moddiscovery.ModFile;
-import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 
 import java.io.*;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -89,7 +79,7 @@ public class Mappings {
 
     private static List<CompoundNBT> parseStates(String name, JsonObject block) {
         JsonElement def = block.get("default");
-        JsonElement variants = block.getAsJsonObject("states");
+        JsonElement variants = block.get("states");
         if (def == null || variants == null) {
             return Collections.singletonList(parse(name, ""));
         }

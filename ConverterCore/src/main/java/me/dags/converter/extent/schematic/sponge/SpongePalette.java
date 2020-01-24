@@ -1,6 +1,5 @@
 package me.dags.converter.extent.schematic.sponge;
 
-import me.dags.converter.block.BlockState;
 import me.dags.converter.registry.Registry;
 import me.dags.converter.registry.RegistryItem;
 

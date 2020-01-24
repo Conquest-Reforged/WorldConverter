@@ -1,0 +1,8 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+[[mods]]
+    displayName="DataGenerator"
+    modId="data_generator"
+    version="1.0.0"
+    authors="dags"
+    description="GameData generator"

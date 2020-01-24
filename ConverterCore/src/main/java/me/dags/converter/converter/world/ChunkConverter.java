@@ -35,8 +35,8 @@ public class ChunkConverter implements Converter {
 
     @Override
     public CompoundTag convert(CompoundTag in) throws Exception {
-        Chunk.Reader reader = from.chunkReader(gameData.blocks, in);
-        Chunk.Writer writer = to.chunkWriter(config);
+        Chunk.Reader reader = from.getChunkFormat().newReader(gameData.blocks, in);
+        Chunk.Writer writer = to.getChunkFormat().newWriter(to, config);
 
         int sections = reader.getSectionCount();
         for (int i = 0; i < sections; i++) {
@@ -83,12 +83,12 @@ public class ChunkConverter implements Converter {
             if (to.isLegacy()) {
                 return ChunkData.legacyLevel();
             }
-            return ChunkData.legacyToLatestLevel(data);
+            return ChunkData.legacyToLatestLevel(from, to, data);
         } else {
             if (to.isLegacy()) {
-                return ChunkData.latestLegacyLevel(data);
+                return ChunkData.latestLegacyLevel(from, to, data);
             }
-            return ChunkData.latestLevel();
+            return ChunkData.v114Tov115(from, to, data);
         }
     }
 }

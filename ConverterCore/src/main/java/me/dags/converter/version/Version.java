@@ -2,18 +2,13 @@ package me.dags.converter.version;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import me.dags.converter.block.BlockState;
 import me.dags.converter.data.GameData;
-import me.dags.converter.extent.Extent;
-import me.dags.converter.extent.WriterConfig;
-import me.dags.converter.extent.chunk.Chunk;
-import me.dags.converter.extent.structure.StructureReader;
-import me.dags.converter.extent.structure.StructureWriter;
-import me.dags.converter.extent.volume.Volume;
-import me.dags.converter.registry.Registry;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.log.Logger;
-import org.jnbt.CompoundTag;
+import me.dags.converter.version.format.BiomeFormat;
+import me.dags.converter.version.format.ChunkFormat;
+import me.dags.converter.version.format.SchematicFormat;
+import me.dags.converter.version.format.StructureFormat;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,25 +22,17 @@ public interface Version {
 
     boolean isLegacy();
 
-    // READERS
+    ChunkFormat getChunkFormat();
 
-    Chunk.Reader chunkReader(Registry<BlockState> registry, CompoundTag root) throws Exception;
+    BiomeFormat getBiomeFormat();
 
-    Volume.Reader schematicReader(Registry<BlockState> registry, CompoundTag root) throws Exception;
+    SchematicFormat getSchematicFormat();
 
-    default Extent.Reader structureReader(Registry<BlockState> registry, CompoundTag root) throws Exception {
-        return new StructureReader(registry, root);
+    default StructureFormat getStructureFormat() {
+        return StructureFormat.INSTANCE;
     }
 
-    // WRITERS
-
-    Chunk.Writer chunkWriter(WriterConfig config);
-
-    Volume.Writer schematicWriter(WriterConfig config);
-
-    default Extent.Writer structureWriter(WriterConfig config) {
-        return new StructureWriter(config);
-    }
+    GameData parseGameData(JsonObject json) throws Exception;
 
     default JsonObject loadGameDataJson() throws Exception {
         String path = String.format("/data/%s/game_data.json", getVersion());
@@ -65,6 +52,4 @@ public interface Version {
         Logger.log("Loading game data for version ", this);
         return parseGameData(loadGameDataJson());
     }
-
-    GameData parseGameData(JsonObject json) throws Exception;
 }

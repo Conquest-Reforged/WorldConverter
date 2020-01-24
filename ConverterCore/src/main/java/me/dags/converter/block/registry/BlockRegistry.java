@@ -43,6 +43,13 @@ public class BlockRegistry extends AbstractRegistry<BlockState> implements Regis
         return new PaletteReader<>(map, BlockState.AIR);
     }
 
+    @Override
+    public String getIdentifier(BlockState blockState) {
+        int id = BlockState.getBlockId(blockState.getStateId());
+        int meta = BlockState.getMetaData(blockState.getStateId());
+        return blockState.getIdentifier() + "(" + id + ":" + meta + ")";
+    }
+
     public static Builder<BlockState> builder(String version) {
         return new AbstractRegistry.Builder<>(version, BlockState.AIR, BlockState.MAX_ID, BlockRegistry::new);
     }

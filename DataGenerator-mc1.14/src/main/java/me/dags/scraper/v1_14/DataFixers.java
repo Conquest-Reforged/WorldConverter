@@ -10,7 +10,6 @@ import net.minecraft.nbt.StringNBT;
 import net.minecraft.util.SharedConstants;
 import net.minecraft.util.datafix.DataFixesManager;
 import net.minecraft.util.datafix.TypeReferences;
-import net.minecraft.util.datafix.fixes.BiomeRenames;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -109,6 +108,9 @@ public class DataFixers {
         CompoundNBT props = in.getCompound("Properties");
         String contents = props.getString("contents");
         String flattened = pottedPlants.get(contents);
+        if (flattened == null) {
+            return in;
+        }
         CompoundNBT flat = new CompoundNBT();
         flat.putString("Name", flattened);
         return flat;

@@ -54,11 +54,11 @@ public class ExtentType extends Pair<Format, Version> {
                 if (root.get("Data").isPresent()) {
                     CompoundTag version = root.get("Data", "Version").asCompound();
                     if (version.isPresent()) {
-                        if (version.getString("Name").startsWith("1.12")) {
-                            return new ExtentType(Format.WORLD, MinecraftVersion.V1_12);
-                        }
-                        if (version.getString("Name").startsWith("1.14")) {
-                            return new ExtentType(Format.WORLD, MinecraftVersion.V1_14);
+                        String name = version.getString("Name");
+                        for (Version v : MinecraftVersion.values()) {
+                            if (name.startsWith(v.getVersion())) {
+                                return new ExtentType(Format.WORLD, v);
+                            }
                         }
                     }
                 }

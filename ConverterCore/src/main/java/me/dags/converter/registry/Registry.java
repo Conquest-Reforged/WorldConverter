@@ -54,6 +54,10 @@ public interface Registry<T extends RegistryItem> extends Iterable<T> {
         return false;
     }
 
+    default String getIdentifier(T t) {
+        return t.getIdentifier();
+    }
+
     interface Writer<T extends RegistryItem> extends Iterable<T> {
 
         int getOrCreateId(T val);

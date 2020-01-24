@@ -1,9 +1,6 @@
 package me.dags.converter.data.mappings;
 
-import me.dags.converter.block.BlockState;
-import me.dags.converter.data.GameData;
 import me.dags.converter.version.MinecraftVersion;
-import me.dags.converter.version.Version;
 
 import java.io.*;
 import java.util.Scanner;

@@ -3,7 +3,6 @@ package me.dags.converter.converter.config;
 import me.dags.converter.extent.Format;
 
 import java.io.File;
-import java.util.concurrent.ForkJoinPool;
 
 public class ExtentFile {
 
