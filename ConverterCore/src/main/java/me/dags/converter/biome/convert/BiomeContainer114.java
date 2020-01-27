@@ -1,6 +1,5 @@
 package me.dags.converter.biome.convert;
 
-import org.jnbt.ByteArrayTag;
 import org.jnbt.Nbt;
 import org.jnbt.Tag;
 
@@ -27,20 +26,11 @@ public class BiomeContainer114 implements BiomeContainer {
         return 16;
     }
 
-    public static BiomeContainer.Reader reader(Tag<?> data) {
-        ByteArrayTag biomes = (ByteArrayTag) data;
-        return new BiomeContainer114.Reader(biomes.getValue());
-    }
-
-    public static BiomeContainer.Writer writer() {
-        return new Writer();
-    }
-
     private static int indexOf(int x, int z) {
         return (z << 4) + x;
     }
 
-    private static class Reader extends BiomeContainer114 implements BiomeContainer.Reader {
+    public static class Reader extends BiomeContainer114 implements BiomeContainer.Reader {
 
         public Reader(byte[] biomes) {
             super(biomes);
@@ -56,7 +46,7 @@ public class BiomeContainer114 implements BiomeContainer {
         }
     }
 
-    private static class Writer extends BiomeContainer114 implements BiomeContainer.Writer {
+    public static class Writer extends BiomeContainer114 implements BiomeContainer.Writer {
 
         public Writer() {
             super(new byte[16 * 16]);

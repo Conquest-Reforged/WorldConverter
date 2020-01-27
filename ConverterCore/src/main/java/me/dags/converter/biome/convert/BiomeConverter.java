@@ -8,11 +8,13 @@ import org.jnbt.Tag;
 
 public class BiomeConverter implements DataConverter {
 
+    private final long seed;
     private final Version versionIn;
     private final Version versionOut;
     private final Registry<Biome> registry;
 
-    public BiomeConverter(Version versionIn, Version versionOut, Registry<Biome> registry) {
+    public BiomeConverter(long seed, Version versionIn, Version versionOut, Registry<Biome> registry) {
+        this.seed = seed;
         this.registry = registry;
         this.versionIn = versionIn;
         this.versionOut = versionOut;
@@ -35,7 +37,7 @@ public class BiomeConverter implements DataConverter {
 
     @Override
     public Tag<?> convert(Tag<?> tag) {
-        BiomeContainer.Reader reader = versionIn.getBiomeFormat().newReader(tag);
+        BiomeContainer.Reader reader = versionIn.getBiomeFormat().newReader(seed, tag);
         BiomeContainer.Writer writer = versionOut.getBiomeFormat().newWriter();
         for (int y = 0; y < writer.sizeY(); y++) {
             for (int z = 0; z < writer.sizeZ(); z++) {

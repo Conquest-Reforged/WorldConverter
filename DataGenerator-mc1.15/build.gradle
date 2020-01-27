@@ -14,11 +14,6 @@ apply plugin: "eclipse"
 apply plugin: "net.minecraftforge.gradle"
 sourceCompatibility = targetCompatibility = "1.8"
 
-configurations {
-    shade
-    compile.extendsFrom(shade)
-}
-
 dependencies {
     shade(project(":ConverterCore")) { transitive(false) }
     minecraft "net.minecraftforge:forge:1.15.1-30.0.35"
@@ -52,7 +47,7 @@ minecraft {
 }
 
 jar {
-//    dependsOn(deobfJar)
+    dependsOn(deobfJar)
 
     manifest {
         attributes([

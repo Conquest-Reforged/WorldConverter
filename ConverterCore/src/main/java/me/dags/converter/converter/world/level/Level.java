@@ -43,6 +43,25 @@ public class Level {
         }
     }
 
+    public long getSeed() {
+        try (InputStream in = new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)))) {
+            CompoundTag root = Nbt.read(in).getTag().asCompound();
+            if (root.isAbsent()) {
+                throw new IOException("Unable to read Level file");
+            }
+
+            LongTag seed = root.get("Data", "RandomSeed").asLong();
+            if (seed.isAbsent()) {
+                return 0L;
+            }
+
+            return seed.getValue();
+        } catch (IOException e) {
+            Logger.log(e).flush();
+            return 0L;
+        }
+    }
+
     public GameData sync(GameData from) throws Exception {
         Logger.log("Synchronising GameData ids with level.dat");
         try (InputStream in = new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)))) {

@@ -23,8 +23,8 @@ public class ChunkConverter implements Converter {
     private final List<DataConverter> level;
     private final List<DataConverter> section;
 
-    public ChunkConverter(Version from, Version to, GameData gameData) {
-        this.level = ChunkData.getLevelDataConverters(from, to, gameData);
+    public ChunkConverter(long seed, Version from, Version to, GameData gameData) {
+        this.level = ChunkData.getLevelDataConverters(seed, from, to, gameData);
         this.section = ChunkData.sectionData();
         this.config = new WriterConfig();
         this.gameData = gameData;

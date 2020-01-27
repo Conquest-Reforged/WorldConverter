@@ -19,39 +19,39 @@ public class ChunkData {
         return list;
     }
 
-    public static List<DataConverter> getLevelDataConverters(Version from, Version to, GameData data) {
+    public static List<DataConverter> getLevelDataConverters(long seed, Version from, Version to, GameData data) {
         if (from.getId() < to.getId()) {
-            return ChunkData.upgrade(from, to, data);
+            return ChunkData.upgrade(seed, from, to, data);
         }
         if (from.getId() > to.getId()) {
-            return ChunkData.downgrade(from, to, data);
+            return ChunkData.downgrade(seed, from, to, data);
         }
-        return ChunkData.transfer(from, to, data);
+        return ChunkData.transfer(seed, from, to, data);
     }
 
-    private static List<DataConverter> upgrade(Version from, Version to, GameData gameData) {
+    private static List<DataConverter> upgrade(long seed, Version from, Version to, GameData gameData) {
         if (from.isLegacy()) {
-            return upgradeFromLegacy(from, to, gameData);
+            return upgradeFromLegacy(seed, from, to, gameData);
         }
-        return transfer(from, to, gameData);
+        return transfer(seed, from, to, gameData);
     }
 
-    private static List<DataConverter> downgrade(Version from, Version to, GameData gameData) {
+    private static List<DataConverter> downgrade(long seed, Version from, Version to, GameData gameData) {
         if (to.isLegacy()) {
-            return downgradeToLegacy(from, to, gameData);
+            return downgradeToLegacy(seed, from, to, gameData);
         }
-        return transfer(from, to, gameData);
+        return transfer(seed, from, to, gameData);
     }
 
-    private static List<DataConverter> transfer(Version from, Version to, GameData gameData) {
+    private static List<DataConverter> transfer(long seed, Version from, Version to, GameData gameData) {
         if (to.isLegacy()) {
-            return transferLegacy(from, to, gameData);
+            return transferLegacy(seed, from, to, gameData);
         }
-        return transferLatest(from, to, gameData);
+        return transferLatest(seed, from, to, gameData);
     }
 
     // upgrade chunk data from Legacy names to Current
-    private static List<DataConverter> upgradeFromLegacy(Version from, Version to, GameData gameData) {
+    private static List<DataConverter> upgradeFromLegacy(long seed, Version from, Version to, GameData gameData) {
         List<DataConverter> list = new LinkedList<>();
         list.add(DataConverter.create("Entities", "Entities"));
         list.add(DataConverter.create("TileEntities", "TileEntities"));
@@ -61,12 +61,12 @@ public class ChunkData {
         list.add(DataConverter.create("TerrainPopulated", "Status", t -> Nbt.tag("full")));
         list.add(DataConverter.create("xPos", "xPos"));
         list.add(DataConverter.create("zPos", "zPos"));
-        list.add(new BiomeConverter(from, to, gameData.biomes));
+        list.add(new BiomeConverter(seed, from, to, gameData.biomes));
         return Collections.unmodifiableList(list);
     }
 
     // downgrade chunk data from Current to legacy
-    private static List<DataConverter> downgradeToLegacy(Version from, Version to, GameData gameData) {
+    private static List<DataConverter> downgradeToLegacy(long seed, Version from, Version to, GameData gameData) {
         List<DataConverter> list = new LinkedList<>();
         list.add(DataConverter.create("Entities", "Entities"));
         list.add(DataConverter.create("TileEntities", "TileEntities"));
@@ -76,11 +76,11 @@ public class ChunkData {
         list.add(DataConverter.create("Status", "TerrainPopulated", t -> Nbt.tag((byte) 1)));
         list.add(DataConverter.create("xPos", "xPos"));
         list.add(DataConverter.create("zPos", "zPos"));
-        list.add(new BiomeConverter(from, to, gameData.biomes));
+        list.add(new BiomeConverter(seed, from, to, gameData.biomes));
         return Collections.unmodifiableList(list);
     }
 
-    private static List<DataConverter> transferLegacy(Version from, Version to, GameData gameData) {
+    private static List<DataConverter> transferLegacy(long seed, Version from, Version to, GameData gameData) {
         List<DataConverter> list = new LinkedList<>();
         list.add(DataConverter.create("Entities", "Entities"));
         list.add(DataConverter.create("TileEntities", "TileEntities"));
@@ -90,11 +90,11 @@ public class ChunkData {
         list.add(DataConverter.create("TerrainPopulated", "TerrainPopulated"));
         list.add(DataConverter.create("xPos", "xPos"));
         list.add(DataConverter.create("zPos", "zPos"));
-        list.add(new BiomeConverter(from, to, gameData.biomes));
+        list.add(new BiomeConverter(seed, from, to, gameData.biomes));
         return Collections.unmodifiableList(list);
     }
 
-    private static List<DataConverter> transferLatest(Version from, Version to, GameData gameData) {
+    private static List<DataConverter> transferLatest(long seed, Version from, Version to, GameData gameData) {
         List<DataConverter> list = new LinkedList<>();
         list.add(DataConverter.create("Entities", "Entities"));
         list.add(DataConverter.create("TileEntities", "TileEntities"));
@@ -104,7 +104,7 @@ public class ChunkData {
         list.add(DataConverter.create("Status", "Status"));
         list.add(DataConverter.create("xPos", "xPos"));
         list.add(DataConverter.create("zPos", "zPos"));
-        list.add(new BiomeConverter(from, to, gameData.biomes));
+        list.add(new BiomeConverter(seed, from, to, gameData.biomes));
         return Collections.unmodifiableList(list);
     }
 }

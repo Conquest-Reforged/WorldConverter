@@ -25,11 +25,13 @@ public class WorldConverter {
 
     private final File root;
     private final Level level;
+    private final long levelSeed;
     private final CustomData customData;
 
     public WorldConverter(File root, CustomData customData) {
         this.root = root;
         this.level = new Level(new File(root, "level.dat"));
+        this.levelSeed = level.getSeed();
         this.customData = customData;
     }
 
@@ -61,7 +63,7 @@ public class WorldConverter {
         GameData destData = getDestGameData(sourceVersion, to, sourceData);
         Mappings mappings = Mappings.build(sourceData, destData).builtIn();
         GameData gameData = GameDataUtil.applyMappings(customData, mappings);
-        Converter converter = new ChunkConverter(from, to, gameData);
+        Converter converter = new ChunkConverter(levelSeed, from, to, gameData);
         CollectorContext context = new CollectorContext(to, destData, converter);
         collect(root, dest, context, 0);
         return context.tasks;
