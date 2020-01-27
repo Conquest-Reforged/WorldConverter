@@ -41,7 +41,7 @@ public class IO {
     }
 
     public static String logFile() {
-        return new SimpleDateFormat("yyMMdd-hhmmss").format(new Date()) + ".log";
+        return "world-converter.log";
     }
 
     public static boolean isJar() {
