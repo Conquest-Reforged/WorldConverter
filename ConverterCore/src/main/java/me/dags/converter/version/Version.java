@@ -2,7 +2,7 @@ package me.dags.converter.version;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import me.dags.converter.data.GameData;
+import me.dags.converter.datagen.Schema;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.log.Logger;
 import me.dags.converter.version.format.BiomeFormat;
@@ -32,7 +32,7 @@ public interface Version {
         return StructureFormat.INSTANCE;
     }
 
-    GameData parseGameData(JsonObject json) throws Exception;
+    VersionData parseGameData(JsonObject json) throws Exception;
 
     default JsonObject loadGameDataJson() throws Exception {
         String path = String.format("/data/%s/game_data.json", getVersion());
@@ -48,7 +48,7 @@ public interface Version {
         }
     }
 
-    default GameData loadGameData() throws Exception {
+    default VersionData loadGameData() throws Exception {
         Logger.log("Loading game data for version ", this);
         return parseGameData(loadGameDataJson());
     }

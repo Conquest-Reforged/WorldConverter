@@ -1,6 +1,7 @@
 package me.dags.converter;
 
 import me.dags.converter.converter.Converter;
+import me.dags.converter.converter.ConverterData;
 import me.dags.converter.converter.ReaderFactory;
 import me.dags.converter.converter.WriterFactory;
 import me.dags.converter.converter.config.Config;
@@ -8,9 +9,7 @@ import me.dags.converter.converter.config.CustomData;
 import me.dags.converter.converter.directory.DirectoryConverter;
 import me.dags.converter.converter.directory.ExtentConverter;
 import me.dags.converter.converter.world.WorldConverter;
-import me.dags.converter.data.GameData;
-import me.dags.converter.data.GameDataUtil;
-import me.dags.converter.data.Mappings;
+import me.dags.converter.datagen.Mappings;
 import me.dags.converter.extent.Format;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.Threading;
@@ -108,8 +107,8 @@ public class Main {
         ReaderFactory reader = in.reader(from);
         WriterFactory writer = out.writer(to);
         Mappings mappings = Mappings.build(from, to).builtIn();
-        GameData gameData = GameDataUtil.applyMappings(customData, mappings);
-        Converter converter = new ExtentConverter(reader, writer, gameData, Collections.emptyList());
+        ConverterData data = ConverterData.create(customData, mappings);
+        Converter converter = new ExtentConverter(reader, writer, data, Collections.emptyList());
         List<Future<Void>> tasks = new DirectoryConverter(converter).convert(source, in, dest, out);
         await(tasks, progress);
         return dest;

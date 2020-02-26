@@ -1,6 +1,10 @@
 package me.dags.converter.extent.structure;
 
-import org.jnbt.*;
+import org.jnbt.CompoundTag;
+import org.jnbt.ListTag;
+import org.jnbt.Nbt;
+import org.jnbt.Tag;
+import org.jnbt.TagType;
 
 import java.util.List;
 

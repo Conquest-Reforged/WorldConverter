@@ -2,8 +2,8 @@ package me.dags.converter.converter.world;
 
 import me.dags.converter.block.BlockState;
 import me.dags.converter.converter.Converter;
+import me.dags.converter.converter.ConverterData;
 import me.dags.converter.converter.DataConverter;
-import me.dags.converter.data.GameData;
 import me.dags.converter.extent.WriterConfig;
 import me.dags.converter.extent.chunk.Chunk;
 import me.dags.converter.extent.chunk.ChunkData;
@@ -18,24 +18,24 @@ public class ChunkConverter implements Converter {
 
     private final Version to;
     private final Version from;
-    private final GameData gameData;
+    private final ConverterData data;
     private final WriterConfig config;
     private final List<DataConverter> level;
     private final List<DataConverter> section;
 
-    public ChunkConverter(long seed, Version from, Version to, GameData gameData) {
-        this.level = ChunkData.getLevelDataConverters(seed, from, to, gameData);
+    public ChunkConverter(long seed, Version from, Version to, ConverterData data) {
+        this.level = ChunkData.getLevelDataConverters(seed, from, to, data);
         this.section = ChunkData.sectionData();
         this.config = new WriterConfig();
-        this.gameData = gameData;
+        this.data = data;
         this.from = from;
         this.to = to;
-        config.put("registry", gameData.blocks);
+        config.put("registry", data.blocks);
     }
 
     @Override
     public CompoundTag convert(CompoundTag in) throws Exception {
-        Chunk.Reader reader = from.getChunkFormat().newReader(gameData.blocks, in);
+        Chunk.Reader reader = from.getChunkFormat().newReader(data.blocks, in);
         Chunk.Writer writer = to.getChunkFormat().newWriter(to, config);
 
         int sections = reader.getSectionCount();
@@ -59,7 +59,7 @@ public class ChunkConverter implements Converter {
         Volume.Writer writer = chunkWriter.getSection(index);
 
         int blockY = index << 4;
-        Registry.Parser<BlockState> parser = gameData.blocks.getParser();
+        Registry.Parser<BlockState> parser = data.blocks.getParser();
 
         // blocks
         for (int y = 0; y < reader.getHeight(); y++) {
@@ -68,7 +68,7 @@ public class ChunkConverter implements Converter {
                     BlockState stateIn = reader.getState(x, y, z);
                     stateIn = stateIn.getActualState(parser, chunkReader, x, blockY + y, z);
 
-                    BlockState stateOut = gameData.blocks.getOutput(stateIn);
+                    BlockState stateOut = data.blocks.getOutput(stateIn);
                     writer.setState(x, y, z, stateOut);
                     if (stateIn.requiresUpgrade()) {
                         chunkWriter.markUpgrade(index, x, y, z);

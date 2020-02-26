@@ -45,8 +45,8 @@ public class BlockRegistry extends AbstractRegistry<BlockState> implements Regis
 
     @Override
     public String getIdentifier(BlockState blockState) {
-        int id = BlockState.getBlockId(blockState.getStateId());
-        int meta = BlockState.getMetaData(blockState.getStateId());
+        int id = BlockState.getBlockId(blockState.getId());
+        int meta = BlockState.getMetaData(blockState.getId());
         return blockState.getIdentifier() + "(" + id + ":" + meta + ")";
     }
 

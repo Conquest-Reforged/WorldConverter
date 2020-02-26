@@ -2,15 +2,29 @@ package me.dags.converter.converter.world.level;
 
 import me.dags.converter.biome.Biome;
 import me.dags.converter.block.BlockState;
-import me.dags.converter.data.GameData;
+import me.dags.converter.version.VersionData;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.log.Logger;
-import me.dags.converter.version.MinecraftVersion;
+import me.dags.converter.version.versions.MinecraftVersion;
 import me.dags.converter.version.Version;
-import org.jnbt.*;
+import org.jnbt.CompoundTag;
+import org.jnbt.ListTag;
+import org.jnbt.Nbt;
+import org.jnbt.Tag;
+import org.jnbt.TagType;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -20,13 +34,13 @@ public class LevelTask implements Callable<Void> {
     private final File source;
     private final File dest;
     private final Version version;
-    private final GameData gameData;
+    private final VersionData versionData;
 
-    public LevelTask(File source, File dest, Version version, GameData gameData) {
+    public LevelTask(File source, File dest, Version version, VersionData versionData) {
         this.source = source;
         this.dest = dest;
         this.version = version;
-        this.gameData = gameData;
+        this.versionData = versionData;
     }
 
     @Override
@@ -90,11 +104,11 @@ public class LevelTask implements Callable<Void> {
     }
 
     private ListTag<CompoundTag> getBlocks() {
-        if (gameData.blocks.getVersion().equals(MinecraftVersion.V1_12.getVersion())) {
+        if (versionData.blocks.getVersion().equals(MinecraftVersion.V1_12.getVersion())) {
             String[] blocks = new String[4096];
-            for (BlockState state : gameData.blocks) {
+            for (BlockState state : versionData.blocks) {
                 String name = state.getBlockName();
-                int stateId = gameData.blocks.getId(state);
+                int stateId = versionData.blocks.getId(state);
                 int blockId = BlockState.getBlockId(stateId);
                 blocks[blockId] = name;
             }
@@ -110,7 +124,7 @@ public class LevelTask implements Callable<Void> {
             int id = 0;
             Set<String> visited = new HashSet<>();
             List<CompoundTag> list = new LinkedList<>();
-            for (BlockState state : gameData.blocks) {
+            for (BlockState state : versionData.blocks) {
                 if (visited.add(state.getBlockName())) {
                     list.add(Nbt.compound().put("K", state.getBlockName()).put("V", id++));
                 }
@@ -121,7 +135,7 @@ public class LevelTask implements Callable<Void> {
 
     private ListTag<CompoundTag> getBiomes() {
         List<CompoundTag> list = new LinkedList<>();
-        for (Biome biome : gameData.biomes) {
+        for (Biome biome : versionData.biomes) {
             list.add(Nbt.compound(2).put("K", biome.getIdentifier()).put("V", biome.getId()));
         }
         return Nbt.list(TagType.COMPOUND, list);

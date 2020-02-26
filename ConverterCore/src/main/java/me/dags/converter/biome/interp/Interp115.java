@@ -6,6 +6,8 @@ public class Interp115 implements BiomeInterpolator {
 
     @Override
     public int getBiome(long seed, int x, int y, int z, BiomeContainer.Reader reader) {
+        y = 0;
+
         int minX = x - 2;
         int minY = y - 2;
         int minZ = z - 2;

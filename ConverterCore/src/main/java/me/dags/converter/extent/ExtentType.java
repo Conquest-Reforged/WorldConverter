@@ -2,12 +2,16 @@ package me.dags.converter.extent;
 
 import me.dags.converter.util.IO;
 import me.dags.converter.util.Pair;
-import me.dags.converter.version.MinecraftVersion;
+import me.dags.converter.version.versions.MinecraftVersion;
 import me.dags.converter.version.Version;
 import org.jnbt.CompoundTag;
 import org.jnbt.Nbt;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.zip.GZIPInputStream;
 
 public class ExtentType extends Pair<Format, Version> {

@@ -5,7 +5,11 @@ import me.dags.converter.block.BlockState;
 import me.dags.converter.block.registry.PaletteWriter;
 import me.dags.converter.extent.WriterConfig;
 import me.dags.converter.registry.Registry;
-import org.jnbt.*;
+import org.jnbt.CompoundTag;
+import org.jnbt.ListTag;
+import org.jnbt.Nbt;
+import org.jnbt.Tag;
+import org.jnbt.TagType;
 
 import java.util.LinkedList;
 import java.util.List;

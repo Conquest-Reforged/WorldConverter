@@ -24,28 +24,14 @@ public interface Registry<T extends RegistryItem> extends Iterable<T> {
     T getValue(int id);
 
     /**
-     * Get the data version of this registry
-     */
-    String getVersion();
-
-    /**
      * Get the value parser for this registry
      */
     Parser<T> getParser();
 
     /**
-     * Get the item directly registered to the given id
+     * Get the data version of this registry
      */
-    default T getInput(int id) {
-        return getValue(id);
-    }
-
-    /**
-     * Get the item that the provided input value is mapped to
-     */
-    default T getOutput(T input) {
-        return input;
-    }
+    String getVersion();
 
     /**
      * Test the provided item to see if is equal to the default/fallback item for this registry

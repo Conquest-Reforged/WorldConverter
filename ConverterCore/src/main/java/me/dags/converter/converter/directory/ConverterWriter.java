@@ -1,7 +1,7 @@
 package me.dags.converter.converter.directory;
 
 import me.dags.converter.block.BlockState;
-import me.dags.converter.data.GameData;
+import me.dags.converter.converter.ConverterData;
 import me.dags.converter.extent.Extent;
 import org.jnbt.CompoundTag;
 import org.jnbt.Tag;
@@ -9,16 +9,16 @@ import org.jnbt.Tag;
 public class ConverterWriter implements Extent.Writer, Extent.Visitor {
 
     private final Extent.Writer writer;
-    private final GameData gameData;
+    private final ConverterData converterData;
 
-    public ConverterWriter(Extent.Writer writer, GameData gameData) {
+    public ConverterWriter(Extent.Writer writer, ConverterData converterData) {
         this.writer = writer;
-        this.gameData = gameData;
+        this.converterData = converterData;
     }
 
     @Override
     public void setState(int x, int y, int z, BlockState state) {
-        state = gameData.blocks.getOutput(state);
+        state = converterData.blocks.getOutput(state);
         writer.setState(x, y, z, state);
     }
 

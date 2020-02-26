@@ -53,7 +53,7 @@ public class BlockState implements RegistryItem {
     }
 
     public boolean isAir() {
-        return getBlockId(getStateId()) == getBlockId(AIR.getId());
+        return getBlockId(getId()) == getBlockId(AIR.getId());
     }
 
     public boolean requiresUpgrade() {
@@ -62,10 +62,6 @@ public class BlockState implements RegistryItem {
 
     public CompoundTag getData() {
         return data;
-    }
-
-    public int getStateId() {
-        return stateId;
     }
 
     public String getBlockName() {
@@ -79,7 +75,7 @@ public class BlockState implements RegistryItem {
 
     @Override
     public int getId() {
-        return getStateId();
+        return stateId;
     }
 
     @Override

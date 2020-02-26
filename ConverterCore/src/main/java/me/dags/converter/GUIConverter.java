@@ -9,12 +9,16 @@ import me.dags.converter.resource.Resource;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.log.Logger;
 import me.dags.converter.util.progress.ProgressBar;
-import me.dags.converter.version.MinecraftVersion;
+import me.dags.converter.version.versions.MinecraftVersion;
 import me.dags.converter.version.Version;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
@@ -161,6 +165,10 @@ public class GUIConverter {
         CustomData customData = config.custom;
         JDialog dialog = new JDialog(frame, "Advanced Options");
 
+        JButton compile = button("Compile Mappings File", 120, 30, () -> {
+            System.out.println("compile...");
+        });
+
         JButton cancel = button("Cancel", 120, 30, () -> {
             config.custom = new CustomData();
             dialog.dispose();
@@ -174,7 +182,8 @@ public class GUIConverter {
         root.add(customDataRow(dialog, "Data In", customData.dataIn));
         root.add(customDataRow(dialog, "Data Out", customData.dataOut));
         root.add(customDataRow(dialog, "Block Mappings", customData.blocks));
-        root.add(customDataRow(dialog, "Biome Mappings", customData.biomes));
+        root.add(new JSeparator());
+        root.add(compileMappingsRow(dialog));
         root.add(row(cancel, done));
 
         dialog.add(root);
@@ -331,6 +340,20 @@ public class GUIConverter {
         JButton choose = button("Choose", 80, 25, () -> choose(dialog, path -> {
             field.setText(path);
             fileRef.set(path);
+        }));
+
+        return row(label, field, choose);
+    }
+
+    private static Component compileMappingsRow(JDialog dialog) {
+        JLabel label = label("Compile Mappings", 120, 25);
+
+        JTextField field = field("", 250, 25);
+        field.setEditable(false);
+
+        JButton choose = button("Choose", 80, 25, () -> choose(dialog, path -> {
+//            field.setText(path);
+//            fileRef.set(path);
         }));
 
         return row(label, field, choose);

@@ -14,6 +14,11 @@ apply plugin: "eclipse"
 apply plugin: "net.minecraftforge.gradle"
 sourceCompatibility = targetCompatibility = "1.8"
 
+configurations {
+    shade
+    compile.extendsFrom(shade)
+}
+
 dependencies {
     shade(project(":ConverterCore")) { transitive(false) }
     minecraft "net.minecraftforge:forge:1.14.4-28.1.80"
@@ -46,8 +51,15 @@ minecraft {
     }
 }
 
+task shadeJar(type: Copy) {
+    includeEmptyDirs = false
+    from { configurations.shade.collect { zipTree(it) } }
+    include("**/*.class")
+    destinationDir("$buildDir/classes/java/main" as File)
+}
+
 jar {
-    dependsOn(deobfJar)
+    dependsOn(shadeJar)
 
     manifest {
         attributes([

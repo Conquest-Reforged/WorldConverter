@@ -4,7 +4,12 @@ import me.dags.converter.block.BlockState;
 import me.dags.converter.block.registry.PaletteWriter;
 import me.dags.converter.extent.volume.Volume;
 import me.dags.converter.util.storage.BitArray;
-import org.jnbt.*;
+import org.jnbt.CompoundTag;
+import org.jnbt.ListTag;
+import org.jnbt.LongArrayTag;
+import org.jnbt.Nbt;
+import org.jnbt.Tag;
+import org.jnbt.TagType;
 
 import java.util.LinkedList;
 import java.util.List;

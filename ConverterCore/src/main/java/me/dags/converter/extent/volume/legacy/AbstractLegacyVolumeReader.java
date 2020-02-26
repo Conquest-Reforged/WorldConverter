@@ -39,7 +39,7 @@ public abstract class AbstractLegacyVolumeReader implements Volume.Reader {
         int blockId = getBlockId(index, blocks);
         int metadata = getMetadata(index, metas);
         int stateId = BlockState.getStateId(blockId, metadata);
-        return registry.getInput(stateId);
+        return registry.getValue(stateId);
     }
 
     @Override

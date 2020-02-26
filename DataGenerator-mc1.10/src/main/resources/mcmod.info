@@ -1,0 +1,16 @@
+[
+{
+  "modid": "scraper",
+  "name": "DataGenerator",
+  "description": "GameData generator",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["dags"],
+  "credits": "dags",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

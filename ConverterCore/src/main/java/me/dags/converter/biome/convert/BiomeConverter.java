@@ -2,7 +2,7 @@ package me.dags.converter.biome.convert;
 
 import me.dags.converter.biome.Biome;
 import me.dags.converter.converter.DataConverter;
-import me.dags.converter.registry.Registry;
+import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.version.Version;
 import org.jnbt.Tag;
 
@@ -11,9 +11,9 @@ public class BiomeConverter implements DataConverter {
     private final long seed;
     private final Version versionIn;
     private final Version versionOut;
-    private final Registry<Biome> registry;
+    private final RemappingRegistry<Biome> registry;
 
-    public BiomeConverter(long seed, Version versionIn, Version versionOut, Registry<Biome> registry) {
+    public BiomeConverter(long seed, Version versionIn, Version versionOut, RemappingRegistry<Biome> registry) {
         this.seed = seed;
         this.registry = registry;
         this.versionIn = versionIn;
@@ -43,9 +43,9 @@ public class BiomeConverter implements DataConverter {
             for (int z = 0; z < writer.sizeZ(); z++) {
                 for (int x = 0; x < writer.sizeX(); x++) {
                     int id = reader.get(x, y, z);
-                    Biome biome = registry.getValue(id);
-                    int output = registry.getId(biome);
-                    writer.set(x, y, z, output);
+                    Biome in = registry.getInput(id);
+                    Biome out = registry.getOutput(in);
+                    writer.set(x, y, z, out.getId());
                 }
             }
         }

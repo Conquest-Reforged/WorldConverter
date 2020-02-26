@@ -1,6 +1,7 @@
 package me.dags.converter.registry;
 
 import me.dags.converter.block.BlockState;
+import me.dags.converter.version.Version;
 
 import java.io.InputStream;
 import java.text.ParseException;
@@ -26,6 +27,20 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
     @Override
     public String getVersion() {
         return version;
+    }
+
+    public static <T extends RegistryItem> Registry.Mapper<T> identity(Version version) {
+        return new Registry.Mapper<T>() {
+            @Override
+            public T apply(T in) {
+                return in;
+            }
+
+            @Override
+            public String getVersion() {
+                return version.getVersion();
+            }
+        };
     }
 
     public static <T extends RegistryItem> Builder<T> builder(Registry<T> from, Registry<T> to) {

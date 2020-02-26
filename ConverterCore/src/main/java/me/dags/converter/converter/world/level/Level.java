@@ -4,15 +4,28 @@ import me.dags.converter.biome.Biome;
 import me.dags.converter.biome.registry.BiomeRegistry;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.block.registry.BlockRegistry;
-import me.dags.converter.data.GameData;
+import me.dags.converter.version.VersionData;
 import me.dags.converter.registry.Registry;
 import me.dags.converter.util.log.Logger;
-import me.dags.converter.version.MinecraftVersion;
+import me.dags.converter.version.versions.MinecraftVersion;
 import me.dags.converter.version.Version;
-import org.jnbt.*;
+import org.jnbt.CompoundTag;
+import org.jnbt.ListTag;
+import org.jnbt.LongTag;
+import org.jnbt.Nbt;
+import org.jnbt.Tag;
+import org.jnbt.TagType;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 public class Level {
@@ -62,7 +75,7 @@ public class Level {
         }
     }
 
-    public GameData sync(GameData from) throws Exception {
+    public VersionData sync(VersionData from) throws Exception {
         Logger.log("Synchronising GameData ids with level.dat");
         try (InputStream in = new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)))) {
             CompoundTag root = Nbt.read(in).getTag().asCompound();
@@ -70,13 +83,14 @@ public class Level {
                 throw new IOException("Unable to read Level file");
             }
 
-            Registry<Biome> biomes = syncBiomes(from.biomes, loadMappings(root, "minecraft:biome"));
             Registry<BlockState> blocks = from.blocks;
             if (from.version.getId() <= MinecraftVersion.V1_12.getId()) {
                 blocks = syncBlocks(from.blocks, loadMappings(root, "minecraft:block"));
             }
 
-            return new GameData(from.version, blocks, biomes);
+            Registry<Biome> biomes = syncBiomes(from.biomes, loadMappings(root, "minecraft:biome"));
+
+            return new VersionData(from.version, blocks, biomes);
         }
     }
 
@@ -93,7 +107,7 @@ public class Level {
                 Logger.log("GameData for version:", version, "contains block:", blockName, "but the provided level.dat does not");
             } else {
                 visited.add(blockName);
-                int stateId = registry.getId(state);
+                int stateId = state.getId();
                 int blockId = BlockState.getBlockId(stateId);
                 if (blockId != id) {
                     int metadata = BlockState.getMetaData(stateId);
@@ -143,7 +157,7 @@ public class Level {
             return Collections.emptyMap();
         }
         Map<String, Integer> map = new HashMap<>();
-        for (Tag pair : mappings) {
+        for (Tag<?> pair : mappings) {
             CompoundTag entry = pair.asCompound();
             map.put(entry.getString("K"), entry.getInt("V"));
         }

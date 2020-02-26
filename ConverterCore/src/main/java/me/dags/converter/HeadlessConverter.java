@@ -6,7 +6,7 @@ import me.dags.converter.extent.Format;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.log.Logger;
 import me.dags.converter.util.progress.ProgressBar;
-import me.dags.converter.version.MinecraftVersion;
+import me.dags.converter.version.versions.MinecraftVersion;
 
 import java.io.File;
 import java.io.IOException;

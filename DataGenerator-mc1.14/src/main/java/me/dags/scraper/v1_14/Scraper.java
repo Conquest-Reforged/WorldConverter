@@ -1,16 +1,19 @@
 package me.dags.scraper.v1_14;
 
-import me.dags.converter.data.GameDataWriter;
-import me.dags.converter.data.Schema;
-import me.dags.converter.data.SectionWriter;
-import me.dags.converter.data.biome.BiomeData;
-import me.dags.converter.data.block.BlockData;
-import me.dags.converter.data.block.StateData;
+import me.dags.converter.datagen.GameDataWriter;
+import me.dags.converter.datagen.Schema;
+import me.dags.converter.datagen.SectionWriter;
+import me.dags.converter.datagen.biome.BiomeData;
+import me.dags.converter.datagen.block.BlockData;
+import me.dags.converter.datagen.block.StateData;
+import me.dags.converter.version.versions.MinecraftVersion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.IProperty;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.OverworldChunkGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,7 +34,7 @@ public class Scraper {
 
     @SubscribeEvent
     public static void generate(FMLCommonSetupEvent event) {
-        Schema schema = Schema.forVersion("1.14");
+        Schema schema = Schema.modern("1.14");
         try (GameDataWriter writer = new GameDataWriter(schema)) {
             try (SectionWriter<BlockData> section = writer.startBlocks()){
                 for (Block block : ForgeRegistries.BLOCKS) {

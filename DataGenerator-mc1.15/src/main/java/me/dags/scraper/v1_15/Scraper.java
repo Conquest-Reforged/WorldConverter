@@ -1,11 +1,12 @@
 package me.dags.scraper.v1_15;
 
-import me.dags.converter.data.GameDataWriter;
-import me.dags.converter.data.Schema;
-import me.dags.converter.data.SectionWriter;
-import me.dags.converter.data.biome.BiomeData;
-import me.dags.converter.data.block.BlockData;
-import me.dags.converter.data.block.StateData;
+import me.dags.converter.datagen.GameDataWriter;
+import me.dags.converter.datagen.Schema;
+import me.dags.converter.datagen.SectionWriter;
+import me.dags.converter.datagen.biome.BiomeData;
+import me.dags.converter.datagen.block.BlockData;
+import me.dags.converter.datagen.block.StateData;
+import me.dags.converter.version.versions.MinecraftVersion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.IProperty;
@@ -31,7 +32,7 @@ public class Scraper {
 
     @SubscribeEvent
     public static void generate(FMLCommonSetupEvent event) {
-        Schema schema = Schema.forVersion("1.15");
+        Schema schema = Schema.modern("1.15");
         try (GameDataWriter writer = new GameDataWriter(schema)) {
             try (SectionWriter<BlockData> section = writer.startBlocks()){
                 for (Block block : ForgeRegistries.BLOCKS) {

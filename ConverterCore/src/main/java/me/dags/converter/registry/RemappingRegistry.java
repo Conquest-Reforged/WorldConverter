@@ -12,6 +12,14 @@ public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
         this.mapper = mapper;
     }
 
+    public T getInput(int id) {
+        return registry.getValue(id);
+    }
+
+    public T getOutput(T input) {
+        return mapper.apply(input);
+    }
+
     @Override
     public int size() {
         return registry.size();
@@ -25,16 +33,6 @@ public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
     @Override
     public T getValue(int id) {
         return getOutput(getInput(id));
-    }
-
-    @Override
-    public T getInput(int id) {
-        return registry.getValue(id);
-    }
-
-    @Override
-    public T getOutput(T input) {
-        return mapper.apply(input);
     }
 
     @Override

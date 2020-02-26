@@ -1,11 +1,12 @@
 package me.dags.scraper.v1_12;
 
-import me.dags.converter.data.GameDataWriter;
-import me.dags.converter.data.Schema;
-import me.dags.converter.data.SectionWriter;
-import me.dags.converter.data.biome.BiomeData;
-import me.dags.converter.data.block.BlockData;
-import me.dags.converter.data.block.StateData;
+import me.dags.converter.datagen.GameDataWriter;
+import me.dags.converter.datagen.Schema;
+import me.dags.converter.datagen.SectionWriter;
+import me.dags.converter.datagen.biome.BiomeData;
+import me.dags.converter.datagen.block.BlockData;
+import me.dags.converter.datagen.block.StateData;
+import me.dags.converter.version.versions.MinecraftVersion;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +33,7 @@ public class Scraper {
     public static void load(WorldEvent.Load event) {
         File dir = event.getWorld().getSaveHandler().getWorldDirectory();
         File out = new File(dir, "game_data.json");
-        Schema schema = Schema.forVersion("1.12");
+        Schema schema = Schema.legacy("1.12");
         try (GameDataWriter writer = new GameDataWriter(schema, out)) {
             try (SectionWriter<BlockData> section = writer.startBlocks()) {
                 for (Block block : ForgeRegistries.BLOCKS) {
@@ -47,6 +48,7 @@ public class Scraper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Mappings.generate();
     }
 
     private static BiomeData geBiomeData(Biome biome) {

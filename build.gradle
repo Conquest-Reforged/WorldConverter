@@ -3,35 +3,10 @@ apply plugin: "java"
 group = "me.dags"
 version = "1.0.0"
 
-configurations {
-    shade
-    compile.extendsFrom(shade)
-}
-
 allprojects {
     apply plugin: "java"
-
-    configurations {
-        shade
-        compile.extendsFrom(shade)
-    }
-
-    task copyClasses(type: Copy) {
-        includeEmptyDirs = false
-        from { configurations.shade.collect { zipTree(it) } }
-        include("**/*.class")
-        destinationDir("$buildDir/classes/java/main" as File)
-    }
-
-    task deobfJar(type: Jar) {
-        dependsOn(copyClasses)
-        from sourceSets.main.output
-        classifier = "deobf"
-    }
-
     group = rootProject.group
     version = rootProject.version
-
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
@@ -56,9 +31,7 @@ task modJars(type: Copy, dependsOn: subprojects.tasks["build"]) {
             if (it.name == "ConverterCore") {
                 return [].asList()
             } else {
-                return it.tasks.withType(Jar)
-                        .matching { !it.toString().contains("deobf") }
-                        .collect { it.archivePath }
+                return it.tasks.withType(Jar).matching { !it.toString().contains("deobf") }.collect { it.archivePath }
             }
         }
     }

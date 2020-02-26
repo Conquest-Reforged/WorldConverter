@@ -1,19 +1,19 @@
 package me.dags.converter.converter.world;
 
 import me.dags.converter.converter.Converter;
+import me.dags.converter.converter.ConverterData;
 import me.dags.converter.converter.config.CustomData;
 import me.dags.converter.converter.world.level.Level;
 import me.dags.converter.converter.world.level.LevelTask;
 import me.dags.converter.converter.world.region.RegionTask;
-import me.dags.converter.data.GameData;
-import me.dags.converter.data.GameDataUtil;
-import me.dags.converter.data.Mappings;
+import me.dags.converter.datagen.Mappings;
 import me.dags.converter.util.CopyTask;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.Threading;
 import me.dags.converter.util.log.Logger;
-import me.dags.converter.version.MinecraftVersion;
 import me.dags.converter.version.Version;
+import me.dags.converter.version.VersionData;
+import me.dags.converter.version.versions.MinecraftVersion;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,28 +42,28 @@ public class WorldConverter {
         return version;
     }
 
-    private GameData getSourceGameData(Version version) throws Exception {
+    private VersionData getSourceGameData(Version version) throws Exception {
         File data = new File(root, "game_data.json");
         if (customData.dataIn.get().exists()) {
             data = customData.dataIn.get();
         }
-        return GameDataUtil.loadGameData(data, version);
+        return level.sync(VersionData.loadGameData(data, version));
     }
 
-    private GameData getDestGameData(Version from, Version to, GameData source) throws Exception {
+    private VersionData getDestGameData(Version from, Version to, VersionData source) throws Exception {
         if (to == from) {
             return source;
         }
-        return GameDataUtil.loadGameData(customData.dataOut.get(), to);
+        return VersionData.loadGameData(customData.dataOut.get(), to);
     }
 
     public List<Future<Void>> convert(Version from, Version to, File dest) throws Exception {
         Version sourceVersion = getWorldVersion(from);
-        GameData sourceData = getSourceGameData(sourceVersion);
-        GameData destData = getDestGameData(sourceVersion, to, sourceData);
+        VersionData sourceData = getSourceGameData(sourceVersion);
+        VersionData destData = getDestGameData(sourceVersion, to, sourceData);
         Mappings mappings = Mappings.build(sourceData, destData).builtIn();
-        GameData gameData = GameDataUtil.applyMappings(customData, mappings);
-        Converter converter = new ChunkConverter(levelSeed, from, to, gameData);
+        ConverterData converterData = ConverterData.create(customData, mappings);
+        Converter converter = new ChunkConverter(levelSeed, from, to, converterData);
         CollectorContext context = new CollectorContext(to, destData, converter);
         collect(root, dest, context, 0);
         return context.tasks;
@@ -90,7 +90,7 @@ public class WorldConverter {
             context.tasks.add(Threading.submit(task));
         } else if (source.getName().equals("level.dat")) {
             Logger.log("Queuing level.dat task:", source.getName());
-            LevelTask task = new LevelTask(source, dest, context.version, context.gameData);
+            LevelTask task = new LevelTask(source, dest, context.version, context.versionData);
             context.tasks.add(Threading.submit(task));
         } else {
             Logger.log("Queuing copy task:", source.getName());
@@ -103,12 +103,12 @@ public class WorldConverter {
 
         private final List<Future<Void>> tasks = new LinkedList<>();
         private final Version version;
-        private final GameData gameData;
+        private final VersionData versionData;
         private final Converter converter;
 
-        private CollectorContext(Version version, GameData gameData, Converter converter) {
+        private CollectorContext(Version version, VersionData versionData, Converter converter) {
             this.version = version;
-            this.gameData = gameData;
+            this.versionData = versionData;
             this.converter = converter;
         }
     }
