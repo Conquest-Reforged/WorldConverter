@@ -1,2 +1,2 @@
 rootProject.name = "WorldConverter"
-include "ConverterCore", "ConverterTools", "DataGenerator-mc1.10", "DataGenerator-mc1.12", "DataGenerator-mc1.14", "DataGenerator-mc1.15"
+include "ConverterCore", "DataGenerator-mc1.10", "DataGenerator-mc1.12", "DataGenerator-mc1.14", "DataGenerator-mc1.15"

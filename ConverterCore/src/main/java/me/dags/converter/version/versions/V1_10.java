@@ -22,10 +22,15 @@ import org.jnbt.CompoundTag;
 import org.jnbt.Nbt;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class V1_10 implements Version {
+
+    private final Map<String, StateFixer> fixers = new HashMap<String, StateFixer>() {{
+        put("minecraft:double_plant", new DoublePlant());
+    }};
 
     @Override
     public int getId() {
@@ -83,21 +88,25 @@ public class V1_10 implements Version {
         return new VersionData(this, blocks.build(), biomes.build());
     }
 
-    private static void parseOne(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {
+    protected Map<String, StateFixer> getFixers() {
+        return fixers;
+    }
+
+    private void parseOne(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {
         int blockId = block.get("id").getAsInt();
         int stateId = BlockState.getStateId(blockId, 0);
         boolean upgrade = block.get("upgrade").getAsBoolean();
-        StateFixer fixer = fixers.getOrDefault(name, StateFixer.NONE);
+        StateFixer fixer = getFixers().getOrDefault(name, StateFixer.NONE);
         CompoundTag state = Nbt.compound(1).put("Name", name);
         builder.addUnchecked(stateId, new BlockState(stateId, state, fixer, upgrade));
     }
 
-    private static void parse(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {
+    private void parse(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {
         int blockId = block.get("id").getAsInt();
         JsonObject states = block.getAsJsonObject("states");
         String defaults = block.get("default").getAsString();
         String fixerId = block.has("fixer") ? block.get("fixer").getAsString() : name;
-        StateFixer fixer = fixers.getOrDefault(fixerId, StateFixer.NONE);
+        StateFixer fixer = getFixers().getOrDefault(fixerId, StateFixer.NONE);
 
         boolean upgrade = block.get("upgrade").getAsBoolean();
         CompoundTag defProps = Serializer.deserializeProps(defaults);
@@ -133,8 +142,4 @@ public class V1_10 implements Version {
             builder.addUnchecked(stateId, new BlockState(stateId, state, fixer, upgrade));
         }
     }
-
-    private static final Map<String, StateFixer> fixers = new HashMap<String, StateFixer>() {{
-        put("minecraft:double_plant", new DoublePlant());
-    }};
 }
