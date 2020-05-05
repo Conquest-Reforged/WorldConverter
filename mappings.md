@@ -1,6 +1,6 @@
 ## Format
 
-Converter mappings are simple text files that read by the converter and interpreted into 'find & replace' rules.  
+Converter mappings are simple text files that are read by the converter and interpreted into 'find & replace' rules.  
 Each line in the mapping file should define a rule in the following format:
 ```
 namespace:input_block_type[input_properties] -> namespace:output_block_type[output_properties]
