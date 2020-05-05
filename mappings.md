@@ -14,7 +14,7 @@ Where:
 
 ## Examples
 
-### Example 1 - Single Block
+### Example 1 - Explicit Blockstates
 
 The simplest way to write a converter mapping is to write out every permutation 
 of a given blockstate to find in the world, and the specific blockstate it should be converted into.
