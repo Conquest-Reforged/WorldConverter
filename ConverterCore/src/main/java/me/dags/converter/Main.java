@@ -19,6 +19,7 @@ import me.dags.converter.version.Version;
 import java.awt.*;
 import java.io.File;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -41,7 +42,7 @@ public class Main {
         return false;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         try {
             if (IO.isJar()) {
                 Logger.add(new PrintStream(IO.logFile()));
@@ -75,6 +76,7 @@ public class Main {
         Logger.log("   + File:   ", config.output.file);
         Logger.log("   + Format: ", config.output.format);
         Logger.log("   + Version:", config.output.version);
+        Logger.log("   + Custom:", config.custom.dataOut.getPath());
         Logger.newLine();
 
         File source = config.input.file;

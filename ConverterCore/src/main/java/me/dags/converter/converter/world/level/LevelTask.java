@@ -2,11 +2,11 @@ package me.dags.converter.converter.world.level;
 
 import me.dags.converter.biome.Biome;
 import me.dags.converter.block.BlockState;
-import me.dags.converter.version.VersionData;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.log.Logger;
-import me.dags.converter.version.versions.MinecraftVersion;
 import me.dags.converter.version.Version;
+import me.dags.converter.version.VersionData;
+import me.dags.converter.version.versions.MinecraftVersion;
 import org.jnbt.CompoundTag;
 import org.jnbt.ListTag;
 import org.jnbt.Nbt;
@@ -50,8 +50,8 @@ public class LevelTask implements Callable<Void> {
             CompoundTag data = Nbt.read(in).getTag().asCompound();
             CompoundTag level = Nbt.compound();
             level.put("Data", getData(data.getCompound("Data")));
-            level.put("fml", getFml(data.getCompound("fml")));
-            level.put("forge", data.getCompound("forge"));
+            level.put("FML", getFml(data.getCompound("FML")));
+            level.put("Forge", data.getCompound("Forge"));
             try (OutputStream out = new BufferedOutputStream(new GZIPOutputStream(new FileOutputStream(dest)))) {
                 Nbt.write(level, out);
             }
@@ -74,24 +74,26 @@ public class LevelTask implements Callable<Void> {
     }
 
     private CompoundTag getFml(CompoundTag in) {
-        CompoundTag registries = Nbt.compound();
-        for (Map.Entry<String, Tag> entry : in.get("Registries").asCompound().getBacking().entrySet()) {
-            if (entry.getKey().equals("minecraft:biome")) {
+        CompoundTag registriesIn = in.getCompound("Registries");
+        CompoundTag registriesOut = Nbt.compound();
+
+        registriesIn.forEach(entry -> {
+            if (entry.getKey().equals("minecraft:biomes")) {
                 CompoundTag biome = entry.getValue().asCompound().copy();
                 biome.put("ids", getBiomes());
-                registries.put(entry.getKey(), biome);
-            } else if (entry.getKey().equals("minecraft:block")) {
+                registriesOut.put(entry.getKey(), biome);
+            } else if (entry.getKey().equals("minecraft:blocks")) {
                 CompoundTag block = entry.getValue().asCompound().copy();
                 block.put("ids", getBlocks());
-                registries.put(entry.getKey(), block);
+                registriesOut.put(entry.getKey(), block);
             } else {
-                registries.put(entry.getKey(), entry.getValue());
+                registriesOut.put(entry.getKey(), entry.getValue());
             }
-        }
+        });
 
         CompoundTag fml = Nbt.compound();
-        fml.put("Registries", registries);
-        fml.put("LoadingModList", in.get("LoadingModList"));
+        fml.put("Registries", registriesOut);
+        fml.put("ModList", in.get("ModList"));
 
         return fml;
     }

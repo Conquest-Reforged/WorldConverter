@@ -10,9 +10,6 @@ import me.dags.converter.block.Serializer;
 import me.dags.converter.block.fixer.DoublePlant;
 import me.dags.converter.block.fixer.StateFixer;
 import me.dags.converter.block.registry.BlockRegistry;
-import me.dags.converter.datagen.Schema;
-import me.dags.converter.datagen.biome.BiomeWriter;
-import me.dags.converter.datagen.block.BlockWriterLegacy;
 import me.dags.converter.version.Version;
 import me.dags.converter.version.VersionData;
 import me.dags.converter.version.format.BiomeFormat;
@@ -89,7 +86,7 @@ public class V1_10 implements Version {
     }
 
     protected Map<String, StateFixer> getFixers() {
-        return fixers;
+        return Collections.emptyMap();
     }
 
     private void parseOne(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {

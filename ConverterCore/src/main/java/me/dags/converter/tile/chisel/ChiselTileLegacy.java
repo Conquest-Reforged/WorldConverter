@@ -7,6 +7,8 @@ import org.jnbt.Nbt;
 
 public class ChiselTileLegacy implements ChiselTile.Reader, ChiselTile.Writer {
 
+    public static final String ID_PREFIX = "mod.chiselandbits";
+
     private final CompoundTag root;
     private final RemappingRegistry<BlockState> registry;
 
@@ -21,12 +23,12 @@ public class ChiselTileLegacy implements ChiselTile.Reader, ChiselTile.Writer {
 
     @Override
     public boolean isValid() {
-        return root.get("Item").isPresent();
+        return getTileId().startsWith(ID_PREFIX) && root.get("X").isPresent();
     }
 
     @Override
     public String getTileId() {
-        return root.getString("Item");
+        return root.getString("id");
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ChiselTileLegacy implements ChiselTile.Reader, ChiselTile.Writer {
 
     @Override
     public void setTileId(String id) {
-        root.put("Item", id);
+        root.put("id", id);
     }
 
     @Override

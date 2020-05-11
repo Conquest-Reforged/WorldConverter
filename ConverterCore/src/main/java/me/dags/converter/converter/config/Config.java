@@ -1,8 +1,8 @@
 package me.dags.converter.converter.config;
 
 import me.dags.converter.extent.Format;
-import me.dags.converter.version.versions.MinecraftVersion;
 import me.dags.converter.version.Version;
+import me.dags.converter.version.versions.MinecraftVersion;
 
 import java.io.File;
 

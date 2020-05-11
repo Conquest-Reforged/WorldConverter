@@ -15,11 +15,35 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 
 public class IO {
 
     private static final File[] empty = new File[0];
+
+    public static String unescape(URL url) {
+        return unescape(url.getPath());
+    }
+
+    public static String unescape(String path) {
+        try {
+            return URLDecoder.decode(path, StandardCharsets.UTF_8.displayName());
+        } catch (UnsupportedEncodingException e) {
+            return path;
+        }
+    }
+
+    public static File toFile(String path) {
+        return new File(unescape(path));
+    }
+
+    public static Path toPath(String path) {
+        return new File(path).getAbsoluteFile().toPath();
+    }
 
     public static InputStream open(String resource) {
         return buffer(IO.class.getResourceAsStream(resource));

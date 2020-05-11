@@ -1,6 +1,7 @@
 package me.dags.converter.registry;
 
 import me.dags.converter.block.BlockState;
+import me.dags.converter.util.log.Logger;
 import me.dags.converter.version.Version;
 
 import java.io.InputStream;
@@ -13,15 +14,22 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
 
     private final String version;
     private final Map<T, T> mappings;
+    private final Registry<T> registry;
 
-    private Mapper(String version, Map<T, T> mappings) {
+    private Mapper(String version, Registry<T> registry, Map<T, T> mappings) {
         this.version = version;
+        this.registry = registry;
         this.mappings = mappings;
     }
 
     @Override
     public T apply(T in) {
-        return mappings.getOrDefault(in, in);
+        T out = mappings.get(in);
+        if (out == null) {
+            int outId = registry.getId(in);
+            out = registry.getValue(outId);
+        }
+        return out;
     }
 
     @Override
@@ -91,6 +99,7 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
                 T from = this.from.getParser().parse(in);
                 T to = this.to.getParser().parse(out);
                 mappings.put(from, to);
+                Logger.log("Parsed Mapping:", in, "->", out);
             } catch (ParseException ignored) {
 
             }
@@ -99,7 +108,7 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
 
         public Mapper<T> build() {
             String version = from.getVersion() + "-" + to.getVersion();
-            return new Mapper<>(version, new HashMap<>(mappings));
+            return new Mapper<>(version, to, new HashMap<>(mappings));
         }
     }
 }

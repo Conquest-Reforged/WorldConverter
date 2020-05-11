@@ -9,6 +9,7 @@ import me.dags.converter.extent.chunk.Chunk;
 import me.dags.converter.extent.chunk.ChunkData;
 import me.dags.converter.extent.volume.Volume;
 import me.dags.converter.registry.Registry;
+import me.dags.converter.util.log.Logger;
 import me.dags.converter.version.Version;
 import org.jnbt.CompoundTag;
 
@@ -38,16 +39,20 @@ public class ChunkConverter implements Converter {
         Chunk.Reader reader = from.getChunkFormat().newReader(data.blocks, in);
         Chunk.Writer writer = to.getChunkFormat().newWriter(to, config);
 
-        int sections = reader.getSectionCount();
-        for (int i = 0; i < sections; i++) {
-            Volume.Reader sectionReader = reader.getSection(i);
-            Volume.Writer sectionWriter = writer.getSection(i);
-            convertSection(i, reader, writer);
-            DataConverter.writeData(sectionReader, sectionWriter, section);
+        try {
+            int sections = reader.getSectionCount();
+            for (int i = 0; i < sections; i++) {
+                Volume.Reader sectionReader = reader.getSection(i);
+                Volume.Writer sectionWriter = writer.getSection(i);
+                convertSection(i, reader, writer);
+                DataConverter.writeData(sectionReader, sectionWriter, section);
+            }
+            DataConverter.writeData(reader, writer, level);
+            return writer.flush();
+        } catch (Throwable t) {
+            Logger.log(t);
+            throw t;
         }
-
-        DataConverter.writeData(reader, writer, level);
-        return writer.flush();
     }
 
     private void convertSection(int index, Chunk.Reader chunkReader, Chunk.Writer chunkWriter) throws Exception {
@@ -69,6 +74,10 @@ public class ChunkConverter implements Converter {
                     stateIn = stateIn.getActualState(parser, chunkReader, x, blockY + y, z);
 
                     BlockState stateOut = data.blocks.getOutput(stateIn);
+                    if (stateOut == null) {
+                        throw new NullPointerException("No mapping for state: " + stateIn.getIdentifier());
+                    }
+
                     writer.setState(x, y, z, stateOut);
                     if (stateIn.requiresUpgrade()) {
                         chunkWriter.markUpgrade(index, x, y, z);

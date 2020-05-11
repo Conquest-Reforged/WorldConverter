@@ -3,6 +3,7 @@ package me.dags.converter.tile.chisel;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.tile.TileConverter;
+import me.dags.converter.util.log.Logger;
 import org.jnbt.CompoundTag;
 
 import java.util.Map;
@@ -13,8 +14,8 @@ public class ChiselTileConverter implements TileConverter {
 
     private final Function<String, String> idMapper;
     private final RemappingRegistry<BlockState> stateRegistry;
-    private final BiFunction<CompoundTag, RemappingRegistry<BlockState>, ChiselTile.Reader> readerFactory;
     private final Function<RemappingRegistry<BlockState>, ChiselTile.Writer> writerFactory;
+    private final BiFunction<CompoundTag, RemappingRegistry<BlockState>, ChiselTile.Reader> readerFactory;
 
     public ChiselTileConverter(Builder builder) {
         this.idMapper = builder.idMapper;
@@ -33,6 +34,8 @@ public class ChiselTileConverter implements TileConverter {
             ChiselTile.Writer writer = writerFactory.apply(stateRegistry);
             writer.setTileId(tileId);
             writer.setStateArray(states);
+
+            Logger.log("Converting %s", tile);
 
             // copy any tile data not already written to the writer
             return TileConverter.copyMissingData(tile, writer.getRoot());

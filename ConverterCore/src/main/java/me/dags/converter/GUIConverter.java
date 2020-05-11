@@ -9,8 +9,8 @@ import me.dags.converter.resource.Resource;
 import me.dags.converter.util.IO;
 import me.dags.converter.util.log.Logger;
 import me.dags.converter.util.progress.ProgressBar;
-import me.dags.converter.version.versions.MinecraftVersion;
 import me.dags.converter.version.Version;
+import me.dags.converter.version.versions.MinecraftVersion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -269,7 +269,7 @@ public class GUIConverter {
 
     private static void choose(Component parent, Consumer<String> setter) {
         JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File("").getParentFile());
+        chooser.setCurrentDirectory(new File("").getAbsoluteFile());
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         int result = chooser.showOpenDialog(parent);
         if (result == JFileChooser.APPROVE_OPTION) {

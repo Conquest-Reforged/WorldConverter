@@ -85,7 +85,7 @@ public class BlockState implements RegistryItem {
 
     @Override
     public boolean equals(Object obj) {
-        return obj != null && obj.getClass() == BlockState.class && obj.hashCode() == this.hashCode();
+        return obj != null && obj.getClass() == BlockState.class && ((BlockState) obj).getIdentifier().equals(getIdentifier());
     }
 
     @Override

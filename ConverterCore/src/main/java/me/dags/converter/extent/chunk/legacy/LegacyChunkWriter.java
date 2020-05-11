@@ -15,7 +15,7 @@ public class LegacyChunkWriter extends AbstractChunkWriter {
 
     public LegacyChunkWriter(Version version, WriterConfig config) {
         super(version);
-        this.registry = config.get("data");
+        this.registry = config.get("registry");
     }
 
     @Override

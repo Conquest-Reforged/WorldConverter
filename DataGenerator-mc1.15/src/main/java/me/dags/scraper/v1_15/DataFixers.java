@@ -47,7 +47,7 @@ public class DataFixers {
         int oldVer = 1125;
         int newVer = SharedConstants.getVersion().getWorldVersion();
         System.out.println(biome + ": " + oldVer + " -> " + newVer);
-        Dynamic<?> dynamic = new Dynamic<>(NBTDynamicOps.INSTANCE, StringNBT.func_229705_a_(biome));
+        Dynamic<?> dynamic = new Dynamic<>(NBTDynamicOps.INSTANCE, StringNBT.valueOf(biome));
         dynamic = DataFixesManager.getDataFixer().update(TypeReferences.BIOME, dynamic, oldVer, newVer);
         StringNBT tag = (StringNBT) dynamic.getValue();
         return tag.getString();

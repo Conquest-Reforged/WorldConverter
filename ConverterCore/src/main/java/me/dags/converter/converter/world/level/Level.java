@@ -4,11 +4,11 @@ import me.dags.converter.biome.Biome;
 import me.dags.converter.biome.registry.BiomeRegistry;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.block.registry.BlockRegistry;
-import me.dags.converter.version.VersionData;
 import me.dags.converter.registry.Registry;
 import me.dags.converter.util.log.Logger;
-import me.dags.converter.version.versions.MinecraftVersion;
 import me.dags.converter.version.Version;
+import me.dags.converter.version.VersionData;
+import me.dags.converter.version.versions.MinecraftVersion;
 import org.jnbt.CompoundTag;
 import org.jnbt.ListTag;
 import org.jnbt.LongTag;
@@ -77,7 +77,7 @@ public class Level {
 
     public VersionData sync(VersionData from) throws Exception {
         Logger.log("Synchronising GameData ids with level.dat");
-        try (InputStream in = new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)))) {
+        try (InputStream in = new GZIPInputStream(new FileInputStream(file))) {
             CompoundTag root = Nbt.read(in).getTag().asCompound();
             if (root.isAbsent()) {
                 throw new IOException("Unable to read Level file");
@@ -85,10 +85,10 @@ public class Level {
 
             Registry<BlockState> blocks = from.blocks;
             if (from.version.getId() <= MinecraftVersion.V1_12.getId()) {
-                blocks = syncBlocks(from.blocks, loadMappings(root, "minecraft:block"));
+                blocks = syncBlocks(from.blocks, loadMappings(root, "minecraft:blocks"));
             }
 
-            Registry<Biome> biomes = syncBiomes(from.biomes, loadMappings(root, "minecraft:biome"));
+            Registry<Biome> biomes = syncBiomes(from.biomes, loadMappings(root, "minecraft:biomes"));
 
             return new VersionData(from.version, blocks, biomes);
         }
@@ -109,7 +109,7 @@ public class Level {
                 visited.add(blockName);
                 int stateId = state.getId();
                 int blockId = BlockState.getBlockId(stateId);
-                if (blockId != id) {
+                if (blockId != id.intValue()) {
                     int metadata = BlockState.getMetaData(stateId);
                     builder.add(BlockState.getStateId(id, metadata), state);
                     Logger.logf("Remapping block id for: %s [%s:%s -> %s:%s]", blockName, blockId, metadata, id, metadata);
@@ -152,14 +152,16 @@ public class Level {
     }
 
     private Map<String, Integer> loadMappings(CompoundTag level, String registry) {
-        ListTag<CompoundTag> mappings = level.get("fml", "Registries", registry).asCompound().getListTag("ids", TagType.COMPOUND);
+        CompoundTag reg = level.getCompound("FML").getCompound("Registries").getCompound(registry);
+        ListTag<CompoundTag> mappings = reg.getListTag("ids", TagType.COMPOUND);
         if (mappings.isAbsent()) {
+            Logger.log("No mappings found for registry", registry);
             return Collections.emptyMap();
         }
         Map<String, Integer> map = new HashMap<>();
         for (Tag<?> pair : mappings) {
             CompoundTag entry = pair.asCompound();
-            map.put(entry.getString("K"), entry.getInt("V"));
+            map.put(entry.getString("K").trim(), entry.getInt("V"));
         }
         return map;
     }

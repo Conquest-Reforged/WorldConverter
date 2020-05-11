@@ -21,11 +21,11 @@ configurations {
 
 dependencies {
     shade(project(":ConverterCore")) { transitive(false) }
-    minecraft "net.minecraftforge:forge:1.15.1-30.0.35"
+    minecraft "net.minecraftforge:forge:1.15.2-31.1.77"
 }
 
 minecraft {
-    mappings channel: "snapshot", version: "20190719-1.14.3"
+    mappings channel: "snapshot", version: "20200225-1.15.1"
     runs {
         client {
             workingDirectory project.file("run")

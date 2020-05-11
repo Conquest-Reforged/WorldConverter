@@ -3,6 +3,7 @@ package me.dags.converter.extent.chunk;
 import me.dags.converter.biome.convert.BiomeConverter;
 import me.dags.converter.converter.ConverterData;
 import me.dags.converter.converter.DataConverter;
+import me.dags.converter.tile.TileHelper;
 import me.dags.converter.version.Version;
 import org.jnbt.Nbt;
 
@@ -30,7 +31,7 @@ public class ChunkData {
     }
 
     private static List<DataConverter> upgrade(long seed, Version from, Version to, ConverterData data) {
-        if (from.isLegacy()) {
+        if (from.isLegacy() && !to.isLegacy()) {
             return upgradeFromLegacy(seed, from, to, data);
         }
         return transfer(seed, from, to, data);
@@ -83,7 +84,8 @@ public class ChunkData {
     private static List<DataConverter> transferLegacy(long seed, Version from, Version to, ConverterData data) {
         List<DataConverter> list = new LinkedList<>();
         list.add(DataConverter.create("Entities", "Entities"));
-        list.add(DataConverter.create("TileEntities", "TileEntities"));
+        list.add(TileHelper.getTileConverter(data.blocks));
+        list.add(DataConverter.create("HeightMap", "HeightMap"));
         list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
         list.add(DataConverter.create("LastUpdate", "LastUpdate"));
         list.add(DataConverter.create("LightPopulated", "LightPopulated"));

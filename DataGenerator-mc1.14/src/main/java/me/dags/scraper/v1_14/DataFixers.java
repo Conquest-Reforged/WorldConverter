@@ -10,6 +10,7 @@ import net.minecraft.nbt.StringNBT;
 import net.minecraft.util.SharedConstants;
 import net.minecraft.util.datafix.DataFixesManager;
 import net.minecraft.util.datafix.TypeReferences;
+import net.minecraft.world.biome.provider.OverworldBiomeProvider;
 
 import java.util.HashMap;
 import java.util.Map;

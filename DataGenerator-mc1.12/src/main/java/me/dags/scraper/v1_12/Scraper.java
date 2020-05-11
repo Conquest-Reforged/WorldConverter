@@ -14,8 +14,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.io.File;
 import java.util.Comparator;
@@ -27,6 +29,14 @@ public class Scraper {
 
     public Scraper() {
         MinecraftForge.EVENT_BUS.register(Scraper.class);
+        MinecraftForge.EVENT_BUS.register(ClientScraper.class);
+    }
+
+    @Mod.EventHandler
+    public static void post(FMLPostInitializationEvent event) {
+        if (event.getSide() == Side.CLIENT) {
+            ClientScraper.dump();
+        }
     }
 
     @SubscribeEvent

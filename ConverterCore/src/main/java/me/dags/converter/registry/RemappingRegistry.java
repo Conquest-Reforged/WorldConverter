@@ -32,7 +32,7 @@ public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
 
     @Override
     public T getValue(int id) {
-        return getOutput(getInput(id));
+        return getInput(id);
     }
 
     @Override

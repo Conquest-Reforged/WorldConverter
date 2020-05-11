@@ -1,9 +1,8 @@
 package me.dags.converter.version.versions;
 
 import com.google.gson.JsonObject;
-import me.dags.converter.datagen.Schema;
-import me.dags.converter.version.VersionData;
 import me.dags.converter.version.Version;
+import me.dags.converter.version.VersionData;
 import me.dags.converter.version.format.BiomeFormat;
 import me.dags.converter.version.format.ChunkFormat;
 import me.dags.converter.version.format.SchematicFormat;

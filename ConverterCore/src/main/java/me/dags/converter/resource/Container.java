@@ -2,8 +2,8 @@ package me.dags.converter.resource;
 
 import me.dags.converter.resource.dir.DirContainer;
 import me.dags.converter.resource.jar.JarContainer;
+import me.dags.converter.util.IO;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -44,12 +44,12 @@ public interface Container extends AutoCloseable {
     };
 
     static Container self(Class<?> source) throws IOException {
-        URL url = source.getProtectionDomain().getCodeSource().getLocation();
-        return open(url.getPath());
+        URL location = source.getProtectionDomain().getCodeSource().getLocation();
+        return open(location.getPath());
     }
 
     static Container open(String path) throws IOException {
-        return Container.open(new File(path).getAbsoluteFile().toPath());
+        return Container.open(IO.toPath(path));
     }
 
     static Container open(Path path) throws IOException {

@@ -56,7 +56,7 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
     public T parse(T in) throws ParseException {
         Integer id = valToId.get(in);
         if (id == null) {
-            throw new ParseException("Unknown item: " + in, -1);
+            throw new ParseException("[Registry:" + getVersion() + "] Unknown item: " + in, -1);
         }
         return getValue(id);
     }

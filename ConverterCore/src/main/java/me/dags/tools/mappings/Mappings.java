@@ -3,19 +3,11 @@ package me.dags.tools.mappings;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import me.dags.converter.version.VersionData;
-import me.dags.converter.version.versions.MinecraftVersion;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
 
 public class Mappings {
 

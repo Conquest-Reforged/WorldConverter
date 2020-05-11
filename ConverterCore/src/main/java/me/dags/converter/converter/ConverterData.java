@@ -36,7 +36,8 @@ public class ConverterData {
     }
 
     private static void apply(File file, Mapper.Builder<?> builder) throws Exception {
-        if (!file.getPath().isEmpty() || !file.exists()) {
+        if (file.getPath().isEmpty() || !file.exists()) {
+            Logger.log("Mappings not found:", file).flush();
             return;
         }
         if (file.isDirectory()) {
