@@ -50,7 +50,7 @@ public class BlockRegistry extends AbstractRegistry<BlockState> implements Regis
         return blockState.getIdentifier() + "(" + id + ":" + meta + ")";
     }
 
-    public static Builder<BlockState> builder(String version) {
-        return new AbstractRegistry.Builder<>(version, BlockState.AIR, BlockState.MAX_ID, BlockRegistry::new);
+    public static Builder<BlockState> builder(String version, int size) {
+        return new AbstractRegistry.Builder<>(version, BlockState.AIR, size, BlockRegistry::new);
     }
 }

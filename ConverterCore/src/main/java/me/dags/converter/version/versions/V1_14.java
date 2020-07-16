@@ -8,6 +8,7 @@ import me.dags.converter.biome.registry.BiomeRegistry;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.block.Serializer;
 import me.dags.converter.block.registry.BlockRegistry;
+import me.dags.converter.util.log.Logger;
 import me.dags.converter.version.Version;
 import me.dags.converter.version.VersionData;
 import me.dags.converter.version.format.BiomeFormat;
@@ -52,7 +53,10 @@ public class V1_14 implements Version {
     @Override
     public VersionData parseGameData(JsonObject json) throws Exception {
         int stateId = 0;
-        BlockRegistry.Builder<BlockState> blocks = BlockRegistry.builder(getVersion());
+        int maxStateId = countBlockStates(json);
+        Logger.logf("Loading %s BlockStates", maxStateId);
+
+        BlockRegistry.Builder<BlockState> blocks = BlockRegistry.builder(getVersion(), maxStateId);
         for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject("blocks").entrySet()) {
             if (!entry.getValue().isJsonObject()) {
                 continue;
@@ -79,5 +83,23 @@ public class V1_14 implements Version {
         }
 
         return new VersionData(this, blocks.build(), biomes.build());
+    }
+
+    private static int countBlockStates(JsonObject json) {
+        if (json.has("blocks")) {
+            int count = 0;
+            for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject("blocks").entrySet()) {
+                if (entry.getValue().isJsonObject()) {
+                    JsonArray states = entry.getValue().getAsJsonObject().getAsJsonArray("states");
+                    if (states == null) {
+                        count += 1;
+                    } else {
+                        count += states.size();
+                    }
+                }
+            }
+            return count;
+        }
+        return 0;
     }
 }

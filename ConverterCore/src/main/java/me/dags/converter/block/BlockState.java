@@ -12,7 +12,7 @@ import java.text.ParseException;
 
 public class BlockState implements RegistryItem {
 
-    public static final int MAX_ID = getStateId(4096, 15);
+    public static final int LEGACY_MAX_ID = getStateId(4096, 15);
     public static final BlockState AIR = new BlockState(0, Nbt.compound(1).put("Name", "minecraft:air"), false);
 
     private final int stateId;

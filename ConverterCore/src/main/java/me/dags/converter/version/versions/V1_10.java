@@ -61,7 +61,7 @@ public class V1_10 implements Version {
 
     @Override
     public VersionData parseGameData(JsonObject json) throws Exception {
-        BlockRegistry.Builder<BlockState> blocks = BlockRegistry.builder(getVersion());
+        BlockRegistry.Builder<BlockState> blocks = BlockRegistry.builder(getVersion(), BlockState.LEGACY_MAX_ID);
         for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject("blocks").entrySet()) {
             if (!entry.getValue().isJsonObject()) {
                 continue;

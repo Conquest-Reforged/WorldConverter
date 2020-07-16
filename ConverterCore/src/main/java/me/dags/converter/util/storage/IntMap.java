@@ -79,14 +79,13 @@ public class IntMap<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                T t = get(++index);
-                if (t != null) {
-                    return t;
+                while (++index < values.length) {
+                    T t = get(index);
+                    if (t != null) {
+                        return t;
+                    }
                 }
-                if (!hasNext()) {
-                    throw new RuntimeException("Out of bounds");
-                }
-                return next();
+                throw new RuntimeException("Out of bounds");
             }
         };
     }
