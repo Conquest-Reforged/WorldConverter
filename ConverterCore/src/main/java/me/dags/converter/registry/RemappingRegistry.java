@@ -26,6 +26,11 @@ public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
     }
 
     @Override
+    public int maxId() {
+        return registry.maxId();
+    }
+
+    @Override
     public String getVersion() {
         return mapper.getVersion();
     }
