@@ -53,7 +53,7 @@ public class V1_14 implements Version {
     @Override
     public VersionData parseGameData(JsonObject json) throws Exception {
         int stateId = 0;
-        int maxStateId = countBlockStates(json);
+        int maxStateId = countBlockStates(json) + 1;
         Logger.logf("Loading %s BlockStates", maxStateId);
 
         BlockRegistry.Builder<BlockState> blocks = BlockRegistry.builder(getVersion(), maxStateId);

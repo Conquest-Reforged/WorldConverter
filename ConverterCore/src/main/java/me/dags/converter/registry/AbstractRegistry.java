@@ -11,6 +11,7 @@ import java.util.function.Function;
 
 public abstract class AbstractRegistry<T extends RegistryItem> implements Registry<T> {
 
+    private final int maxId;
     private final T fallback;
     private final String version;
     protected final IntMap<T> idToVal;
@@ -21,11 +22,17 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
         this.valToId = builder.valToId;
         this.version = builder.version;
         this.fallback = builder.fallback;
+        this.maxId = builder.maxId;
     }
 
     @Override
     public int size() {
         return valToId.size();
+    }
+
+    @Override
+    public int maxId() {
+        return maxId;
     }
 
     @Override
@@ -63,6 +70,7 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
 
     public static class Builder<T extends RegistryItem> {
 
+        private int maxId = -1;
         private final IntMap<T> idToVal;
         private final Map<T, Integer> valToId;
         private final Function<Builder<T>, Registry<T>> constructor;
@@ -90,7 +98,7 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
             }
             valToId.put(val, id);
             idToVal.put(id, val);
-            return this;
+            return recordId(id);
         }
 
         public Builder<T> addUnchecked(T val) {
@@ -100,6 +108,11 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
         public Builder<T> addUnchecked(int id, T val) {
             valToId.put(val, id);
             idToVal.put(id, val);
+            return recordId(id);
+        }
+
+        private Builder<T> recordId(int id) {
+            maxId = Math.max(id, maxId);
             return this;
         }
 

@@ -95,7 +95,7 @@ public class Level {
     }
 
     private Registry<BlockState> syncBlocks(Registry<BlockState> registry, Map<String, Integer> mappings) throws Exception {
-        BlockRegistry.Builder<BlockState> builder = BlockRegistry.builder(registry.getVersion(), getMaxId(registry, mappings));
+        BlockRegistry.Builder<BlockState> builder = BlockRegistry.builder(registry.getVersion(), getNewSize(registry, mappings));
         Set<String> visited = new HashSet<>();
 
         String version = registry.getVersion();
@@ -166,7 +166,9 @@ public class Level {
         return map;
     }
 
-    private static int getMaxId(Registry<?> registry, Map<?, Integer> map) {
-        return Math.max(registry.size(), map.values().stream().max(Integer::compareTo).orElse(map.size()));
+    private static int getNewSize(Registry<?> registry, Map<?, Integer> map) {
+        int registryMax = registry.maxId();
+        int dataMax = map.values().stream().mapToInt(Integer::intValue).max().orElse(0);
+        return Math.max(registryMax, dataMax) + 1;
     }
 }

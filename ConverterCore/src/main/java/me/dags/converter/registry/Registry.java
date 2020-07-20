@@ -14,6 +14,11 @@ public interface Registry<T extends RegistryItem> extends Iterable<T> {
     int size();
 
     /**
+     * Get the largest id in the registry
+     */
+    int maxId();
+
+    /**
      * Get the id that the provided item is registered to
      */
     int getId(T val);
