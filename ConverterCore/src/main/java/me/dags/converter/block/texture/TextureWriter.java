@@ -1,6 +1,7 @@
 package me.dags.converter.block.texture;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.io.BufferedWriter;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Map;
 
 public class TextureWriter implements AutoCloseable {
 
@@ -41,7 +43,7 @@ public class TextureWriter implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(root, writer);
+        new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(sort(root), writer);
         writer.close();
     }
 
@@ -58,6 +60,17 @@ public class TextureWriter implements AutoCloseable {
         String path = texture.substring(j);
 
         return domain + ":" + path;
+    }
+
+    private static JsonElement sort(JsonElement element) {
+        if (element.isJsonObject()) {
+            JsonObject result = new JsonObject();
+            element.getAsJsonObject().entrySet().stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(e -> result.add(e.getKey(), sort(e.getValue())));
+            return result;
+        }
+        return element;
     }
 
     public static TextureWriter of(File file) throws IOException {

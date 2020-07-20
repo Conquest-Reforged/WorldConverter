@@ -59,7 +59,7 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
 
         private final Registry<T> from;
         private final Registry<T> to;
-        private final Map<T, T> mappings = new HashMap<>(BlockState.MAX_ID);
+        private final Map<T, T> mappings = new HashMap<>(BlockState.LEGACY_MAX_ID);
 
         private Builder(Registry<T> from, Registry<T> to) {
             this.from = from;

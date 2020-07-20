@@ -13,6 +13,7 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        System.out.println("Starting");
         try (FileWriter writer = new FileWriter("generated-mappings.txt")) {
             JsonObject a = Helper.upgrade(Main.open("blocks-1.12"));
             JsonObject b = Main.open("blocks-1.15");
@@ -26,17 +27,22 @@ public class Main {
 
                 for (Map.Entry<String, JsonElement> blockA : typeA.entrySet()) {
                     JsonObject modelA = blockA.getValue().getAsJsonObject();
+                    if (modelA.size() == 0) {
+                        continue;
+                    }
 
                     for (Map.Entry<String, JsonElement> blockB : typeB.entrySet()) {
                         JsonObject modelB = blockB.getValue().getAsJsonObject();
 
                         if (countMatches(modelA, modelB) == modelA.size()) {
                             writer.write(blockA.getKey() + " -> " + blockB.getKey() + "\n");
+                            break;
                         }
                     }
                 }
             }
         }
+        System.out.println("Done");
     }
 
     private static int countMatches(JsonObject modelA, JsonObject modelB) {

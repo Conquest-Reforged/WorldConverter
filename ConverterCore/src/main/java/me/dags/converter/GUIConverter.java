@@ -2,6 +2,7 @@ package me.dags.converter;
 
 import me.dags.converter.converter.config.Config;
 import me.dags.converter.converter.config.CustomData;
+import me.dags.converter.datagen.mappings.Compiler;
 import me.dags.converter.extent.ExtentType;
 import me.dags.converter.extent.Format;
 import me.dags.converter.resource.Container;
@@ -275,7 +276,6 @@ public class GUIConverter {
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
             setter.accept(file.getAbsolutePath());
-            setter.accept(file.getAbsolutePath());
         }
     }
 
@@ -352,8 +352,12 @@ public class GUIConverter {
         field.setEditable(false);
 
         JButton choose = button("Choose", 80, 25, () -> choose(dialog, path -> {
-//            field.setText(path);
-//            fileRef.set(path);
+            try {
+                Compiler.compile(path);
+                JOptionPane.showMessageDialog(dialog, "Complete!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }));
 
         return row(label, field, choose);

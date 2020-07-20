@@ -15,6 +15,8 @@ public class Helper {
     static {
         parse("block_types.txt", typeMappings);
         parse("textures.txt", textureMappings);
+
+        typeMappings.put("BlockStairsMeta", "Stairs");
     }
 
     public static String getType(String name) {
