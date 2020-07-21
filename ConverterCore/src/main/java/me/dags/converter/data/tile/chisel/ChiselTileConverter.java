@@ -1,8 +1,8 @@
-package me.dags.converter.tile.chisel;
+package me.dags.converter.data.tile.chisel;
 
 import me.dags.converter.block.BlockState;
+import me.dags.converter.data.EntityConverter;
 import me.dags.converter.registry.RemappingRegistry;
-import me.dags.converter.tile.TileConverter;
 import me.dags.converter.util.log.Logger;
 import org.jnbt.CompoundTag;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class ChiselTileConverter implements TileConverter {
+public class ChiselTileConverter implements EntityConverter {
 
     private final Function<String, String> idMapper;
     private final RemappingRegistry<BlockState> stateRegistry;
@@ -22,6 +22,11 @@ public class ChiselTileConverter implements TileConverter {
         this.stateRegistry = builder.registry;
         this.readerFactory = builder.reader;
         this.writerFactory = builder.writer;
+    }
+
+    @Override
+    public String getId() {
+        return "";
     }
 
     @Override
@@ -38,7 +43,7 @@ public class ChiselTileConverter implements TileConverter {
             Logger.log("Converting %s", tile);
 
             // copy any tile data not already written to the writer
-            return TileConverter.copyMissingData(tile, writer.getRoot());
+            return EntityConverter.copyMissingData(tile, writer.getRoot());
         }
         return tile;
     }

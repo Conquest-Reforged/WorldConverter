@@ -1,4 +1,4 @@
-package me.dags.converter.tile.chisel;
+package me.dags.converter.data.tile.chisel;
 
 import me.dags.converter.block.BlockState;
 import org.jnbt.CompoundTag;

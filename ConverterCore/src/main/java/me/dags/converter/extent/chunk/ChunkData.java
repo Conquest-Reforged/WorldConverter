@@ -3,7 +3,9 @@ package me.dags.converter.extent.chunk;
 import me.dags.converter.biome.convert.BiomeConverter;
 import me.dags.converter.converter.ConverterData;
 import me.dags.converter.converter.DataConverter;
-import me.dags.converter.tile.TileHelper;
+import me.dags.converter.data.entity.EntityConverters;
+import me.dags.converter.data.tile.TileEntityConverters;
+import me.dags.converter.util.Utils;
 import me.dags.converter.version.Version;
 import org.jnbt.Nbt;
 
@@ -54,7 +56,7 @@ public class ChunkData {
     // upgrade chunk data from Legacy names to Current
     private static List<DataConverter> upgradeFromLegacy(long seed, Version from, Version to, ConverterData data) {
         List<DataConverter> list = new LinkedList<>();
-        list.add(DataConverter.create("Entities", "Entities"));
+        list.add(EntityConverters.getDataConverter());
         list.add(DataConverter.create("TileEntities", "TileEntities"));
         list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
         list.add(DataConverter.create("LastUpdate", "LastUpdate"));
@@ -69,7 +71,7 @@ public class ChunkData {
     // downgrade chunk data from Current to legacy
     private static List<DataConverter> downgradeToLegacy(long seed, Version from, Version to, ConverterData data) {
         List<DataConverter> list = new LinkedList<>();
-        list.add(DataConverter.create("Entities", "Entities"));
+        list.add(EntityConverters.getDataConverter());
         list.add(DataConverter.create("TileEntities", "TileEntities"));
         list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
         list.add(DataConverter.create("LastUpdate", "LastUpdate"));
@@ -83,8 +85,8 @@ public class ChunkData {
 
     private static List<DataConverter> transferLegacy(long seed, Version from, Version to, ConverterData data) {
         List<DataConverter> list = new LinkedList<>();
-        list.add(DataConverter.create("Entities", "Entities"));
-        list.add(TileHelper.getTileConverter(data.blocks));
+        list.add(EntityConverters.getDataConverter());
+        list.add(TileEntityConverters.getTileConverter(data.blocks));
         list.add(DataConverter.create("HeightMap", "HeightMap"));
         list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
         list.add(DataConverter.create("LastUpdate", "LastUpdate"));
@@ -98,7 +100,7 @@ public class ChunkData {
 
     private static List<DataConverter> transferLatest(long seed, Version from, Version to, ConverterData data) {
         List<DataConverter> list = new LinkedList<>();
-        list.add(DataConverter.create("Entities", "Entities"));
+        list.add(EntityConverters.getDataConverter());
         list.add(DataConverter.create("TileEntities", "TileEntities"));
         list.add(DataConverter.create("InhabitedTime", "InhabitedTime"));
         list.add(DataConverter.create("LastUpdate", "LastUpdate"));

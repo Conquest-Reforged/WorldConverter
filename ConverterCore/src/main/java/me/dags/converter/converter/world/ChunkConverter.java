@@ -4,6 +4,8 @@ import me.dags.converter.block.BlockState;
 import me.dags.converter.converter.Converter;
 import me.dags.converter.converter.ConverterData;
 import me.dags.converter.converter.DataConverter;
+import me.dags.converter.data.tile.LazyTileEntityMap;
+import me.dags.converter.data.tile.TileEntityMap;
 import me.dags.converter.extent.WriterConfig;
 import me.dags.converter.extent.chunk.Chunk;
 import me.dags.converter.extent.chunk.ChunkData;
@@ -38,7 +40,6 @@ public class ChunkConverter implements Converter {
     public CompoundTag convert(CompoundTag in) throws Exception {
         Chunk.Reader reader = from.getChunkFormat().newReader(data.blocks, in);
         Chunk.Writer writer = to.getChunkFormat().newWriter(to, config);
-
         try {
             int sections = reader.getSectionCount();
             for (int i = 0; i < sections; i++) {

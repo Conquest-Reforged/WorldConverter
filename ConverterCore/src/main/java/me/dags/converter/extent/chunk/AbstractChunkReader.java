@@ -1,5 +1,7 @@
 package me.dags.converter.extent.chunk;
 
+import me.dags.converter.data.tile.LazyTileEntityMap;
+import me.dags.converter.data.tile.TileEntityMap;
 import me.dags.converter.extent.volume.Volume;
 import org.jnbt.CompoundTag;
 import org.jnbt.Tag;
@@ -11,10 +13,12 @@ public abstract class AbstractChunkReader implements Chunk.Reader {
 
     private final CompoundTag level;
     private final Volume.Reader[] sections;
+    private final TileEntityMap tileEntityMap;
     private final List<Tag<CompoundTag>> sectionData;
 
     public AbstractChunkReader(CompoundTag root) {
         this.level = root.getCompound("Level");
+        this.tileEntityMap = new LazyTileEntityMap(level);
         this.sectionData = level.getListTag("Sections", TagType.COMPOUND).getBacking();
         this.sections = new Volume.Reader[sectionData.size()];
     }
@@ -22,6 +26,11 @@ public abstract class AbstractChunkReader implements Chunk.Reader {
     @Override
     public int getSectionCount() {
         return sections.length;
+    }
+
+    @Override
+    public TileEntityMap getTileEntityMap() {
+        return tileEntityMap;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package me.dags.converter.extent.chunk;
 
 import me.dags.converter.block.BlockState;
+import me.dags.converter.data.tile.TileEntityMap;
 import me.dags.converter.extent.Extent;
 import me.dags.converter.extent.io.DataReader;
 import me.dags.converter.extent.io.DataWriter;
@@ -13,6 +14,8 @@ public interface Chunk {
         int getSectionCount();
 
         Volume.Reader getSection(int index) throws Exception;
+
+        TileEntityMap getTileEntityMap();
 
         default BlockState getState(int x, int y, int z) throws Exception {
             Volume.Reader section = getSection(y >> 4);

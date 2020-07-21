@@ -1,10 +1,12 @@
-package me.dags.converter.tile;
+package me.dags.converter.data;
 
 import org.jnbt.CompoundTag;
 
-public interface TileConverter {
+public interface EntityConverter {
 
-    CompoundTag convert(CompoundTag tile);
+    String getId();
+
+    CompoundTag convert(CompoundTag data);
 
     static CompoundTag copyMissingData(CompoundTag from, CompoundTag to) {
         from.forEach(e -> {
