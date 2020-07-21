@@ -8,7 +8,7 @@ input_version=1.12
 
 # The format and version to convert to [optional, defaults to 1.14]
 output_format=world
-output_version=1.14
+output_version=1.15
 
 # The paths to your custom GameData json files [optional]
 data_in=

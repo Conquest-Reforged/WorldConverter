@@ -1,6 +1,6 @@
 package me.dags.converter.data.tile;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jnbt.CompoundTag;
 
 public interface TileEntityMap {

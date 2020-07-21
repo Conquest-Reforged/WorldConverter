@@ -1654,3 +1654,6 @@ minecraft:structure_block[mode=save] -> minecraft:structure_block[mode=save]
 minecraft:structure_block[mode=load] -> minecraft:structure_block[mode=load]
 minecraft:structure_block[mode=corner] -> minecraft:structure_block[mode=corner]
 minecraft:structure_block[mode=data] -> minecraft:structure_block[mode=data]
+conquest:stone_full_1[variant=alpha] -> conquest:lime_mortar_masonry
+conquest:stone_full_1[variant=bravo] -> conquest:slate_mortar_wall
+conquest:stone_full_1[variant=echo] -> conquest:dry_slate_wall

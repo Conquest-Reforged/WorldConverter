@@ -13,11 +13,13 @@ configurations {
 repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
+    maven { url "https://mvnrepository.com/artifact/org.jetbrains/annotations" }
 }
 
 dependencies {
     shade "com.github.dags-:JNBT:2.0.5"
     shade "com.google.code.gson:gson:2.8.2"
+    shade "org.jetbrains:annotations:19.0.0"
 }
 
 shadowJar {

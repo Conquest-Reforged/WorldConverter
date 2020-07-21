@@ -15,7 +15,7 @@ public class Compiler {
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(path)))) {
             try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("mappings-compiled.txt")))) {
                 StateRegistry from = StateRegistry.createLegacy(MinecraftVersion.V1_12.loadGameDataJson().getAsJsonObject("blocks"));
-                StateRegistry to = StateRegistry.create(MinecraftVersion.V1_14.loadGameDataJson().getAsJsonObject("blocks"));
+                StateRegistry to = StateRegistry.create(MinecraftVersion.V1_15.loadGameDataJson().getAsJsonObject("blocks"));
                 StateMapper mapper = new StateMapper(from, to);
                 boolean lastWasEmpty = false;
                 while (scanner.hasNext()) {

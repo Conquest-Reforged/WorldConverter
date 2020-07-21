@@ -18,7 +18,7 @@ public class JarContainer implements Container {
     private final ZipFile jar;
 
     public JarContainer(Path path) throws IOException {
-        this.jar = new ZipFile(path.toString());
+        this.jar = new ZipFile(path.toString().replace("%20", " "));
     }
 
     @Override

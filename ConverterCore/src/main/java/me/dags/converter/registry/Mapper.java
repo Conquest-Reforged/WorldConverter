@@ -101,7 +101,7 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
                 mappings.put(from, to);
                 Logger.log("Parsed Mapping:", in, "->", out);
             } catch (ParseException ignored) {
-
+                Logger.log("Ignored Mapping:" + ignored);
             }
             return this;
         }
