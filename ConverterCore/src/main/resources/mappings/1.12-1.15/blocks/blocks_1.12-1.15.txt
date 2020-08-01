@@ -7,7 +7,6 @@ minecraft:stone[variant=andesite] -> minecraft:andesite
 minecraft:stone[variant=smooth_andesite] -> minecraft:polished_andesite
 minecraft:grass[snowy=false] -> minecraft:grass_block[snowy=false]
 minecraft:dirt[snowy=false,variant=dirt] -> minecraft:dirt
-minecraft:dirt[snowy=false,variant=coarse_dirt] -> minecraft:coarse_dirt
 minecraft:dirt[snowy=false,variant=podzol] -> minecraft:podzol[snowy=false]
 minecraft:cobblestone -> minecraft:cobblestone
 minecraft:planks[variant=oak] -> minecraft:oak_planks
