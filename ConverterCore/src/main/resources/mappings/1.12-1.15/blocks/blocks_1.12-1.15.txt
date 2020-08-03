@@ -1074,7 +1074,6 @@ minecraft:stained_hardened_clay[color=gray] -> minecraft:gray_terracotta
 minecraft:stained_hardened_clay[color=silver] -> minecraft:light_gray_terracotta
 minecraft:stained_hardened_clay[color=cyan] -> minecraft:cyan_terracotta
 minecraft:stained_hardened_clay[color=purple] -> minecraft:purple_terracotta
-minecraft:stained_hardened_clay[color=blue] -> minecraft:blue_terracotta
 minecraft:stained_hardened_clay[color=brown] -> minecraft:brown_terracotta
 minecraft:stained_hardened_clay[color=green] -> minecraft:green_terracotta
 minecraft:stained_hardened_clay[color=red] -> minecraft:red_terracotta
