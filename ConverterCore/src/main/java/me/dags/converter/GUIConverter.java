@@ -311,9 +311,9 @@ public class GUIConverter {
                 }
 
                 if (type.b == MinecraftVersion.V1_12) {
-                    outputVersion.setSelectedItem(MinecraftVersion.V1_14);
+                    outputVersion.setSelectedItem(MinecraftVersion.V1_15);
                 } else {
-                    outputVersion.setSelectedItem(MinecraftVersion.V1_14);
+                    outputVersion.setSelectedItem(MinecraftVersion.V1_15);
                 }
             }
         }

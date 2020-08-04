@@ -50,10 +50,10 @@ public class ExtentType extends Pair<Format, Version> {
                     return new ExtentType(Format.SCHEMATIC, MinecraftVersion.V1_12);
                 }
                 if (root.get("BlockData").isPresent() && root.get("Palette").isPresent()) {
-                    return new ExtentType(Format.SCHEMATIC, MinecraftVersion.V1_14);
+                    return new ExtentType(Format.SCHEMATIC, MinecraftVersion.V1_15);
                 }
                 if (root.get("blocks").isPresent() && root.get("palette").isPresent()) {
-                    return new ExtentType(Format.STRUCTURE, MinecraftVersion.V1_14);
+                    return new ExtentType(Format.STRUCTURE, MinecraftVersion.V1_15);
                 }
                 if (root.get("Data").isPresent()) {
                     CompoundTag version = root.get("Data", "Version").asCompound();

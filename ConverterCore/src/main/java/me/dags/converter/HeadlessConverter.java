@@ -52,7 +52,7 @@ public class HeadlessConverter {
         }
 
         if (config.output.version == MinecraftVersion.DETECT) {
-            config.output.version = MinecraftVersion.V1_14;
+            config.output.version = MinecraftVersion.V1_15;
         }
 
         Main.convert(config, ProgressBar.console());
