@@ -1,4 +1,4 @@
-minecraft:bed[#color=white] -> minecraft:red_bed
+minecraft:bed[#color=white] -> minecraft:white_bed
 minecraft:bed[#color=orange] -> minecraft:orange_bed
 minecraft:bed[#color=magenta] -> minecraft:magenta_bed
 minecraft:bed[#color=light_blue] -> minecraft:light_blue_bed
