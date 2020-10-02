@@ -64,3 +64,41 @@ Not bad. For just 2 lines of mapping rules we can convert 8 blockstate permutati
 - 1.15 does not have a value `none` for the `axis` property so the output falls back to the default value of `y`
 - any properties that exist on 1.12 that do not exist in 1.15 are omitted from the output blockstate
 - any properties that exist on 1.15 and not on 1.12 will be set to its default value if not otherwise specified in the conversion rule
+
+----
+
+### Example 3 - Extended Blockstates
+
+Extended BlockStates are BlockStates whose information is wholly or partially determined by information outside of the standard
+blockstate properties. This information might include neighbour blocks or tile entity data. Extended states require additional
+code added to the converter in order to gather the extra information for the blockstate.
+
+An example of is the [BedExtender](https://github.com/Conquest-Reforged/WorldConverter/blob/master/ConverterCore/src/main/java/me/dags/converter/block/extender/BedExtender.java)  which pulls the bed's color from it's tile entity and adds it to the blockstate's property map - this color property can then be 
+referenced in mappings using the '#color' property ('#' signifying the property is an extended one).
+
+BlockStateExtenders are provided the game version class [as can be seen here](https://github.com/Conquest-Reforged/WorldConverter/blob/master/ConverterCore/src/main/java/me/dags/converter/version/versions/V1_12.java#L25).
+
+**Rule:**
+```
+minecraft:bed[#color=white] -> minecraft:white_bed
+```
+
+**Conversions:**
+```
+minecraft:bed[#color=white,facing=north,occupied=true,part=head] -> minecraft:white_bed[facing=north,occupied=true,part=head]
+minecraft:bed[#color=white,facing=north,occupied=true,part=foot] -> minecraft:white_bed[facing=north,occupied=true,part=foot]
+minecraft:bed[#color=white,facing=north,occupied=false,part=head] -> minecraft:white_bed[facing=north,occupied=false,part=head]
+minecraft:bed[#color=white,facing=north,occupied=false,part=foot] -> minecraft:white_bed[facing=north,occupied=false,part=foot]
+minecraft:bed[#color=white,facing=south,occupied=true,part=head] -> minecraft:white_bed[facing=south,occupied=true,part=head]
+minecraft:bed[#color=white,facing=south,occupied=true,part=foot] -> minecraft:white_bed[facing=south,occupied=true,part=foot]
+minecraft:bed[#color=white,facing=south,occupied=false,part=head] -> minecraft:white_bed[facing=south,occupied=false,part=head]
+minecraft:bed[#color=white,facing=south,occupied=false,part=foot] -> minecraft:white_bed[facing=south,occupied=false,part=foot]
+minecraft:bed[#color=white,facing=west,occupied=true,part=head] -> minecraft:white_bed[facing=west,occupied=true,part=head]
+minecraft:bed[#color=white,facing=west,occupied=true,part=foot] -> minecraft:white_bed[facing=west,occupied=true,part=foot]
+minecraft:bed[#color=white,facing=west,occupied=false,part=head] -> minecraft:white_bed[facing=west,occupied=false,part=head]
+minecraft:bed[#color=white,facing=west,occupied=false,part=foot] -> minecraft:white_bed[facing=west,occupied=false,part=foot]
+minecraft:bed[#color=white,facing=east,occupied=true,part=head] -> minecraft:white_bed[facing=east,occupied=true,part=head]
+minecraft:bed[#color=white,facing=east,occupied=true,part=foot] -> minecraft:white_bed[facing=east,occupied=true,part=foot]
+minecraft:bed[#color=white,facing=east,occupied=false,part=head] -> minecraft:white_bed[facing=east,occupied=false,part=head]
+minecraft:bed[#color=white,facing=east,occupied=false,part=foot] -> minecraft:white_bed[facing=east,occupied=false,part=foot]
+```
