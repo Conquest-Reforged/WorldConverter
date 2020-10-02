@@ -69,14 +69,14 @@ Not bad. For just 2 lines of mapping rules we can convert 8 blockstate permutati
 
 ### Example 3 - Extended Blockstates
 
-Extended BlockStates are BlockStates whose information is wholly or partially determined by information outside of the standard
-blockstate properties. This information might include neighbour blocks or tile entity data. Extended states require additional
-code added to the converter in order to gather the extra information for the blockstate.
+Extended blockstates are those whose information is wholly or partially determined by information outside of the standard
+blockstate properties. This information might include neighbour blocks or tile entity data. Extended states require a
+StateExtender implementation in order to gather the extra information for the blockstate.
 
-An example of is the [BedExtender](https://github.com/Conquest-Reforged/WorldConverter/blob/master/ConverterCore/src/main/java/me/dags/converter/block/extender/BedExtender.java)  which pulls the bed's color from it's tile entity and adds it to the blockstate's property map - this color property can then be 
+An example of is the [BedExtender](https://github.com/Conquest-Reforged/WorldConverter/blob/master/ConverterCore/src/main/java/me/dags/converter/block/extender/BedExtender.java)  which pulls the bed's color from its tile entity and adds it to the blockstate's property map - this color property can then be 
 referenced in mappings using the '#color' property ('#' signifying the property is an extended one).
 
-BlockStateExtenders are provided the game version class [as can be seen here](https://github.com/Conquest-Reforged/WorldConverter/blob/master/ConverterCore/src/main/java/me/dags/converter/version/versions/V1_12.java#L25).
+StateExtender are provided the game version class [as can be seen here](https://github.com/Conquest-Reforged/WorldConverter/blob/master/ConverterCore/src/main/java/me/dags/converter/version/versions/V1_12.java#L25).
 
 **Rule:**
 ```
