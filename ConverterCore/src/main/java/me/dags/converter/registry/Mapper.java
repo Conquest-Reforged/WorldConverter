@@ -1,16 +1,16 @@
 package me.dags.converter.registry;
 
 import me.dags.converter.block.BlockState;
+import me.dags.converter.util.Utils;
 import me.dags.converter.util.log.Logger;
 import me.dags.converter.version.Version;
 
 import java.io.InputStream;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
+public class Mapper<T extends RegistryItem<T>> implements Registry.Mapper<T> {
 
     private final String version;
     private final Map<T, T> mappings;
@@ -37,7 +37,7 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
         return version;
     }
 
-    public static <T extends RegistryItem> Registry.Mapper<T> identity(Version version) {
+    public static <T extends RegistryItem<T>> Registry.Mapper<T> identity(Version version) {
         return new Registry.Mapper<T>() {
             @Override
             public T apply(T in) {
@@ -51,15 +51,15 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
         };
     }
 
-    public static <T extends RegistryItem> Builder<T> builder(Registry<T> from, Registry<T> to) {
+    public static <T extends RegistryItem<T>> Builder<T> builder(Registry<T> from, Registry<T> to) {
         return new Builder<>(from, to);
     }
 
-    public static class Builder<T extends RegistryItem> {
+    public static class Builder<T extends RegistryItem<T>> {
 
         private final Registry<T> from;
         private final Registry<T> to;
-        private final Map<T, T> mappings = new HashMap<>(BlockState.LEGACY_MAX_ID);
+        private final Map<T, T> mappings = Utils.newMap(BlockState.LEGACY_MAX_ID);
 
         private Builder(Registry<T> from, Registry<T> to) {
             this.from = from;
@@ -96,19 +96,19 @@ public class Mapper<T extends RegistryItem> implements Registry.Mapper<T> {
 
         public Builder<T> parse(String in, String out) throws ParseException {
             try {
-                T from = this.from.getParser().parse(in);
-                T to = this.to.getParser().parse(out);
-                mappings.put(from, to);
+                T from = this.from.getParser().parse(in).parseExtended(in);
+                T to = this.to.getParser().parse(out).parseExtended(out);
+                mappings.putIfAbsent(from, to);
                 Logger.log("Parsed Mapping:", in, "->", out);
             } catch (ParseException ignored) {
-                Logger.log("Ignored Mapping:" + ignored);
+
             }
             return this;
         }
 
         public Mapper<T> build() {
             String version = from.getVersion() + "-" + to.getVersion();
-            return new Mapper<>(version, to, new HashMap<>(mappings));
+            return new Mapper<>(version, to, Utils.newMap(mappings));
         }
     }
 }

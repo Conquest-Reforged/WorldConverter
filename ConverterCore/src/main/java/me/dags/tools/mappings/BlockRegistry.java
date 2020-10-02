@@ -2,16 +2,16 @@ package me.dags.tools.mappings;
 
 import me.dags.converter.block.BlockState;
 import me.dags.converter.registry.Registry;
+import me.dags.converter.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BlockRegistry {
 
-    private final Map<String, StateContainer> blocks = new HashMap<>();
+    private final Map<String, StateContainer> blocks = Utils.newMap();
 
     public BlockRegistry(Registry<BlockState> registry) {
         for (BlockState state : registry) {

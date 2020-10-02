@@ -3,15 +3,15 @@ package me.dags.tools.mappings;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import me.dags.converter.util.Utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Mappings {
 
-    private final Map<Mapping, Mapping> mappings = new LinkedHashMap<>();
+    private final Map<Mapping, Mapping> mappings = Utils.newOrderedMap();
 
     public Mappings(File file) throws IOException {
         JsonObject root = JsonHelper.loadJson(file);

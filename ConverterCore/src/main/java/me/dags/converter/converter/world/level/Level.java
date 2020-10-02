@@ -5,6 +5,7 @@ import me.dags.converter.biome.registry.BiomeRegistry;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.block.registry.BlockRegistry;
 import me.dags.converter.registry.Registry;
+import me.dags.converter.util.Utils;
 import me.dags.converter.util.log.Logger;
 import me.dags.converter.version.Version;
 import me.dags.converter.version.VersionData;
@@ -22,7 +23,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -158,7 +158,7 @@ public class Level {
             Logger.log("No mappings found for registry", registry);
             return Collections.emptyMap();
         }
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = Utils.newMap();
         for (Tag<?> pair : mappings) {
             CompoundTag entry = pair.asCompound();
             map.put(entry.getString("K").trim(), entry.getInt("V"));

@@ -1,15 +1,15 @@
 package me.dags.converter.registry;
 
+import me.dags.converter.util.Utils;
 import me.dags.converter.util.storage.IntMap;
 
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
-public abstract class AbstractRegistry<T extends RegistryItem> implements Registry<T> {
+public abstract class AbstractRegistry<T extends RegistryItem<T>> implements Registry<T> {
 
     private final int maxId;
     private final T fallback;
@@ -68,7 +68,7 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
         return getValue(id);
     }
 
-    public static class Builder<T extends RegistryItem> {
+    public static class Builder<T extends RegistryItem<T>> {
 
         private int maxId = -1;
         private final IntMap<T> idToVal;
@@ -83,7 +83,7 @@ public abstract class AbstractRegistry<T extends RegistryItem> implements Regist
             this.version = version;
             this.fallback = def;
             this.idToVal = new IntMap<>(size);
-            this.valToId = new HashMap<>(size);
+            this.valToId = Utils.newMap(size);
             this.constructor = constructor;
         }
 

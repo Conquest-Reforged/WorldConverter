@@ -2,15 +2,15 @@ package me.dags.tools.textrues;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import me.dags.converter.util.Utils;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Helper {
 
-    private static final Map<String, String> typeMappings = new LinkedHashMap<>();
-    private static final Map<String, String> textureMappings = new LinkedHashMap<>();
+    private static final Map<String, String> typeMappings = Utils.newOrderedMap();;
+    private static final Map<String, String> textureMappings = Utils.newOrderedMap();;
 
     static {
         parse("block_types.txt", typeMappings);

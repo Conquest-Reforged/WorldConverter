@@ -31,8 +31,8 @@ public class StateMapper {
                 List<CompoundTag> statesOut = to.getStates(rule.getName());
                 for (CompoundTag stateOut : statesOut) {
                     if (rule.matches(stateOut)) {
-                        String left = Serializer.serialize(stateIn);
-                        String right = Serializer.serialize(stateOut);
+                        String left = Serializer.serialize(in.extend(stateIn));
+                        String right = Serializer.serialize(out.extend(stateOut));
                         consumer.accept(left + " -> " + right);
                         break;
                     }

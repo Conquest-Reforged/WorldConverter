@@ -1,6 +1,6 @@
 package me.dags.converter.datagen.mappings;
 
-import me.dags.converter.version.versions.MinecraftVersion;
+import me.dags.converter.version.Version;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,11 +11,11 @@ import java.util.Scanner;
 
 public class Compiler {
 
-    public static void compile(String path) throws Exception {
+    public static void compile(String path, Version versionFrom, Version versionTo) throws Exception {
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(path)))) {
             try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("mappings-compiled.txt")))) {
-                StateRegistry from = StateRegistry.createLegacy(MinecraftVersion.V1_12.loadGameDataJson().getAsJsonObject("blocks"));
-                StateRegistry to = StateRegistry.create(MinecraftVersion.V1_15.loadGameDataJson().getAsJsonObject("blocks"));
+                StateRegistry from = StateRegistry.createLegacy(versionFrom.loadGameDataJson().getAsJsonObject("blocks"));
+                StateRegistry to = StateRegistry.create(versionTo.loadGameDataJson().getAsJsonObject("blocks"));
                 StateMapper mapper = new StateMapper(from, to);
                 boolean lastWasEmpty = false;
                 while (scanner.hasNext()) {

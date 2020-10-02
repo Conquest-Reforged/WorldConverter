@@ -4,13 +4,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import me.dags.converter.block.Serializer;
+import me.dags.converter.util.Utils;
 import me.dags.converter.util.log.Logger;
 import org.jnbt.CompoundTag;
 import org.jnbt.Nbt;
 
 import java.text.ParseException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +22,8 @@ public class StateRegistry {
 
     private final Function<String, CompoundTag> defaults;
     private final Function<String, List<CompoundTag>> states;
-    private final Map<String, CompoundTag> defaultsCache = new HashMap<>();
-    private final Map<String, List<CompoundTag>> statesCache = new HashMap<>();
+    private final Map<String, CompoundTag> defaultsCache = Utils.newMap();
+    private final Map<String, List<CompoundTag>> statesCache = Utils.newMap();
 
     public StateRegistry(Computer<CompoundTag> defaults, Computer<List<CompoundTag>> states) {
         this.states = name -> {

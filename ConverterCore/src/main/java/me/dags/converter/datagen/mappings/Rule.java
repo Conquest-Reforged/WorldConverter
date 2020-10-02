@@ -1,6 +1,7 @@
 package me.dags.converter.datagen.mappings;
 
 import org.jnbt.CompoundTag;
+import org.jnbt.Nbt;
 import org.jnbt.Tag;
 
 import java.util.Collections;
@@ -11,10 +12,12 @@ public class Rule {
 
     private final String name;
     private final Map<String, String> props;
+    private final boolean hasExtensions;
 
     public Rule(String name, Map<String, String> props) {
         this.name = name;
         this.props = props;
+        this.hasExtensions = props.keySet().stream().anyMatch(s -> s.startsWith("#"));
     }
 
     public String getName() {
@@ -26,9 +29,25 @@ public class Rule {
         return name + props.toString();
     }
 
+    public CompoundTag extend(CompoundTag state) {
+        if (hasExtensions) {
+            CompoundTag properties = state.getCompound("Properties").copy();
+            for (Map.Entry<String, String> e : props.entrySet()) {
+                if (e.getKey().startsWith("#")) {
+                    properties.put(e.getKey(), e.getValue());
+                }
+            }
+            return Nbt.compound(2).put("Name", state.getString("Name")).put("Properties", properties);
+        }
+        return state;
+    }
+
     public boolean matches(CompoundTag state) {
         CompoundTag properties = state.getCompound("Properties");
         for (Map.Entry<String, String> e : props.entrySet()) {
+            if (e.getKey().startsWith("#")) {
+                continue;
+            }
             if (e.getValue().startsWith("$")) {
                 continue;
             }

@@ -74,10 +74,49 @@ public class Serializer {
 
             String key = properties.substring(keyStart, keyEnd);
             String val = properties.substring(valStart, valEnd);
-            props.put(key, val);
+
+            // # denotes a extended property
+            if (key.charAt(0) != '#') {
+                props.put(key, val);
+            }
+
             i = valEnd;
         }
         return props;
+    }
+
+    public static CompoundTag deserializeExtendedProps(CompoundTag propertiesOutIn, String properties) throws ParseException {
+        CompoundTag propertiesOut = propertiesOutIn.copy();
+        for (int i = 0; i < properties.length(); i++) {
+            int keyStart = properties.indexOf('#', i);
+            if (keyStart == -1) {
+                break;
+            }
+
+            int keyEnd = properties.indexOf('=', keyStart);
+            if (keyEnd == -1) {
+                throw new ParseException(properties, keyStart);
+            }
+
+            int valStart = keyEnd + 1;
+            if (valStart >= properties.length()) {
+                throw new ParseException(properties, valStart);
+            }
+
+            int valEnd = properties.indexOf(',', valStart);
+            if (valEnd == -1) {
+                valEnd = properties.lastIndexOf(']');
+                if (valEnd == -1) {
+                    valEnd = properties.length();
+                }
+            }
+
+            String key = properties.substring(keyStart, keyEnd);
+            String val = properties.substring(valStart, valEnd);
+
+            propertiesOut.put(key, val);
+        }
+        return propertiesOut;
     }
 
     private static CompoundTag simple(String name) {

@@ -1,14 +1,17 @@
 package me.dags.converter.data.tile;
 
+import me.dags.converter.util.Utils;
 import org.jnbt.CompoundTag;
 import org.jnbt.ListTag;
+import org.jnbt.Nbt;
 import org.jnbt.TagType;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public class LazyTileEntityMap implements TileEntityMap {
+
+    private static final CompoundTag EMPTY = Nbt.tag(Collections.emptyMap());
 
     private static final int SIZE = 16;
     private static final int AREA = SIZE * SIZE;
@@ -24,20 +27,19 @@ public class LazyTileEntityMap implements TileEntityMap {
     @Override
     public CompoundTag getEntity(int x, int y, int z) {
         buildMap();
-        return entities.get(index(x, y, z));
+        return entities.getOrDefault(index(x, y, z), EMPTY);
     }
 
     private void buildMap() {
         if (entities == null) {
             ListTag<CompoundTag> list = level.getListTag("TileEntities", TagType.COMPOUND);
             if (list.isPresent() && list.size() > 0) {
-                entities = new HashMap<>();
+                entities = Utils.newMap(list.size());
                 for (CompoundTag entity : list) {
                     int x = entity.getInt("x");
                     int y = entity.getInt("y");
                     int z = entity.getInt("z");
-                    int seed = index(x, y, z);
-                    entities.put(seed, entity);
+                    entities.put(index(x, y, z), entity);
                 }
             } else {
                 entities = Collections.emptyMap();

@@ -184,7 +184,7 @@ public class GUIConverter {
         root.add(customDataRow(dialog, "Data Out", customData.dataOut));
         root.add(customDataRow(dialog, "Block Mappings", customData.blocks));
         root.add(new JSeparator());
-        root.add(compileMappingsRow(dialog));
+        root.add(compileMappingsRow(dialog, config));
         root.add(row(cancel, done));
 
         dialog.add(root);
@@ -345,7 +345,7 @@ public class GUIConverter {
         return row(label, field, choose);
     }
 
-    private static Component compileMappingsRow(JDialog dialog) {
+    private static Component compileMappingsRow(JDialog dialog, Config config) {
         JLabel label = label("Compile Mappings", 120, 25);
 
         JTextField field = field("", 250, 25);
@@ -353,7 +353,19 @@ public class GUIConverter {
 
         JButton choose = button("Choose", 80, 25, () -> choose(dialog, path -> {
             try {
-                Compiler.compile(path);
+                Version input = config.input.version;
+                if (input == MinecraftVersion.DETECT) {
+                    JOptionPane.showMessageDialog(dialog, "No input version selected!");
+                    return;
+                }
+
+                Version output = config.output.version;
+                if (output == MinecraftVersion.DETECT) {
+                    JOptionPane.showMessageDialog(dialog, "No output version selected!");
+                    return;
+                }
+
+                Compiler.compile(path, input, output);
                 JOptionPane.showMessageDialog(dialog, "Complete!");
             } catch (Exception e) {
                 e.printStackTrace();

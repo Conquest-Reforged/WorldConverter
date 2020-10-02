@@ -2,11 +2,11 @@ package me.dags.converter.data.tile;
 
 import me.dags.converter.block.BlockState;
 import me.dags.converter.converter.DataConverter;
-import me.dags.converter.data.EntityListConverter;
 import me.dags.converter.data.EntityConverter;
-import me.dags.converter.registry.RemappingRegistry;
+import me.dags.converter.data.EntityListConverter;
 import me.dags.converter.data.tile.chisel.ChiselTileConverter;
 import me.dags.converter.data.tile.chisel.ChiselTileLegacy;
+import me.dags.converter.registry.RemappingRegistry;
 import me.dags.converter.util.log.Logger;
 
 import java.util.Collections;

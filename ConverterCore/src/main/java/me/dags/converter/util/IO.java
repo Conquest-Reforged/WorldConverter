@@ -20,6 +20,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class IO {
 
@@ -31,18 +32,22 @@ public class IO {
 
     public static String unescape(String path) {
         try {
+            if (path.length() > 1 && path.charAt(0) == '/') {
+                path = path.substring(1);
+            }
             return URLDecoder.decode(path, StandardCharsets.UTF_8.displayName());
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
             return path;
         }
     }
 
     public static File toFile(String path) {
-        return new File(unescape(path));
+        return new File(unescape(path)).getAbsoluteFile();
     }
 
     public static Path toPath(String path) {
-        return new File(path).getAbsoluteFile().toPath();
+        return Paths.get(unescape(path)).toAbsolutePath();
     }
 
     public static InputStream open(String resource) {
@@ -78,7 +83,7 @@ public class IO {
 
     public static boolean isJar() {
         URL url = IO.class.getProtectionDomain().getCodeSource().getLocation();
-        File file = new File(url.getPath());
+        File file = IO.toFile(url.getPath());
         return !file.isDirectory();
     }
 

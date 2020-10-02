@@ -7,9 +7,10 @@ import me.dags.converter.biome.registry.BiomeRegistry;
 import me.dags.converter.block.BlockState;
 import me.dags.converter.block.PropertyComparator;
 import me.dags.converter.block.Serializer;
-import me.dags.converter.block.fixer.DoublePlant;
-import me.dags.converter.block.fixer.StateFixer;
+import me.dags.converter.block.extender.DoublePlantExtender;
+import me.dags.converter.block.extender.StateExtender;
 import me.dags.converter.block.registry.BlockRegistry;
+import me.dags.converter.util.map.FastMap;
 import me.dags.converter.version.Version;
 import me.dags.converter.version.VersionData;
 import me.dags.converter.version.format.BiomeFormat;
@@ -19,14 +20,12 @@ import org.jnbt.CompoundTag;
 import org.jnbt.Nbt;
 
 import java.text.ParseException;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public class V1_10 implements Version {
 
-    private final Map<String, StateFixer> fixers = new HashMap<String, StateFixer>() {{
-        put("minecraft:double_plant", new DoublePlant());
+    private final Map<String, StateExtender> STATE_EXTENDERS = new FastMap<String, StateExtender>() {{
+        put("minecraft:double_plant", new DoublePlantExtender());
     }};
 
     @Override
@@ -85,17 +84,17 @@ public class V1_10 implements Version {
         return new VersionData(this, blocks.build(), biomes.build());
     }
 
-    protected Map<String, StateFixer> getFixers() {
-        return Collections.emptyMap();
+    protected Map<String, StateExtender> getExtenders() {
+        return STATE_EXTENDERS;
     }
 
     private void parseOne(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {
         int blockId = block.get("id").getAsInt();
         int stateId = BlockState.getStateId(blockId, 0);
         boolean upgrade = block.get("upgrade").getAsBoolean();
-        StateFixer fixer = getFixers().getOrDefault(name, StateFixer.NONE);
+        StateExtender extender = getExtenders().getOrDefault(name, StateExtender.NONE);
         CompoundTag state = Nbt.compound(1).put("Name", name);
-        builder.addUnchecked(stateId, new BlockState(stateId, state, fixer, upgrade));
+        builder.addUnchecked(stateId, new BlockState(stateId, state, extender, upgrade));
     }
 
     private void parse(String name, JsonObject block, BlockRegistry.Builder<BlockState> builder) throws ParseException {
@@ -103,7 +102,7 @@ public class V1_10 implements Version {
         JsonObject states = block.getAsJsonObject("states");
         String defaults = block.get("default").getAsString();
         String fixerId = block.has("fixer") ? block.get("fixer").getAsString() : name;
-        StateFixer fixer = getFixers().getOrDefault(fixerId, StateFixer.NONE);
+        StateExtender extender = getExtenders().getOrDefault(fixerId, StateExtender.NONE);
 
         boolean upgrade = block.get("upgrade").getAsBoolean();
         CompoundTag defProps = Serializer.deserializeProps(defaults);
@@ -136,7 +135,7 @@ public class V1_10 implements Version {
                     .put("Name", name)
                     .put("Properties", props);
 
-            builder.addUnchecked(stateId, new BlockState(stateId, state, fixer, upgrade));
+            builder.addUnchecked(stateId, new BlockState(stateId, state, extender, upgrade));
         }
     }
 }

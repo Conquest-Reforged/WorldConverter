@@ -4,7 +4,7 @@ import me.dags.converter.registry.Registry;
 import me.dags.converter.registry.RegistryItem;
 import me.dags.converter.util.storage.IntMap;
 
-public class PaletteReader<T extends RegistryItem> implements Registry.Reader<T> {
+public class PaletteReader<T extends RegistryItem<T>> implements Registry.Reader<T> {
 
     private final IntMap<T> idToVal;
     private final T fallback;

@@ -1,0 +1,16 @@
+minecraft:bed[#color=white] -> minecraft:red_bed
+minecraft:bed[#color=orange] -> minecraft:orange_bed
+minecraft:bed[#color=magenta] -> minecraft:magenta_bed
+minecraft:bed[#color=light_blue] -> minecraft:light_blue_bed
+minecraft:bed[#color=yellow] -> minecraft:yellow_bed
+minecraft:bed[#color=lime] -> minecraft:lime_bed
+minecraft:bed[#color=pink] -> minecraft:pink_bed
+minecraft:bed[#color=gray] -> minecraft:gray_bed
+minecraft:bed[#color=light_gray] -> minecraft:light_gray_bed
+minecraft:bed[#color=cyan] -> minecraft:cyan_bed
+minecraft:bed[#color=purple] -> minecraft:purple_bed
+minecraft:bed[#color=blue] -> minecraft:blue_bed
+minecraft:bed[#color=brown] -> minecraft:brown_bed
+minecraft:bed[#color=green] -> minecraft:green_bed
+minecraft:bed[#color=red] -> minecraft:red_bed
+minecraft:bed[#color=black] -> minecraft:black_bed

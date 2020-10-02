@@ -5,7 +5,6 @@ import me.dags.converter.converter.ConverterData;
 import me.dags.converter.converter.DataConverter;
 import me.dags.converter.data.entity.EntityConverters;
 import me.dags.converter.data.tile.TileEntityConverters;
-import me.dags.converter.util.Utils;
 import me.dags.converter.version.Version;
 import org.jnbt.Nbt;
 

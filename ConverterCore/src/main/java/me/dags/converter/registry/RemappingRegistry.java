@@ -2,7 +2,7 @@ package me.dags.converter.registry;
 
 import java.util.Iterator;
 
-public class RemappingRegistry<T extends RegistryItem> implements Registry<T> {
+public class RemappingRegistry<T extends RegistryItem<T>> implements Registry<T> {
 
     private final Registry<T> registry;
     private final Registry.Mapper<T> mapper;

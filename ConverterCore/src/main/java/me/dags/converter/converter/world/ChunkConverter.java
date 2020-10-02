@@ -4,8 +4,6 @@ import me.dags.converter.block.BlockState;
 import me.dags.converter.converter.Converter;
 import me.dags.converter.converter.ConverterData;
 import me.dags.converter.converter.DataConverter;
-import me.dags.converter.data.tile.LazyTileEntityMap;
-import me.dags.converter.data.tile.TileEntityMap;
 import me.dags.converter.extent.WriterConfig;
 import me.dags.converter.extent.chunk.Chunk;
 import me.dags.converter.extent.chunk.ChunkData;
@@ -72,11 +70,16 @@ public class ChunkConverter implements Converter {
             for (int z = 0; z < reader.getLength(); z++) {
                 for (int x = 0; x < reader.getWidth(); x++) {
                     BlockState stateIn = reader.getState(x, y, z);
-                    stateIn = stateIn.getActualState(parser, chunkReader, x, blockY + y, z);
+                    BlockState extendedState = stateIn.getExtendedState(parser, chunkReader, x, blockY + y, z);
 
-                    BlockState stateOut = data.blocks.getOutput(stateIn);
+                    // try convert mappings explicitly for extended states first
+                    BlockState stateOut = data.blocks.getOutput(extendedState);
                     if (stateOut == null) {
-                        throw new NullPointerException("No mapping for state: " + stateIn.getIdentifier());
+                        // fall back to non-extended state and try again
+                        stateOut = data.blocks.getOutput(stateIn);
+                        if (stateOut == null) {
+                            throw new NullPointerException("No mapping for state: " + stateIn.getIdentifier());
+                        }
                     }
 
                     writer.setState(x, y, z, stateOut);

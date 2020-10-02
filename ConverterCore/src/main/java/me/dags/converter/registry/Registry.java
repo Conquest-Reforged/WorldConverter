@@ -6,7 +6,7 @@ import org.jnbt.Tag;
 import java.text.ParseException;
 import java.util.List;
 
-public interface Registry<T extends RegistryItem> extends Iterable<T> {
+public interface Registry<T extends RegistryItem<T>> extends Iterable<T> {
 
     /**
      * Get the number of elements in this registry
@@ -49,26 +49,26 @@ public interface Registry<T extends RegistryItem> extends Iterable<T> {
         return t.getIdentifier();
     }
 
-    interface Writer<T extends RegistryItem> extends Iterable<T> {
+    interface Writer<T extends RegistryItem<T>> extends Iterable<T> {
 
         int getOrCreateId(T val);
 
         int size();
     }
 
-    interface Reader<T extends RegistryItem> {
+    interface Reader<T extends RegistryItem<T>> {
 
         T getValue(int id);
     }
 
-    interface Mapper<T extends RegistryItem> {
+    interface Mapper<T extends RegistryItem<T>> {
 
         T apply(T in);
 
         String getVersion();
     }
 
-    interface Parser<T extends RegistryItem> {
+    interface Parser<T extends RegistryItem<T>> {
 
         T parse(String in) throws ParseException;
 

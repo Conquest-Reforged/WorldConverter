@@ -1,7 +1,7 @@
 package me.dags.converter.block;
 
-import me.dags.converter.block.fixer.None;
-import me.dags.converter.block.fixer.StateFixer;
+import me.dags.converter.block.extender.None;
+import me.dags.converter.block.extender.StateExtender;
 import me.dags.converter.extent.chunk.Chunk;
 import me.dags.converter.registry.Registry;
 import me.dags.converter.registry.RegistryItem;
@@ -10,7 +10,7 @@ import org.jnbt.Nbt;
 
 import java.text.ParseException;
 
-public class BlockState implements RegistryItem {
+public class BlockState implements RegistryItem<BlockState> {
 
     public static final int LEGACY_MAX_ID = getStateId(4096, 15);
     public static final BlockState AIR = new BlockState(0, Nbt.compound(1).put("Name", "minecraft:air"), false);
@@ -20,7 +20,7 @@ public class BlockState implements RegistryItem {
     private final CompoundTag data;
     private final String blockName;
     private final String identifier;
-    private final StateFixer fixer;
+    private final StateExtender extender;
 
     public BlockState(CompoundTag data) {
         this(0, data, false);
@@ -32,24 +32,24 @@ public class BlockState implements RegistryItem {
         this.blockName = name;
         this.data = Serializer.deserialize(name, properties);
         this.identifier = Serializer.serialize(data);
-        this.fixer = None.NONE;
+        this.extender = None.NONE;
     }
 
     public BlockState(int stateId, CompoundTag data, boolean upgrade) {
-        this(stateId, data, StateFixer.NONE, upgrade);
+        this(stateId, data, StateExtender.NONE, upgrade);
     }
 
-    public BlockState(int stateId, CompoundTag data, StateFixer fixer, boolean upgrade) {
+    public BlockState(int stateId, CompoundTag data, StateExtender extender, boolean upgrade) {
         this.data = data;
-        this.fixer = fixer;
+        this.extender = extender;
         this.upgrade = upgrade;
         this.stateId = stateId;
         this.blockName = data.getString("Name");
         this.identifier = Serializer.serialize(data);
     }
 
-    public BlockState getActualState(Registry.Parser<BlockState> parser, Chunk.Reader chunk, int x, int y, int z) throws Exception {
-        return fixer.getActualState(this, parser, chunk, x, y, z);
+    public BlockState getExtendedState(Registry.Parser<BlockState> parser, Chunk.Reader chunk, int x, int y, int z) throws Exception {
+        return extender.getExtendedState(this, parser, chunk, x, y, z);
     }
 
     public boolean isAir() {
@@ -79,6 +79,16 @@ public class BlockState implements RegistryItem {
     }
 
     @Override
+    public BlockState parseExtended(String properties) throws ParseException {
+        if (properties.indexOf('#') > 0) {
+            CompoundTag propertyData = data.getCompound("Properties");
+            CompoundTag extendedData = Serializer.deserializeExtendedProps(propertyData, properties);
+            return BlockState.createTransientInstance(this, extendedData);
+        }
+        return this;
+    }
+
+    @Override
     public int hashCode() {
         return identifier.hashCode();
     }
@@ -103,5 +113,10 @@ public class BlockState implements RegistryItem {
 
     public static int getMetaData(int stateId) {
         return (stateId >> 12) & 15;
+    }
+
+    public static BlockState createTransientInstance(BlockState state, CompoundTag properties) {
+        CompoundTag data = Nbt.compound(2).put("Name", state.getBlockName()).put("Properties", properties);
+        return new BlockState(state.stateId, data, state.upgrade);
     }
 }

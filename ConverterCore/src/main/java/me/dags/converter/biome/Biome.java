@@ -2,7 +2,7 @@ package me.dags.converter.biome;
 
 import me.dags.converter.registry.RegistryItem;
 
-public class Biome implements RegistryItem {
+public class Biome implements RegistryItem<Biome> {
 
     public static final int MAX_ID = 999;
     public static final Biome NONE = new Biome("ocean", 0);
@@ -23,6 +23,11 @@ public class Biome implements RegistryItem {
     @Override
     public int getId() {
         return id;
+    }
+
+    @Override
+    public Biome parseExtended(String properties) {
+        return null;
     }
 
     @Override
