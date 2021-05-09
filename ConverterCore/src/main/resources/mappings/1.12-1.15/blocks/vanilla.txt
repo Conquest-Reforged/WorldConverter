@@ -1,4 +1,5 @@
 minecraft:air -> minecraft:air
+minecraft:stone[variant=stone] -> minecraft:stone
 minecraft:stone[variant=granite] -> minecraft:granite
 minecraft:stone[variant=smooth_granite] -> minecraft:polished_granite
 minecraft:stone[variant=diorite] -> minecraft:diorite
