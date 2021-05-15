@@ -48,6 +48,9 @@ public class LazyTileEntityMap implements TileEntityMap {
     }
 
     private static int index(int x, int y, int z) {
+        // make sure x & z are chunk-relative (ie 0-15)
+        x &= 15;
+        z &= 15;
         return (y * AREA) + (z * SIZE) + x;
     }
 }

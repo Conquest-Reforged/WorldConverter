@@ -4,7 +4,6 @@ import me.dags.converter.block.BlockState;
 import me.dags.converter.extent.chunk.Chunk;
 import me.dags.converter.registry.Registry;
 import org.jnbt.CompoundTag;
-import org.jnbt.Nbt;
 import org.jnbt.StringTag;
 
 public class DoublePlantExtender_v1_12 implements StateExtender {
