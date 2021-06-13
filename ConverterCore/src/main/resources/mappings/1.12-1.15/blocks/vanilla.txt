@@ -221,7 +221,7 @@ minecraft:piston_head[facing=east,short=false,type=sticky] -> minecraft:piston_h
 minecraft:wool[color=white] -> minecraft:white_wool
 minecraft:wool[color=orange] -> minecraft:orange_wool
 minecraft:wool[color=magenta] -> minecraft:magenta_wool
-minecraft:wool[color=lightblue] -> minecraft:light_blue_wool
+minecraft:wool[color=light_blue] -> minecraft:light_blue_wool
 minecraft:wool[color=yellow] -> minecraft:yellow_wool
 minecraft:wool[color=lime] -> minecraft:lime_wool
 minecraft:wool[color=pink] -> minecraft:pink_wool
