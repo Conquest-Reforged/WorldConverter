@@ -1,10 +1,10 @@
 minecraft:air -> minecraft:air
 minecraft:stone[variant=stone] -> minecraft:stone
-minecraft:stone[variant=granite] -> minecraft:granite
+minecraft:stone[variant=granite] -> conquest:pink_limestone
 minecraft:stone[variant=smooth_granite] -> minecraft:polished_granite
 minecraft:stone[variant=diorite] -> minecraft:diorite
 minecraft:stone[variant=smooth_diorite] -> minecraft:polished_diorite
-minecraft:stone[variant=andesite] -> minecraft:andesite
+minecraft:stone[variant=andesite] -> conquest:dark_limestone
 minecraft:stone[variant=smooth_andesite] -> minecraft:polished_andesite
 minecraft:grass[snowy=false] -> minecraft:grass_block[snowy=false]
 minecraft:dirt[snowy=false,variant=dirt] -> minecraft:dirt
