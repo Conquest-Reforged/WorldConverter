@@ -99,9 +99,9 @@ public class Mapper<T extends RegistryItem<T>> implements Registry.Mapper<T> {
                 T from = this.from.getParser().parse(in).parseExtended(in);
                 T to = this.to.getParser().parse(out).parseExtended(out);
                 mappings.putIfAbsent(from, to);
-                Logger.log("Parsed Mapping:", in, "->", out);
+                //Logger.log("Parsed Mapping:", in, "->", out);
             } catch (ParseException ignored) {
-
+                Logger.log("Parsing Exception: line='" + in + " -> " + out + ", err=" + ignored);
             }
             return this;
         }

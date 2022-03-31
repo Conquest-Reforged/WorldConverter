@@ -16,16 +16,6 @@ public class ChunkReader extends AbstractChunkReader {
     }
 
     @Override
-    public Volume.Reader getSection(int index) throws Exception {
-        return super.getSection(index + 1); // Sections start at Y: -1
-    }
-
-    @Override
-    public int getSectionCount() {
-        return super.getSectionCount() - 1; // Sections start at Y: -1
-    }
-
-    @Override
     protected Volume.Reader createSection(CompoundTag section) throws Exception {
         return new SectionReader(registry, section);
     }

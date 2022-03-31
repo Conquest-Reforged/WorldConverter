@@ -40,7 +40,7 @@ public class BiomeContainer114 implements BiomeContainer {
         public int get(int x, int y, int z) {
             int index = indexOf(x, z);
             if (index < biomes.length) {
-                return biomes[index];
+                return (255 & (int) biomes[index]);
             }
             return 0;
         }

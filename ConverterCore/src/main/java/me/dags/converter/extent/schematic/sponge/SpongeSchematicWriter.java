@@ -82,4 +82,6 @@ public class SpongeSchematicWriter implements Volume.Writer {
     private ByteArrayTag flushBlocks() {
         return Nbt.tag(blocks.writeBytes());
     }
+
+    public boolean isEmpty() { return false; }
 }

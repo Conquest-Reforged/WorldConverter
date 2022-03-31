@@ -8,6 +8,7 @@ import me.dags.converter.converter.WriterFactory;
 import me.dags.converter.extent.Extent;
 import me.dags.converter.extent.WriterConfig;
 import org.jnbt.CompoundTag;
+import org.jnbt.Tag;
 
 import java.util.List;
 
@@ -36,8 +37,14 @@ public class ExtentConverter implements Converter {
         Extent.Reader reader = readerFactory.create(converterData.blocks, in);
         ConverterWriter writer = new ConverterWriter(writerFactory.create(config), converterData);
         reader.iterate(writer);
-        writer.setData("Entities", reader.getData("Entities"));
-        writer.setData("TileEntities", reader.getData("TileEntities"));
+        Tag<?> ent = reader.getData("Entities");
+        if (ent != null) {
+            writer.setData("Entities", ent);
+        }
+        ent = reader.getData("TileEntities");
+        if (ent != null) {
+            writer.setData("TileEntities", ent);
+        }
         DataConverter.writeData(reader, writer, converters);
         return writer.flush();
     }

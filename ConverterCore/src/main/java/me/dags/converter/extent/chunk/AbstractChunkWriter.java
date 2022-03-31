@@ -85,11 +85,7 @@ public abstract class AbstractChunkWriter implements Chunk.Writer {
     protected void addSections(List<CompoundTag> list) {
         for (int i = 0; i <= top; i++) {
             Volume.Writer section = sections[i];
-            if (section == null) {
-                list.add(Nbt.compound().put("Y", i));
-            } else {
-                list.add(section.flush());
-            }
+            list.add(section.flush());
         }
     }
 

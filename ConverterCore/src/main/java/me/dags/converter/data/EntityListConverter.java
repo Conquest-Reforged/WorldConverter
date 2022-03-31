@@ -54,15 +54,14 @@ public class EntityListConverter implements DataConverter {
             String id = child.getString("id");
             CompoundTag data = child;
             for (EntityConverter converter : converters) {
+                if (data == null) {
+                    break;
+                }
                 if (converter.getId().isEmpty() || converter.getId().equals(id)) {
                     data = converter.convert(data);
                 }
             }
             dataList.add(data);
-        }
-
-        if (dataList.isEmpty()) {
-            return list;
         }
 
         return Nbt.list(TagType.COMPOUND, dataList);

@@ -30,6 +30,7 @@ public abstract class AbstractVolumeWriter implements Volume.Writer {
         this.width = width;
         this.height= height;
         this.length = length;
+        this.setState(0, 0, 0, BlockState.AIR);
     }
 
     @Override
